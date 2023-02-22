@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import client from './api/client';
 import HelloWorld from './components/HelloWorld.vue';
+client.get('/teste');
 </script>
 
 <template>
