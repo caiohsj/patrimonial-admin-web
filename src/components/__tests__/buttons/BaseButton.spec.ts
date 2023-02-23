@@ -6,7 +6,6 @@ describe('BaseButton', () => {
   it('emitted click', () => {
     const wrapper = mount(BaseButton, {
       props: {
-        text: 'Meu botão',
         type: 'button',
       },
     });
@@ -19,7 +18,6 @@ describe('BaseButton', () => {
   it('emitted submit', () => {
     const wrapper = mount(BaseButton, {
       props: {
-        text: 'Meu botão',
         type: 'submit',
       },
     });
