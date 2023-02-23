@@ -24,11 +24,13 @@ const handleSubmit = () => console.log('submit');
         :label="t('views.loginView.form.labels.email')"
         type="email"
         v-model="email"
+        autocomplete="on"
       />
       <InputGroup
         :label="t('views.loginView.form.labels.password')"
         type="password"
         v-model="password"
+        autocomplete="on"
       />
 
       <BaseButton type="submit" class="mt-8">

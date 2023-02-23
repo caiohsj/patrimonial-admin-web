@@ -5,6 +5,7 @@ type InputGroupProps = {
   label: string;
   type: 'email' | 'text' | 'date' | 'number' | 'password' | 'search';
   modelValue?: string;
+  autocomplete?: 'on' | 'off';
 };
 
 const props = defineProps<InputGroupProps>();
@@ -27,6 +28,7 @@ const inputId = `${props.label.toLowerCase()}_${Math.floor(Math.random() * 6)}`;
     <input
       :id="inputId"
       :type="props.type"
+      :autocomplete="props.autocomplete"
       v-model="inputValue"
       class="bg-light border-dark h-16 rounded-md shadow-lg outline-none p-2 transition-all duration-300 focus:border-sky-300"
     />
