@@ -1,15 +1,16 @@
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+import { useForm } from 'vee-validate';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-const email = ref('');
-const password = ref('');
+const { handleSubmit } = useForm();
 
-const handleSubmit = () => console.log('submit');
+const onSubmit = handleSubmit(values => {
+  console.log(values);
+});
 </script>
 
 <template>
@@ -19,18 +20,20 @@ const handleSubmit = () => console.log('submit');
       {{ t('views.loginView.title') }}
     </h1>
 
-    <form class="grid gap-4 w-80" @submit.prevent="handleSubmit()">
+    <form class="grid gap-4 w-80" @submit="onSubmit">
       <InputGroup
         :label="t('views.loginView.form.labels.email')"
-        type="email"
-        v-model="email"
+        name="email"
+        type="text"
         autocomplete="on"
+        rules="required"
       />
       <InputGroup
         :label="t('views.loginView.form.labels.password')"
+        name="password"
         type="password"
-        v-model="password"
         autocomplete="on"
+        rules="required"
       />
 
       <BaseButton type="submit" class="mt-8">

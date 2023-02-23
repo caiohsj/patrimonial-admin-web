@@ -9,6 +9,7 @@ describe('InputGroup', () => {
       props: {
         label: 'Email',
         type: 'email',
+        name: 'email',
         modelValue: '',
         'onUpdate:modelValue': (e: string) => {
           wrapper.setProps({ modelValue: e });

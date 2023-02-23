@@ -6,6 +6,7 @@ import router from '@/router';
 
 import './assets/main.css';
 import i18n from './locales';
+import '@/plugins/VeeValidate';
 
 const app = createApp(App);
 
