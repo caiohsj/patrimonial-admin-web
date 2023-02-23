@@ -21,14 +21,14 @@ const inputId = `${props.label.toLowerCase()}_${Math.floor(Math.random() * 6)}`;
 
 <template>
   <div class="flex flex-col">
-    <label :for="inputId" class="font-baloo2-bold text-neutral-800">
+    <label :for="inputId" class="font-baloo2-bold text-dark">
       {{ props.label }}
     </label>
     <input
       :id="inputId"
       :type="props.type"
       v-model="inputValue"
-      class="bg-slate-50 border-neutral-800 h-16 rounded-md shadow-lg outline-none p-2 transition-all duration-300 focus:border-sky-300"
+      class="bg-light border-dark h-16 rounded-md shadow-lg outline-none p-2 transition-all duration-300 focus:border-sky-300"
     />
   </div>
 </template>
