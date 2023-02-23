@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils';
 import InputGroup from '@/components/inputs/InputGroup.vue';
 
 describe('InputGroup', () => {
-  it('renders properly', async () => {
+  it('updated value', async () => {
     const wrapper = mount(InputGroup, {
       props: {
         label: 'Email',
