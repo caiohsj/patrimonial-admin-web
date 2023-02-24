@@ -1,15 +1,19 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { useForm } from 'vee-validate';
+import type { SignInFormData } from '@/@types/interfaces/SignInFormData';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
+import { useSessionStore } from '@/stores/session';
 
 const { t } = useI18n();
 
-const { handleSubmit } = useForm();
+const { handleSubmit } = useForm<SignInFormData>();
 
-const onSubmit = handleSubmit(values => {
-  console.log(values);
+const sessionStore = useSessionStore();
+
+const onSubmit = handleSubmit((values) => {
+  sessionStore.signIn(values);
 });
 </script>
 
