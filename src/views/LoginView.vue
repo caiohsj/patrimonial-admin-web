@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { useForm } from 'vee-validate';
+import { storeToRefs } from 'pinia';
+import { onBeforeMount, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import type { SignInFormData } from '@/@types/interfaces/SignInFormData';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
@@ -8,12 +11,23 @@ import { useSessionStore } from '@/stores/session';
 
 const { t } = useI18n();
 
+const router = useRouter();
+
 const { handleSubmit } = useForm<SignInFormData>();
 
 const sessionStore = useSessionStore();
+const { hasSession } = storeToRefs(sessionStore);
 
 const onSubmit = handleSubmit((values) => {
   sessionStore.signIn(values);
+});
+
+onBeforeMount(() => {
+  if (hasSession.value === true) router.push({ name: 'home' });
+});
+
+watch(hasSession, (value) => {
+  if (value === true) router.push({ name: 'home' });
 });
 </script>
 
