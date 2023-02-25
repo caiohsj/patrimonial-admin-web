@@ -42,7 +42,7 @@ watch(hasSession, (value) => {
       <InputGroup
         :label="t('views.loginView.form.labels.email')"
         name="email"
-        type="text"
+        type="email"
         autocomplete="on"
         rules="required"
       />

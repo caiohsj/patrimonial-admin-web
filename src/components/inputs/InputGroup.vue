@@ -39,7 +39,9 @@ const { errorMessage, value, meta } = useField<string>(
   }
 );
 
-const errorInputClass = computed(() => (meta.valid ? '' : 'border-red-500'));
+const errorInputClass = computed(() =>
+  !meta.valid && meta.validated ? 'border-red-500' : ''
+);
 </script>
 
 <template>
