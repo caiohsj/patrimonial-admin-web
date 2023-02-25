@@ -7,7 +7,7 @@ import router from '@/router';
 
 import './assets/main.css';
 import i18n from './locales';
-import '@/plugins/VeeValidate';
+import VeeValidate from '@/plugins/VeeValidate';
 
 const app = createApp(App);
 
@@ -17,5 +17,6 @@ pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
 app.use(i18n);
+app.use(VeeValidate);
 
 app.mount('#app');

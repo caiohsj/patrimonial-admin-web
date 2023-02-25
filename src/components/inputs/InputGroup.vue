@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useField } from 'vee-validate';
-import { toRef, computed } from 'vue';
+import { computed } from 'vue';
 
 const defaultInputClasses = [
   'bg-light',
@@ -31,21 +31,24 @@ const emit = defineEmits<{
 
 const updateModelValue = () => emit('update:modelValue', value.value);
 
-const inputId = `${props.label.toLowerCase()}_${Math.floor(Math.random() * 6)}`;
-
-const nameRef = toRef(props, 'name');
-const { errorMessage, value, meta } = useField<string>(nameRef, props.rules);
+const { errorMessage, value, meta } = useField<string>(
+  props.name,
+  props.rules,
+  {
+    label: props.label.toLocaleLowerCase(),
+  },
+);
 
 const errorInputClass = computed(() => (meta.valid ? '' : 'border-red-500'));
 </script>
 
 <template>
   <div class="flex flex-col">
-    <label :for="inputId" class="font-baloo2-bold text-dark">
+    <label :for="props.name" class="font-baloo2-bold text-dark">
       {{ props.label }}
     </label>
     <input
-      :id="inputId"
+      :id="props.name"
       :type="props.type"
       :name="props.name"
       :autocomplete="props.autocomplete"
