@@ -36,7 +36,7 @@ const { errorMessage, value, meta } = useField<string>(
   props.rules,
   {
     label: props.label.toLocaleLowerCase(),
-  },
+  }
 );
 
 const errorInputClass = computed(() => (meta.valid ? '' : 'border-red-500'));

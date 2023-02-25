@@ -12,7 +12,16 @@ module.exports = {
   rules: {
     'eol-last': ['error', 'always'],
     semi: ['error', 'always'],
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
   },
   parserOptions: {
     ecmaVersion: 'latest',
