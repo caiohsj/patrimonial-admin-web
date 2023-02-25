@@ -1,18 +1,18 @@
-import HomeView from '../views/HomeView.vue';
+import LoginView from '@/views/LoginView.vue';
+import SelectionOptionView from '@/views/SelectionOptionView.vue';
 
 const routes = [
+  { path: '/', redirect: '/entrar' },
   {
-    path: '/',
-    name: 'home',
-    component: HomeView,
+    path: '/entrar',
+    name: 'login',
+    component: LoginView,
   },
+  { path: '/inicio', name: 'home', redirect: '/selecao' },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/AboutView.vue'),
+    path: '/selecao',
+    name: 'selectionOptions',
+    component: SelectionOptionView,
   },
 ];
 
