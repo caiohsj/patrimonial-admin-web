@@ -21,8 +21,8 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: ftp.ambientecode.com.br
-        username: ambie114
-        password: ${{ secrets.FTP_PASSWORD }}
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ftp.ambientecode.com.br
+          username: ambie114
+          password: ${{ secrets.FTP_PASSWORD }}
