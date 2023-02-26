@@ -21,11 +21,10 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ftp.ambientecode.com.br
-          server-dir: distribution/
-          dangerous-clean-slate: true
+          local-dir: distribution/
           username: patrimonial@patrimonial.ambientecode.com.br
           password: ${{ secrets.FTP_PASSWORD }}
           exclude: |
@@ -38,8 +37,10 @@ jobs:
             **/src/**
             **.json
             **.ts
+            **.js
             **.cjs
             **.md
+            **.html
             .editorconfig
             .env
             .env.staging
