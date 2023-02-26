@@ -32,11 +32,7 @@ jobs:
             **/node_modules/**
             **/public**
             **/src/**
-            **.json
-            **.ts
-            **.js
-            **.md
-            **.html
+            index.html
       - name: Copy files to root
         uses: appleboy/ssh-action@v0.1.7
         with:
