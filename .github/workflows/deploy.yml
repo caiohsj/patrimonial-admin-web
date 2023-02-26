@@ -13,7 +13,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Copy .env
-        run: cp .env.staging .env
+        uses: canastro/copy-file-action@master
+        with:
+          source: ".env.staging"
+          target: ".env"
       - name: Build
         - uses: actions/setup-node@v3
           - run: npm install
