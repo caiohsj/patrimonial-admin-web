@@ -37,8 +37,14 @@ jobs:
             **.json
             **.ts
             **.js
+            **.cjs
             **.md
             **.html
+            .editorconfig
+            .env
+            .env.staging
+            .env.development
+            .gitignore
       - name: Copy files to root
         uses: appleboy/ssh-action@v0.1.7
         with:
