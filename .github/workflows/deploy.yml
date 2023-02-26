@@ -30,9 +30,7 @@ jobs:
             **/.git**
             **/.git*/**
             **/node_modules/**
-            **/public**
             **/src/**
-            index.html
       - name: Copy files to root
         uses: appleboy/ssh-action@v0.1.7
         with:
