@@ -11,16 +11,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
 
       - name: Copy .env
         uses: canastro/copy-file-action@master
         with:
           source: ".env.staging"
           target: ".env"
-      - name: Build
-        uses: actions/setup-node@v3
-        - run: npm install
-        - run: npm run build
+      - run: npm install
+      - run: npm run build
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
