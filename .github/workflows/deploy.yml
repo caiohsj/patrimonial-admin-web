@@ -26,11 +26,6 @@ jobs:
           server: ftp.ambientecode.com.br
           username: patrimonial@patrimonial.ambientecode.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-          exclude: |
-            **/.git**
-            **/.git*/**
-            **/node_modules/**
-            **/src/**
       - name: Copy files to root
         uses: appleboy/ssh-action@v0.1.7
         with:
