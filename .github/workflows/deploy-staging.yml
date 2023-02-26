@@ -24,10 +24,10 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ftp.ambientecode.com.br
+          server: ${{ secrets.STAGING_FTP_HOST }}
           local-dir: distribution/
-          username: patrimonial@patrimonial.ambientecode.com.br
-          password: ${{ secrets.FTP_PASSWORD }}
+          username: ${{ secrets.STAGING_FTP_USER }}
+          password: ${{ secrets.STAGING_FTP_PASSWORD }}
           exclude: |
             **/.git**
             **/.git*/**
