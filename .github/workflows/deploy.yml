@@ -26,12 +26,3 @@ jobs:
           server: ftp.ambientecode.com.br
           username: patrimonial@patrimonial.ambientecode.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-      - name: Copy files to root
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cp -R /dist ./
-            rm -rf dist
