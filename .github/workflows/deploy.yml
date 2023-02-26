@@ -20,6 +20,7 @@ jobs:
           target: ".env"
       - run: npm install
       - run: npm run build
+      - run: mv -T dist distribution
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
