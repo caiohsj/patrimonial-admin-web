@@ -5,22 +5,26 @@ on:
     branches: ["develop"]
 
 jobs:
-  steps:
-  - uses: actions/checkout@v3
+  build-and-deploy:
+    
+    runs-on: ubuntu-latest
 
-  - name: Copy .env
-    run: cp .env.staging .env
-  - name: Build
-    - uses: actions/setup-node@v3
-      - run: npm install
-      - run: npm run build
-  - name: Install SSH Key
-    uses: shimataro/ssh-key-action@v2
-    with:
-      key: ${{ secrets.SSH_PRIVATE_KEY }}
-  - name: Adding Known Hosts
-    run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-  - name: Adding Known Hosts
-    run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-  - name: Deploy with rsync
-    run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/patrimonial.ambientecode.com.br
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Copy .env
+        run: cp .env.staging .env
+      - name: Build
+        - uses: actions/setup-node@v3
+          - run: npm install
+          - run: npm run build
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy with rsync
+        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/patrimonial.ambientecode.com.br
