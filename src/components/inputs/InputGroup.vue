@@ -40,7 +40,7 @@ const { errorMessage, value, meta } = useField<string>(
 );
 
 const errorInputClass = computed(() =>
-  !meta.valid && meta.validated ? 'border-red-500' : ''
+  !meta.valid && meta.validated ? 'border-danger' : ''
 );
 </script>
 
@@ -58,7 +58,7 @@ const errorInputClass = computed(() =>
       @input="updateModelValue"
       :class="[...defaultInputClasses, errorInputClass]"
     />
-    <span class="text-red-500">{{ errorMessage }}</span>
+    <span class="text-danger">{{ errorMessage }}</span>
   </div>
 </template>
 
