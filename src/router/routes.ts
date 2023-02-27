@@ -1,18 +1,30 @@
+import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
-import SelectionOptionView from '@/views/SelectionOptionView.vue';
+import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
+import type { RouteRecordRaw } from 'vue-router';
 
-const routes = [
-  { path: '/', redirect: '/entrar' },
+const routes: readonly RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    meta: {
+      requiresAuth: true,
+      requiresApplicationConfigurations: true,
+    },
+  },
   {
     path: '/entrar',
     name: 'login',
     component: LoginView,
   },
-  { path: '/inicio', name: 'home', redirect: '/selecao' },
   {
-    path: '/selecao',
-    name: 'selectionOptions',
-    component: SelectionOptionView,
+    path: '/configuracoes-da-aplicacao',
+    name: 'applicationConfigurations',
+    component: ApplicationConfigurationsView,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 

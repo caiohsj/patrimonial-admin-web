@@ -1,5 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <RouterView />
+  <div class="bg-gray-light h-screen">
+    <RouterView />
+  </div>
 </template>

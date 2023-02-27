@@ -11,5 +11,15 @@ export default {
         submit: 'Acessar',
       },
     },
+    applicationConfigurationsView: {
+      title: 'Configure a aplicação',
+      form: {
+        labels: {
+          branch: 'Filial',
+          place: 'Local',
+        },
+        submit: 'Aplicar',
+      },
+    },
   },
 };

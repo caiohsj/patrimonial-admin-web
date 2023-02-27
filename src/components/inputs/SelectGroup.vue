@@ -2,7 +2,7 @@
 import { useField } from 'vee-validate';
 import { computed } from 'vue';
 
-const defaultInputClasses = [
+const defaultSelectClasses = [
   'bg-light',
   'border-dark',
   'h-16',
@@ -15,16 +15,20 @@ const defaultInputClasses = [
   'focus:border-sky-300',
 ];
 
-type InputGroupProps = {
+type SelectOption = {
+  value: string | number;
+  text: string;
+};
+
+type SelectGroupProps = {
   label: string;
   name: string;
   modelValue?: string;
-  type: 'email' | 'text' | 'date' | 'number' | 'password' | 'search';
-  autocomplete?: 'on' | 'off';
   rules?: string;
+  options: Array<SelectOption>;
 };
 
-const props = defineProps<InputGroupProps>();
+const props = defineProps<SelectGroupProps>();
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string | null): void;
 }>();
@@ -39,7 +43,7 @@ const { errorMessage, value, meta } = useField<string>(
   }
 );
 
-const errorInputClass = computed(() =>
+const errorSelectClass = computed(() =>
   !meta.valid && meta.validated ? 'border-danger' : ''
 );
 </script>
@@ -49,21 +53,27 @@ const errorInputClass = computed(() =>
     <label :for="props.name" class="font-baloo2-bold text-dark">
       {{ props.label }}
     </label>
-    <input
+    <select
       :id="props.name"
-      :type="props.type"
       :name="props.name"
-      :autocomplete="props.autocomplete"
       v-model="value"
-      @input="updateModelValue"
-      :class="[...defaultInputClasses, errorInputClass]"
-    />
+      @change="updateModelValue"
+      :class="[...defaultSelectClasses, errorSelectClass]"
+    >
+      <option
+        v-for="{ value, text } in props.options"
+        :key="value"
+        :value="value"
+      >
+        {{ text }}
+      </option>
+    </select>
     <span class="text-danger">{{ errorMessage }}</span>
   </div>
 </template>
 
-<style scoped>
-input {
+<style lang="css" scoped>
+select {
   border-width: 1px;
 }
 </style>
