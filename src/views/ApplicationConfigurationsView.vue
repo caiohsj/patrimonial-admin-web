@@ -3,6 +3,7 @@ import { onMounted, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import SelectGroup from '@/components/inputs/SelectGroup.vue';
 import { useBranchStore } from '@/stores/branch';
@@ -10,6 +11,7 @@ import { usePlaceStore } from '@/stores/place';
 import { useSessionStore } from '@/stores/session';
 
 const router = useRouter();
+const { t } = useI18n();
 
 const branchStore = useBranchStore();
 const { branchesOptions } = storeToRefs(branchStore);
@@ -48,23 +50,25 @@ const onSubmit = handleSubmit(({ branch, place }) => {
       class="selection-option-view bg-light flex flex-col items-center rounded-lg shadow-lg"
     >
       <h1 class="font-baloo2-bold text-2xl text-center mt-10 mb-24">
-        Configure a aplicação
+        {{ t('views.applicationConfigurationsView.title') }}
       </h1>
 
       <form class="w-2/4 grid gap-4" @submit="onSubmit">
         <SelectGroup
-          label="Filial"
+          :label="t('views.applicationConfigurationsView.form.labels.branch')"
           name="branch"
           rules="required"
           :options="branchesOptions"
         />
         <SelectGroup
-          label="Local"
+          :label="t('views.applicationConfigurationsView.form.labels.place')"
           name="place"
           rules="required"
           :options="placesOptions"
         />
-        <BaseButton type="submit">Aplicar</BaseButton>
+        <BaseButton type="submit">
+          {{ t('views.applicationConfigurationsView.form.submit') }}
+        </BaseButton>
       </form>
     </div>
   </div>
