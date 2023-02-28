@@ -1,5 +1,9 @@
 export default {
   altLogo: 'SMX Inventários',
+  errors: {
+    unauthorized: 'Não autorizado',
+    responseInvalid: 'Não conseguimos processar sua requisição',
+  },
   views: {
     loginView: {
       title: 'Autenticação',
