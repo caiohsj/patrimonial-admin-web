@@ -13,9 +13,9 @@ export const usePlaceStore = defineStore('place', {
 
   getters: {
     placesOptions: (state) => {
-      return state.places.map((place) => ({
+      return state.places.map((place, index) => ({
         text: place.description,
-        value: place.id,
+        value: index,
       }));
     },
   },
