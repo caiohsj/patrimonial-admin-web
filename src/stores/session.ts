@@ -25,6 +25,8 @@ export const useSessionStore = defineStore('session', {
   }),
   getters: {
     hasSession: (state) => state.currentUser != null && state.token != null,
+    hasApplicationConfigurations: (state) =>
+      state.currentBranch != null && state.currentPlace != null,
   },
   actions: {
     async signIn(payload: SignInFormData) {
