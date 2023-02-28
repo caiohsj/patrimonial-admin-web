@@ -11,6 +11,6 @@ type SignInResponse = {
 
 export default {
   signIn(data: SignInFormData): Promise<AxiosResponse<SignInResponse>> {
-    return client.post('/users/sign_in', data);
+    return client.post('/users/sign_in', data, true);
   },
 };
