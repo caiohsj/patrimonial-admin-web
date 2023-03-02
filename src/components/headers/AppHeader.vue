@@ -33,6 +33,11 @@ const toggleSettings = () => {
       opacity == '0' || opacity == '' ? '1' : '0';
   }
 };
+
+const changeApplicationConfigurations = () => {
+  sessionStore.clearApplicationConfigurations();
+  router.push({ name: 'applicationConfigurations' });
+};
 </script>
 
 <template>
@@ -40,7 +45,8 @@ const toggleSettings = () => {
     <div>
       <div
         v-if="hasApplicationConfigurations"
-        class="flex bg-white py-2 rounded-md"
+        @click="changeApplicationConfigurations"
+        class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer"
       >
         <span
           class="flex flex-col items-start px-8 justify-center border-gray-light border-r-2"

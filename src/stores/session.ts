@@ -48,6 +48,13 @@ export const useSessionStore = defineStore('session', {
       });
     },
 
+    clearApplicationConfigurations() {
+      this.$patch({
+        currentBranch: null,
+        currentPlace: null,
+      });
+    },
+
     setCurrentBranch(index: number) {
       const branchStore = useBranchStore();
       this.currentBranch = branchStore.branches[index];
