@@ -29,6 +29,8 @@ export default {
   components: {
     headers: {
       appHeader: {
+        branch: 'Filial',
+        place: 'Local',
         logout: 'Sair',
       },
     },
