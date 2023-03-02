@@ -26,4 +26,11 @@ export default {
       },
     },
   },
+  components: {
+    headers: {
+      appHeader: {
+        logout: 'Sair',
+      },
+    },
+  },
 };
