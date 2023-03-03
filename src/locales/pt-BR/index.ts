@@ -34,5 +34,13 @@ export default {
         logout: 'Sair',
       },
     },
+    navs: {
+      asideNav: {
+        items: {
+          branches: 'Filiais',
+          places: 'Locais',
+        },
+      },
+    },
   },
 };
