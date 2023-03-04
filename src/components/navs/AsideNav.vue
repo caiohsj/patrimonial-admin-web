@@ -42,6 +42,7 @@ const navItemActiveClass = (name: string) => {
             :class="[
               'flex',
               'justify-center',
+              'font-baloo2-bold',
               'rounded-sm',
               'py-2',
               'border-2',

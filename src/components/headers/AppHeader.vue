@@ -86,7 +86,7 @@ const changeApplicationConfigurations = () => {
       </div>
       <div
         ref="settingsContainer"
-        class="settings cursor-default absolute top-16 right-2 bg-white px-6 py-4 w-56 rounded-md shadow-lg"
+        class="settings cursor-default absolute top-16 right-2 bg-white px-6 py-4 w-56 rounded-md shadow-lg font-baloo2-bold"
       >
         <a @click="logout" class="hover:text-success cursor-pointer">
           {{ t('components.headers.appHeader.logout') }}
