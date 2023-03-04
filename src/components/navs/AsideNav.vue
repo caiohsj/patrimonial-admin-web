@@ -61,10 +61,3 @@ const navItemActiveClass = (name: string) => {
     </nav>
   </div>
 </template>
-
-<style lang="css" scoped>
-nav ul li a.active {
-  background-color: yellow;
-  color: #ffffff;
-}
-</style>
