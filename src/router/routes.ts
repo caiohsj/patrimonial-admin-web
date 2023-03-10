@@ -10,7 +10,6 @@ const routes: readonly RouteRecordRaw[] = [
     component: HomeView,
     meta: {
       requiresAuth: true,
-      requiresApplicationConfigurations: true,
     },
   },
   {

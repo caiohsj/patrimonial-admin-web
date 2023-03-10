@@ -1,9 +1,17 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useSessionStore } from '@/stores/session';
+import { usePermissions } from '@/composables/permissions';
 
 const { t } = useI18n();
 const route = useRoute();
+
+const sessionStore = useSessionStore();
+const { hasSession } = storeToRefs(sessionStore);
+
+const { userCanAccessRoute } = usePermissions();
 
 const navItems = [
   {
@@ -27,7 +35,7 @@ const navItemActiveClass = (name: string) => {
 </script>
 
 <template>
-  <div class="bg-white w-80 pt-3">
+  <div class="bg-white w-80 pt-3" v-if="hasSession">
     <div class="flex justify-center mb-10">
       <img
         src="@/assets/images/logo.png"
@@ -39,6 +47,7 @@ const navItemActiveClass = (name: string) => {
       <ul class="grid gap-4">
         <li v-for="item in navItems" :key="item.route">
           <router-link
+            v-if="userCanAccessRoute(item.route)"
             :class="[
               'flex',
               'justify-center',
