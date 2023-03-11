@@ -25,6 +25,15 @@ export default {
         submit: 'Aplicar',
       },
     },
+    branchesView: {
+      table: {
+        title: 'Filiais',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+        },
+      },
+    },
   },
   components: {
     headers: {
@@ -40,6 +49,12 @@ export default {
           branches: 'Filiais',
           places: 'Locais',
         },
+      },
+    },
+    tables: {
+      baseTable: {
+        search: 'Pesquisar',
+        results: '{count} resultado(s)',
       },
     },
   },

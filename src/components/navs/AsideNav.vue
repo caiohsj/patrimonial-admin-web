@@ -9,9 +9,9 @@ const navItems = [
   {
     route: 'branches',
   },
-  {
-    route: 'places',
-  },
+  // {
+  //   route: 'places',
+  // },
 ];
 
 const navItemActiveClass = (name: string) => {
@@ -22,7 +22,9 @@ const navItemActiveClass = (name: string) => {
     'hover:text-primary',
     'hover:border-primary',
   ];
-  return name == route.name ? activeClasses : '';
+  return name == route.name
+    ? activeClasses
+    : ['hover:bg-primary', 'hover:text-white'];
 };
 </script>
 
@@ -40,6 +42,7 @@ const navItemActiveClass = (name: string) => {
         <li v-for="item in navItems" :key="item.route">
           <router-link
             :class="[
+              ...navItemActiveClass(item.route),
               'flex',
               'justify-center',
               'font-baloo2-bold',
@@ -48,12 +51,9 @@ const navItemActiveClass = (name: string) => {
               'border-2',
               'border-transparent',
               'cursor-pointer',
-              'hover:bg-primary',
-              'hover:text-white',
               'transition',
-              navItemActiveClass(item.route),
             ]"
-            :to="item.route"
+            :to="{ name: item.route }"
           >
             {{ t(`components.navs.asideNav.items.${item.route}`) }}
           </router-link>

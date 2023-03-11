@@ -41,7 +41,7 @@ const changeApplicationConfigurations = () => {
 </script>
 
 <template>
-  <div v-if="hasSession" class="h-24 flex justify-between items-center px-4">
+  <div v-if="hasSession" class="h-24 flex justify-between items-center">
     <div>
       <div
         v-if="hasApplicationConfigurations"
@@ -70,15 +70,15 @@ const changeApplicationConfigurations = () => {
         </span>
       </div>
     </div>
-    <div
-      @click="toggleSettings"
-      class="profile flex items-center gap-2 hover:cursor-pointer relative"
-    >
-      <img
-        src="@/assets/images/Avatar.png"
-        :alt="currentUser?.name"
-        class="hover:opacity-60 h-12"
-      />
+    <div class="profile flex items-center gap-2 hover:cursor-pointer relative">
+      <div>
+        <img
+          src="@/assets/images/Avatar.png"
+          :alt="currentUser?.name"
+          class="hover:opacity-60 h-12"
+          @click="toggleSettings"
+        />
+      </div>
       <div class="font-baloo2-bold flex flex-col">
         <span class="text-lg">{{ currentUser?.name }}</span>
         <!-- TODO -->
