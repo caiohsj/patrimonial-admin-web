@@ -81,8 +81,9 @@ const changeApplicationConfigurations = () => {
       />
       <div class="font-baloo2-bold flex flex-col">
         <span class="text-lg">{{ currentUser?.name }}</span>
-        <!-- TODO -->
-        <span class="text-xs text-gray-darken">Cargo</span>
+        <span class="text-xs text-gray-darken text-center">
+          {{ currentUser?.role.name }}
+        </span>
       </div>
       <div
         ref="settingsContainer"

@@ -45,11 +45,24 @@ const onSubmit = handleSubmit(({ branch, place }) => {
 </script>
 
 <template>
-  <div class="h-full flex justify-center items-center">
+  <div class="flex justify-center items-center">
     <div
-      class="selection-option-view bg-light flex flex-col items-center rounded-lg shadow-lg"
+      :class="[
+        'selection-option-view',
+        'bg-light',
+        'flex',
+        'flex-col',
+        'items-center',
+        'rounded-lg',
+        'shadow-lg',
+        'lg:h-fit',
+        'lg:w-3/6',
+        'lg:p-10',
+      ]"
     >
-      <h1 class="font-baloo2-bold text-2xl text-center mt-10 mb-24">
+      <h1
+        class="font-baloo2-bold text-2xl text-center 2xl:mt-10 2xl:mb-24 lg:mb-12"
+      >
         {{ t('views.applicationConfigurationsView.title') }}
       </h1>
 
@@ -74,9 +87,4 @@ const onSubmit = handleSubmit(({ branch, place }) => {
   </div>
 </template>
 
-<style scoped>
-.selection-option-view {
-  width: 600px;
-  height: 600px;
-}
-</style>
+<style scoped></style>

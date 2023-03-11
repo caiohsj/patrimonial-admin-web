@@ -1,3 +1,4 @@
+import { usePermissions } from '@/composables/permissions';
 import { createRouter, createWebHistory } from 'vue-router';
 import routes from '@/router/routes';
 import { useSessionStore } from '@/stores/session';
@@ -7,18 +8,25 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   const sessionStore = useSessionStore();
+  const { userCanAccessRoute } = usePermissions();
 
   if (to.meta.requiresAuth && !sessionStore.hasSession) {
-    router.push({ name: 'login' });
+    await router.push({ name: 'login' });
+  }
+
+  if (sessionStore.hasSession && !userCanAccessRoute(String(to.name))) {
+    await router.push({ name: 'home' });
   }
 
   if (
-    to.meta.requiresApplicationConfigurations &&
-    !sessionStore.hasApplicationConfigurations
+    sessionStore.hasSession &&
+    to.name != 'applicationConfigurations' &&
+    !sessionStore.hasApplicationConfigurations &&
+    userCanAccessRoute('applicationConfigurations')
   ) {
-    router.push({ name: 'applicationConfigurations' });
+    await router.push({ name: 'applicationConfigurations' });
   }
 });
 
