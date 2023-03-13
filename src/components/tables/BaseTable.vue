@@ -31,7 +31,10 @@ const showActions = computed(() => props.canEdit || props.canDelete);
         {{ props.title }}
       </h1>
       <form class="flex">
-        <input type="search" class="h-8 rounded-sm outline-none px-2" />
+        <input
+          type="search"
+          class="h-8 rounded-sm border-2 border-primary outline-none px-2"
+        />
         <BaseButton
           type="submit"
           class="h-8 text-sm px-4 rounded-tl-none rounded-bl-none shadow-none"
