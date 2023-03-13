@@ -10,7 +10,7 @@ import AsideNav from '@/components/navs/AsideNav.vue';
     <AsideNav />
     <div class="flex flex-col w-full px-4">
       <AppHeader />
-      <div class="overflow-auto">
+      <div class="overflow-y-auto flex-1">
         <RouterView />
       </div>
     </div>
