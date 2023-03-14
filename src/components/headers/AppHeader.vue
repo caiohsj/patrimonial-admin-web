@@ -81,14 +81,16 @@ const changeApplicationConfigurations = () => {
       class="profile flex items-center gap-2 hover:cursor-pointer relative"
       v-if="!isMobile"
     >
-      <div>
+      <a
+        class="rounded-full bg-light p-2 hover:opacity-60"
+        @click="toggleSettings"
+      >
         <img
-          src="@/assets/images/Avatar.png"
+          src="@/assets/images/Avatar.jpg"
           :alt="currentUser?.name"
-          class="hover:opacity-60 h-12"
-          @click="toggleSettings"
+          class="h-8 rounded-full"
         />
-      </div>
+      </a>
       <div class="font-baloo2-bold flex flex-col">
         <span class="text-lg">{{ currentUser?.name }}</span>
         <span class="text-xs text-gray-darken text-center">

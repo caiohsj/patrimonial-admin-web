@@ -13,6 +13,7 @@ const defaultSelectClasses = [
   'transition-all',
   'duration-300',
   'focus:border-sky-300',
+  'cursor-pointer',
 ];
 
 type SelectOption = {
