@@ -2,6 +2,7 @@ import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
 import BranchesView from '@/views/BranchesView.vue';
+import PlacesView from '@/views/PlacesView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -30,6 +31,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/filiais',
     name: 'branches',
     component: BranchesView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/locais',
+    name: 'places',
+    component: PlacesView,
     meta: {
       requiresAuth: true,
     },

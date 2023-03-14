@@ -28,9 +28,9 @@ const navItems = [
   {
     route: 'branches',
   },
-  // {
-  //   route: 'places',
-  // },
+  {
+    route: 'places',
+  },
 ];
 
 const itemActive = (name: string) => {
