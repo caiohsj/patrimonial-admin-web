@@ -19,12 +19,14 @@ onMounted(() => branchStore.fetchBranches());
 </script>
 
 <template>
-  <BaseTable
-    :title="t('views.branchesView.table.title')"
-    :can-edit="true"
-    :can-delete="true"
-    :headers="headers"
-    :items="branches"
-    :total="branches.length"
-  />
+  <main>
+    <BaseTable
+      :title="t('views.branchesView.table.title')"
+      :can-edit="true"
+      :can-delete="true"
+      :headers="headers"
+      :items="branches"
+      :total="branches.length"
+    />
+  </main>
 </template>
