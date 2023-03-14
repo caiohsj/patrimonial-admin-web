@@ -24,16 +24,21 @@ const showActions = computed(() => props.canEdit || props.canDelete);
 
 <template>
   <div class="base-table">
-    <div class="header flex justify-between items-center h-20 px-2 bg-light">
+    <div
+      class="header flex flex-col justify-between items-center px-2 py-2 gap-4 bg-light md:flex-row md:h-20"
+    >
       <h1 class="font-baloo2-semibold text-xl">
         {{ props.title }}
       </h1>
-      <form class="flex gap-2">
+      <form class="flex">
         <input
           type="search"
-          class="h-8 rounded-sm shadow-md outline-none px-2"
+          class="h-8 rounded-sm border-2 border-primary outline-none px-2"
         />
-        <BaseButton type="submit" class="h-8 text-sm px-4">
+        <BaseButton
+          type="submit"
+          class="h-8 text-sm px-4 rounded-tl-none rounded-bl-none shadow-none"
+        >
           {{ t('components.tables.baseTable.search') }}
         </BaseButton>
       </form>
@@ -41,32 +46,42 @@ const showActions = computed(() => props.canEdit || props.canDelete);
         {{ t('components.tables.baseTable.results', { count: props.total }) }}
       </span>
     </div>
-    <table class="table text-left w-full bg-light">
-      <thead class="bg-gray-darken text-light">
-        <tr class="h-12 font-baloo2-bold">
-          <th v-for="(item, index) in props.headers" :key="index">
-            {{ item }}
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody class="font-baloo2-regular">
-        <tr
-          class="h-20 border-b-2 border-gray-light"
-          v-for="(item, index) in props.items"
-          :key="index"
-        >
-          <td v-for="(value, index) in objectToArray(item)" :key="index">
-            {{ value }}
-          </td>
-          <td class="flex justify-end" v-if="showActions">
-            <button class="hover:opacity-50 transition-opacity">
-              <OptionsIcon class="w-6" />
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto">
+      <table class="table text-left bg-light w-full">
+        <thead class="bg-gray-darken text-light">
+          <tr class="h-12 font-baloo2-bold">
+            <th
+              v-for="(item, index) in props.headers"
+              :key="index"
+              class="px-4"
+            >
+              {{ item }}
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="font-baloo2-regular">
+          <tr
+            class="h-20 border-b-2 border-gray-light"
+            v-for="(item, index) in props.items"
+            :key="index"
+          >
+            <td
+              v-for="(value, index) in objectToArray(item)"
+              :key="index"
+              class="px-4"
+            >
+              {{ value }}
+            </td>
+            <td class="flex justify-end" v-if="showActions">
+              <button class="hover:opacity-50 transition-opacity">
+                <OptionsIcon class="w-6" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

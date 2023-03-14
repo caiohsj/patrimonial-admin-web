@@ -1,11 +1,15 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useSessionStore } from '@/stores/session';
+import { useWindow } from '@/composables/window';
 import MapPinIcon from '@/components/icons/MapPinIcon.vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
+
+const { bodyWidth } = useWindow();
+const isMobile = computed(() => bodyWidth.value < 768);
 
 const router = useRouter();
 const { t } = useI18n();
@@ -41,12 +45,15 @@ const changeApplicationConfigurations = () => {
 </script>
 
 <template>
-  <div v-if="hasSession" class="h-24 flex justify-between items-center">
+  <div
+    v-if="hasSession"
+    class="h-24 flex justify-end md:justify-between items-center"
+  >
     <div>
       <div
         v-if="hasApplicationConfigurations"
         @click="changeApplicationConfigurations"
-        class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer"
+        class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer text-sm md:text-base"
       >
         <span
           class="flex flex-col items-start px-8 justify-center border-gray-light border-r-2"
@@ -70,15 +77,20 @@ const changeApplicationConfigurations = () => {
         </span>
       </div>
     </div>
-    <div class="profile flex items-center gap-2 hover:cursor-pointer relative">
-      <div>
+    <div
+      class="profile flex items-center gap-2 hover:cursor-pointer relative"
+      v-if="!isMobile"
+    >
+      <a
+        class="rounded-full bg-light p-2 hover:opacity-60"
+        @click="toggleSettings"
+      >
         <img
-          src="@/assets/images/Avatar.png"
+          src="@/assets/images/Avatar.jpg"
           :alt="currentUser?.name"
-          class="hover:opacity-60 h-12"
-          @click="toggleSettings"
+          class="h-8 rounded-full"
         />
-      </div>
+      </a>
       <div class="font-baloo2-bold flex flex-col">
         <span class="text-lg">{{ currentUser?.name }}</span>
         <span class="text-xs text-gray-darken text-center">
