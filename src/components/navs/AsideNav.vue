@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute, type RouteLocationRaw } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useSessionStore } from '@/stores/session';
 import { usePermissions } from '@/composables/permissions';
 import { useWindow } from '@/composables/window';
 import HamburgerIcon from '@/components/icons/HamburgerIcon.vue';
 import CloseIcon from '@/components/icons/CloseIcon.vue';
+import MenuItem from './MenuItem.vue';
 
 const navMobile = ref<HTMLDivElement>();
 
@@ -16,6 +17,7 @@ const showButtonNavMobile = computed(() => bodyWidth.value < 768);
 
 const { t } = useI18n();
 const route = useRoute();
+const router = useRouter();
 
 const sessionStore = useSessionStore();
 const { hasSession } = storeToRefs(sessionStore);
@@ -31,17 +33,8 @@ const navItems = [
   // },
 ];
 
-const navItemActiveClass = (name: string) => {
-  const activeClasses = [
-    'bg-primary',
-    'text-white',
-    'hover:bg-transparent',
-    'hover:text-primary',
-    'hover:border-primary',
-  ];
-  return name == route.name
-    ? activeClasses
-    : ['hover:bg-primary', 'hover:text-white'];
+const itemActive = (name: string) => {
+  return name == route.name;
 };
 
 const toggleNavMobile = () => {
@@ -50,10 +43,10 @@ const toggleNavMobile = () => {
   navMobile.value?.classList.toggle('w-full');
 };
 
-const navigate = (name: string): RouteLocationRaw => {
+const navigate = (name: string): void => {
   toggleNavMobile();
 
-  return { name };
+  router.push({ name });
 };
 </script>
 
@@ -71,26 +64,15 @@ const navigate = (name: string): RouteLocationRaw => {
     </div>
     <nav class="px-8">
       <ul class="grid gap-4">
-        <li v-for="item in navItems" :key="item.route">
-          <router-link
-            v-if="userCanAccessRoute(item.route)"
-            :class="[
-              ...navItemActiveClass(item.route),
-              'flex',
-              'justify-center',
-              'font-baloo2-bold',
-              'rounded-sm',
-              'py-2',
-              'border-2',
-              'border-transparent',
-              'cursor-pointer',
-              'transition',
-            ]"
-            :to="navigate(item.route)"
-          >
-            {{ t(`components.navs.asideNav.items.${item.route}`) }}
-          </router-link>
-        </li>
+        <MenuItem
+          :active="itemActive(item.route)"
+          :show="userCanAccessRoute(item.route)"
+          :key="item.route"
+          v-for="item in navItems"
+          @navigate="navigate(item.route)"
+        >
+          {{ t(`components.navs.asideNav.items.${item.route}`) }}
+        </MenuItem>
       </ul>
     </nav>
   </div>
@@ -114,26 +96,15 @@ const navigate = (name: string): RouteLocationRaw => {
       </div>
       <nav class="px-8">
         <ul class="grid gap-4">
-          <li v-for="item in navItems" :key="item.route">
-            <router-link
-              v-if="userCanAccessRoute(item.route)"
-              :class="[
-                ...navItemActiveClass(item.route),
-                'flex',
-                'justify-center',
-                'font-baloo2-bold',
-                'rounded-sm',
-                'py-2',
-                'border-2',
-                'border-transparent',
-                'cursor-pointer',
-                'transition',
-              ]"
-              :to="navigate(item.route)"
-            >
-              {{ t(`components.navs.asideNav.items.${item.route}`) }}
-            </router-link>
-          </li>
+          <MenuItem
+            :active="itemActive(item.route)"
+            :show="userCanAccessRoute(item.route)"
+            :key="item.route"
+            v-for="item in navItems"
+            @navigate="navigate(item.route)"
+          >
+            {{ t(`components.navs.asideNav.items.${item.route}`) }}
+          </MenuItem>
         </ul>
       </nav>
       <button class="absolute top-3 right-3" @click="toggleNavMobile">
