@@ -34,6 +34,15 @@ export default {
         },
       },
     },
+    placesView: {
+      table: {
+        title: 'Locais',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+        },
+      },
+    },
   },
   components: {
     headers: {
