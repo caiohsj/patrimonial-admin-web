@@ -40,7 +40,7 @@ watch(hasSession, (value) => {
       {{ t('views.loginView.title') }}
     </h1>
 
-    <form class="grid gap-4 w-full" @submit="onSubmit">
+    <form class="grid gap-4 w-full md:w-96" @submit="onSubmit">
       <InputGroup
         :label="t('views.loginView.form.labels.email')"
         name="email"
