@@ -10,6 +10,7 @@ const { t } = useI18n();
 
 type TableProps = {
   title: string;
+  canCreate: boolean;
   canEdit: boolean;
   canDelete: boolean;
   headers: Array<string>;
@@ -18,6 +19,7 @@ type TableProps = {
 };
 
 const props = defineProps<TableProps>();
+const emit = defineEmits(['create']);
 
 const showActions = computed(() => props.canEdit || props.canDelete);
 </script>
@@ -27,9 +29,19 @@ const showActions = computed(() => props.canEdit || props.canDelete);
     <div
       class="header flex flex-col justify-between items-center px-2 py-2 gap-4 bg-light md:flex-row md:h-20"
     >
-      <h1 class="font-baloo2-semibold text-xl">
-        {{ props.title }}
-      </h1>
+      <div class="content-title flex items-center gap-2">
+        <h1 class="font-baloo2-semibold text-xl">
+          {{ props.title }}
+        </h1>
+        <BaseButton
+          type="button"
+          class="add-button w-6 h-6 flex items-center justify-center"
+          v-if="props.canCreate"
+          @click="emit('create')"
+        >
+          +
+        </BaseButton>
+      </div>
       <form class="flex">
         <input
           type="search"
@@ -87,13 +99,13 @@ const showActions = computed(() => props.canEdit || props.canDelete);
 
 <style lang="css" scoped>
 .base-table .header {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .base-table .table {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .base-table .table thead tr th:first-child,
@@ -103,5 +115,9 @@ const showActions = computed(() => props.canEdit || props.canDelete);
 
 .base-table .table thead tr th:last-child {
   padding-right: 12px;
+}
+
+.base-table .header .content-title .add-button {
+  border-radius: 50%;
 }
 </style>

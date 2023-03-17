@@ -10,13 +10,13 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const sessionStore = useSessionStore();
-  const { userCanAccessRoute } = usePermissions();
+  const { userHasPermission } = usePermissions();
 
   if (to.meta.requiresAuth && !sessionStore.hasSession) {
     await router.push({ name: 'login' });
   }
 
-  if (sessionStore.hasSession && !userCanAccessRoute(String(to.name))) {
+  if (sessionStore.hasSession && !userHasPermission(String(to.name))) {
     await router.push({ name: 'home' });
   }
 
@@ -24,7 +24,7 @@ router.beforeEach(async (to) => {
     sessionStore.hasSession &&
     to.name != 'applicationConfigurations' &&
     !sessionStore.hasApplicationConfigurations &&
-    userCanAccessRoute('applicationConfigurations')
+    userHasPermission('applicationConfigurations')
   ) {
     await router.push({ name: 'applicationConfigurations' });
   }

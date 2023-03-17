@@ -5,7 +5,7 @@ export function usePermissions() {
   const sessionStore = useSessionStore();
   const { abilities } = storeToRefs(sessionStore);
 
-  function userCanAccessRoute(routeName: string): boolean {
+  function userHasPermission(routeName: string): boolean {
     if (abilities.value.includes('*')) return true;
 
     if (abilities.value.includes(routeName)) return true;
@@ -13,5 +13,5 @@ export function usePermissions() {
     return false;
   }
 
-  return { userCanAccessRoute };
+  return { userHasPermission };
 }

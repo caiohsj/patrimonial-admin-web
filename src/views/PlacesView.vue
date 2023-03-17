@@ -19,14 +19,12 @@ onMounted(() => placeStore.fetchPlaces());
 </script>
 
 <template>
-  <main>
-    <BaseTable
-      :title="t('views.placesView.table.title')"
-      :can-edit="true"
-      :can-delete="true"
-      :headers="headers"
-      :items="places"
-      :total="places.length"
-    />
-  </main>
+  <BaseTable
+    :title="t('views.placesView.table.title')"
+    :can-edit="true"
+    :can-delete="true"
+    :headers="headers"
+    :items="places"
+    :total="places.length"
+  />
 </template>

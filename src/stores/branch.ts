@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Branch } from '@/@types/interfaces/models/branch';
+import type { CreateBranchFormData } from '@/@types/interfaces/CreateBranchFormData';
 import BranchResource from '@/api/resources/branch';
 
 type BranchStoreState = {
@@ -24,6 +25,10 @@ export const useBranchStore = defineStore('branch', {
     async fetchBranches() {
       const { data } = await BranchResource.index();
       this.branches = data;
+    },
+
+    createBranch(params: CreateBranchFormData) {
+      return BranchResource.create(params);
     },
   },
 });
