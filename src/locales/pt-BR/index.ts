@@ -43,6 +43,15 @@ export default {
         },
       },
     },
+    createBranchesView: {
+      form: {
+        title: 'Filiais',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Cadastrar',
+      },
+    },
   },
   components: {
     headers: {

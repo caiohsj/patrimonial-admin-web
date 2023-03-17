@@ -32,7 +32,7 @@ watch(hasSession, (value) => {
 </script>
 
 <template>
-  <main
+  <div
     class="bg-light h-screen w-full flex flex-col justify-center items-center"
   >
     <img src="@/assets/images/logo.png" :alt="t('altLogo')" class="w-48 h-40" />
@@ -60,5 +60,5 @@ watch(hasSession, (value) => {
         {{ t('views.loginView.form.submit') }}
       </BaseButton>
     </form>
-  </main>
+  </div>
 </template>

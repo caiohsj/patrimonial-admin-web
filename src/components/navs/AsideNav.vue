@@ -22,7 +22,7 @@ const router = useRouter();
 const sessionStore = useSessionStore();
 const { hasSession, currentUser } = storeToRefs(sessionStore);
 
-const { userCanAccessRoute } = usePermissions();
+const { userHasPermission } = usePermissions();
 
 const navItems = [
   {
@@ -72,7 +72,7 @@ const logout = () => {
       <ul class="grid gap-4">
         <MenuItem
           :active="itemActive(item.route)"
-          :show="userCanAccessRoute(item.route)"
+          :show="userHasPermission(item.route)"
           :key="item.route"
           v-for="item in navItems"
           @navigate="navigate(item.route)"
@@ -125,7 +125,7 @@ const logout = () => {
         <ul class="grid gap-4">
           <MenuItem
             :active="itemActive(item.route)"
-            :show="userCanAccessRoute(item.route)"
+            :show="userHasPermission(item.route)"
             :key="item.route"
             v-for="item in navItems"
             @navigate="navigate(item.route)"

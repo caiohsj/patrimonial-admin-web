@@ -2,10 +2,14 @@
 import { computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 import { useBranchStore } from '@/stores/branch';
+import { usePermissions } from '../composables/permissions';
 import BaseTable from '@/components/tables/BaseTable.vue';
 
 const { t } = useI18n();
+const { userHasPermission } = usePermissions();
+const router = useRouter();
 
 const branchStore = useBranchStore();
 const { branches } = storeToRefs(branchStore);
@@ -19,14 +23,14 @@ onMounted(() => branchStore.fetchBranches());
 </script>
 
 <template>
-  <main>
-    <BaseTable
-      :title="t('views.branchesView.table.title')"
-      :can-edit="true"
-      :can-delete="true"
-      :headers="headers"
-      :items="branches"
-      :total="branches.length"
-    />
-  </main>
+  <BaseTable
+    :title="t('views.branchesView.table.title')"
+    :can-create="userHasPermission('create-branches')"
+    :can-edit="userHasPermission('update-branches')"
+    :can-delete="userHasPermission('delete-branches')"
+    :headers="headers"
+    :items="branches"
+    :total="branches.length"
+    @create="router.push({ name: 'createBranches' })"
+  />
 </template>
