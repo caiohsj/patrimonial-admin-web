@@ -4,6 +4,7 @@ import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView
 import BranchesView from '@/views/BranchesView.vue';
 import PlacesView from '@/views/PlacesView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
+import CreatePlacesView from '@/views/CreatePlacesView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -48,6 +49,11 @@ const routes: readonly RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/locais/cadastro',
+    name: 'createPlaces',
+    component: CreatePlacesView,
   },
 ];
 

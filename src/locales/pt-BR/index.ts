@@ -45,7 +45,16 @@ export default {
     },
     createBranchesView: {
       form: {
-        title: 'Filiais',
+        title: 'Filial',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Cadastrar',
+      },
+    },
+    createPlacesView: {
+      form: {
+        title: 'Local',
         labels: {
           description: 'Descrição',
         },

@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useBranchStore } from '@/stores/branch';
-import { usePermissions } from '../composables/permissions';
+import { usePermissions } from '@/composables/permissions';
 import BaseTable from '@/components/tables/BaseTable.vue';
 
 const { t } = useI18n();
