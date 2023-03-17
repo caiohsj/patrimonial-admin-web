@@ -4,7 +4,7 @@ const props = defineProps<{ title: string }>();
 
 <template>
   <div class="form-card bg-light rounded-lg pb-8 shadow-md">
-    <div class="header border-dark px-8 h-20 flex items-center">
+    <div class="header border-gray-light px-8 h-20 flex items-center">
       <h1 class="font-baloo2-semibold text-gray-darken text-xl">
         {{ props.title }}
       </h1>
