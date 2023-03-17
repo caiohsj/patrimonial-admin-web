@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Place } from '@/@types/interfaces/models/place';
+import type { CreatePlaceFormData } from '@/@types/interfaces/CreatePlaceFormData';
 import PlaceResource from '@/api/resources/place';
 
 type PlaceStoreState = {
@@ -24,6 +25,10 @@ export const usePlaceStore = defineStore('place', {
     async fetchPlaces() {
       const { data } = await PlaceResource.index();
       this.places = data;
+    },
+
+    createPlace(params: CreatePlaceFormData) {
+      return PlaceResource.create(params);
     },
   },
 });
