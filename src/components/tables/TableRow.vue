@@ -62,12 +62,14 @@ const confirmDelete = () => {
         <button
           class="bg-success text-light px-2 rounded-md"
           @click="emit('edit', props.item)"
+          v-if="props.canEdit"
         >
           {{ t('components.tables.tableRow.buttons.edit') }}
         </button>
         <button
           class="bg-danger text-light px-2 rounded-md"
           @click="openConfirmationScreen = true"
+          v-if="props.canDelete"
         >
           {{ t('components.tables.tableRow.buttons.delete') }}
         </button>
