@@ -83,6 +83,19 @@ export default {
         search: 'Pesquisar',
         results: '{count} resultado(s)',
       },
+      tableRow: {
+        confirmationTitle: 'Você realmente confirma esta ação?',
+        buttons: {
+          edit: 'Editar',
+          delete: 'Apagar',
+        },
+      },
+    },
+    feedbacks: {
+      confirmationScreen: {
+        confirm: 'Sim',
+        cancel: 'Cancelar',
+      },
     },
   },
 };

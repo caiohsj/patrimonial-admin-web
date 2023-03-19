@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router';
 import { useBranchStore } from '@/stores/branch';
 import { usePermissions } from '@/composables/permissions';
 import BaseTable from '@/components/tables/BaseTable.vue';
+import type { Branch } from '@/@types/interfaces/models/branch';
 
 const { t } = useI18n();
 const { userHasPermission } = usePermissions();
@@ -20,6 +21,10 @@ const headers = computed(() => [
 ]);
 
 onMounted(() => branchStore.fetchBranches());
+
+const deleteBranch = (item: Branch) => {
+  branchStore.deleteBranch(item);
+};
 </script>
 
 <template>
@@ -32,5 +37,6 @@ onMounted(() => branchStore.fetchBranches());
     :items="branches"
     :total="branches.length"
     @create="router.push({ name: 'createBranches' })"
+    @delete="deleteBranch"
   />
 </template>

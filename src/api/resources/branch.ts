@@ -10,4 +10,7 @@ export default {
   create(params: CreateBranchFormData) {
     return client.post('/branches', params, true);
   },
+  delete(branch: Branch) {
+    return client.delete(`/branches/${branch.id}`);
+  },
 };

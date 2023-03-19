@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useTransform } from '@/composables/transform';
-import OptionsIcon from '@/components/icons/OptionsIcon.vue';
 import BaseButton from '@/components/buttons/BaseButton.vue';
+import TableRow from './TableRow.vue';
 
-const { objectToArray } = useTransform();
 const { t } = useI18n();
 
 type TableProps = {
@@ -18,10 +15,18 @@ type TableProps = {
   total: number;
 };
 
-const props = defineProps<TableProps>();
-const emit = defineEmits(['create']);
+type BaseTableEmits = {
+  (event: 'create'): void;
+  (event: 'edit', value: any): void;
+  (event: 'delete', value: any): void;
+};
 
-const showActions = computed(() => props.canEdit || props.canDelete);
+const props = defineProps<TableProps>();
+const emit = defineEmits<BaseTableEmits>();
+
+const deleteItem = (item: any) => {
+  emit('delete', item);
+};
 </script>
 
 <template>
@@ -73,24 +78,15 @@ const showActions = computed(() => props.canEdit || props.canDelete);
           </tr>
         </thead>
         <tbody class="font-baloo2-regular">
-          <tr
-            class="h-20 border-b-2 border-gray-light"
+          <TableRow
             v-for="(item, index) in props.items"
             :key="index"
-          >
-            <td
-              v-for="(value, index) in objectToArray(item)"
-              :key="index"
-              class="px-4"
-            >
-              {{ value }}
-            </td>
-            <td class="flex justify-end" v-if="showActions">
-              <button class="hover:opacity-50 transition-opacity">
-                <OptionsIcon class="w-6" />
-              </button>
-            </td>
-          </tr>
+            :item="item"
+            :can-create="props.canCreate"
+            :can-edit="props.canEdit"
+            :can-delete="props.canDelete"
+            @delete="deleteItem"
+          />
         </tbody>
       </table>
     </div>
