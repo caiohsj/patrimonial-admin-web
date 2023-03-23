@@ -30,5 +30,10 @@ export const useBranchStore = defineStore('branch', {
     createBranch(params: CreateBranchFormData) {
       return BranchResource.create(params);
     },
+
+    deleteBranch(branch: Branch) {
+      BranchResource.delete(branch);
+      this.fetchBranches();
+    },
   },
 });
