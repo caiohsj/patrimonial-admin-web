@@ -42,8 +42,8 @@ export const useBranchStore = defineStore('branch', {
       return BranchResource.update(params, id);
     },
 
-    deleteBranch(branch: Branch) {
-      BranchResource.delete(branch);
+    async deleteBranch(branch: Branch) {
+      await BranchResource.delete(branch);
       this.fetchBranches();
     },
   },

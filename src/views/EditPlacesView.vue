@@ -4,8 +4,8 @@ import { useForm } from 'vee-validate';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
-import type { CreateBranchFormData } from '@/@types/interfaces/CreateBranchFormData';
-import { useBranchStore } from '@/stores/branch';
+import type { CreatePlaceFormData } from '@/@types/interfaces/CreatePlaceFormData';
+import { usePlaceStore } from '@/stores/place';
 import FormCard from '@/components/cards/FormCard.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
 import BaseButton from '@/components/buttons/BaseButton.vue';
@@ -14,38 +14,38 @@ const router = useRouter();
 const route = useRoute();
 const { t } = useI18n();
 
-const branchStore = useBranchStore();
-const { branch } = storeToRefs(branchStore);
+const placeStore = usePlaceStore();
+const { place } = storeToRefs(placeStore);
 
-const branchId = computed(() => Number(route.params.id));
+const placeId = computed(() => Number(route.params.id));
 
-onBeforeMount(() => branchStore.fetchBranch(branchId.value));
+onBeforeMount(() => placeStore.fetchPlace(placeId.value));
 
-const { handleSubmit, setValues } = useForm<CreateBranchFormData>();
+const { handleSubmit, setValues } = useForm<CreatePlaceFormData>();
 
 const onSubmit = handleSubmit((values) => {
-  branchStore.updateBranch(values, branchId.value).then(() => {
-    router.push({ name: 'branches' });
+  placeStore.updatePlace(values, placeId.value).then(() => {
+    router.push({ name: 'places' });
   });
 });
 
-watch(branch, (branch) => {
-  setValues({ description: branch?.description });
+watch(place, (place) => {
+  setValues({ description: place?.description });
 });
 </script>
 
 <template>
   <div class="w-full">
-    <FormCard :title="t('views.editBranchesView.form.title', { id: branchId })">
+    <FormCard :title="t('views.editPlacesView.form.title', { id: placeId })">
       <form class="flex flex-col gap-6" @submit="onSubmit">
         <InputGroup
-          :label="t('views.editBranchesView.form.labels.description')"
+          :label="t('views.editPlacesView.form.labels.description')"
           type="text"
           name="description"
           rules="required"
         />
         <BaseButton type="submit" class="md:w-56 md:self-end">
-          {{ t('views.editBranchesView.form.submit') }}
+          {{ t('views.editPlacesView.form.submit') }}
         </BaseButton>
       </form>
     </FormCard>

@@ -52,7 +52,7 @@ export default {
         submit: 'Cadastrar',
       },
     },
-    updateBranchesView: {
+    editBranchesView: {
       form: {
         title: 'Filial #{id}',
         labels: {
@@ -68,6 +68,15 @@ export default {
           description: 'Descrição',
         },
         submit: 'Cadastrar',
+      },
+    },
+    editPlacesView: {
+      form: {
+        title: 'Local #{id}',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
       },
     },
   },
