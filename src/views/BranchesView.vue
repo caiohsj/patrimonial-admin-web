@@ -25,6 +25,10 @@ onMounted(() => branchStore.fetchBranches());
 const deleteBranch = (item: Branch) => {
   branchStore.deleteBranch(item);
 };
+
+const navigateToEditBranch = (branch: Branch) => {
+  router.push({ name: 'editBranches', params: { id: branch.id } });
+};
 </script>
 
 <template>
@@ -37,6 +41,7 @@ const deleteBranch = (item: Branch) => {
     :items="branches"
     :total="branches.length"
     @create="router.push({ name: 'createBranches' })"
+    @edit="navigateToEditBranch"
     @delete="deleteBranch"
   />
 </template>

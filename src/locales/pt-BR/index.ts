@@ -52,6 +52,15 @@ export default {
         submit: 'Cadastrar',
       },
     },
+    updateBranchesView: {
+      form: {
+        title: 'Filial #{id}',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
+      },
+    },
     createPlacesView: {
       form: {
         title: 'Local',
