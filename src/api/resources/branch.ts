@@ -10,6 +10,12 @@ export default {
   create(params: CreateBranchFormData) {
     return client.post('/branches', params, true);
   },
+  show(id: number): Promise<AxiosResponse<Branch>> {
+    return client.get(`/branches/${id}`);
+  },
+  update(params: CreateBranchFormData, id: number) {
+    return client.put(`/branches/${id}`, params, true);
+  },
   delete(branch: Branch) {
     return client.delete(`/branches/${branch.id}`);
   },

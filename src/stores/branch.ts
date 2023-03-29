@@ -5,11 +5,13 @@ import BranchResource from '@/api/resources/branch';
 
 type BranchStoreState = {
   branches: Array<Branch>;
+  branch: Branch | null;
 };
 
 export const useBranchStore = defineStore('branch', {
   state: (): BranchStoreState => ({
     branches: [],
+    branch: null,
   }),
 
   getters: {
@@ -29,6 +31,15 @@ export const useBranchStore = defineStore('branch', {
 
     createBranch(params: CreateBranchFormData) {
       return BranchResource.create(params);
+    },
+
+    async fetchBranch(id: number) {
+      const { data } = await BranchResource.show(id);
+      this.branch = data;
+    },
+
+    updateBranch(params: CreateBranchFormData, id: number) {
+      return BranchResource.update(params, id);
     },
 
     deleteBranch(branch: Branch) {

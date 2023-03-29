@@ -27,6 +27,10 @@ const emit = defineEmits<BaseTableEmits>();
 const deleteItem = (item: any) => {
   emit('delete', item);
 };
+
+const editItem = (item: any) => {
+  emit('edit', item);
+};
 </script>
 
 <template>
@@ -86,6 +90,7 @@ const deleteItem = (item: any) => {
             :can-edit="props.canEdit"
             :can-delete="props.canDelete"
             @delete="deleteItem"
+            @edit="editItem"
           />
         </tbody>
       </table>

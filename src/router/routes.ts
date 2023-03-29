@@ -4,6 +4,7 @@ import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView
 import BranchesView from '@/views/BranchesView.vue';
 import PlacesView from '@/views/PlacesView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
+import EditBranchesView from '@/views/EditBranchesView.vue';
 import CreatePlacesView from '@/views/CreatePlacesView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -33,6 +34,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/filiais',
     name: 'branches',
     component: BranchesView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/filiais/:id',
+    name: 'editBranches',
+    component: EditBranchesView,
     meta: {
       requiresAuth: true,
     },
