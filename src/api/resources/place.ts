@@ -10,4 +10,13 @@ export default {
   create(params: CreatePlaceFormData) {
     return client.post('/places', params, true);
   },
+  show(id: number): Promise<AxiosResponse<Place>> {
+    return client.get(`/places/${id}`);
+  },
+  update(params: CreatePlaceFormData, id: number) {
+    return client.put(`/places/${id}`, params, true);
+  },
+  delete(branch: Place) {
+    return client.delete(`/places/${branch.id}`);
+  },
 };

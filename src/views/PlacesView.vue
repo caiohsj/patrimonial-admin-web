@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia';
 import { usePermissions } from '@/composables/permissions';
 import { usePlaceStore } from '@/stores/place';
 import BaseTable from '@/components/tables/BaseTable.vue';
+import type { Place } from '@/@types/interfaces/models/place';
 
 const { t } = useI18n();
 const { userHasPermission } = usePermissions();
@@ -20,6 +21,14 @@ const headers = computed(() => [
 ]);
 
 onMounted(() => placeStore.fetchPlaces());
+
+const deletePlace = (item: Place) => {
+  placeStore.deletePlace(item);
+};
+
+const navigateToEditPlace = (place: Place) => {
+  router.push({ name: 'editPlaces', params: { id: place.id } });
+};
 </script>
 
 <template>
@@ -32,5 +41,7 @@ onMounted(() => placeStore.fetchPlaces());
     :items="places"
     :total="places.length"
     @create="router.push({ name: 'createPlaces' })"
+    @edit="navigateToEditPlace"
+    @delete="deletePlace"
   />
 </template>

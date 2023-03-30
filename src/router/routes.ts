@@ -6,6 +6,7 @@ import PlacesView from '@/views/PlacesView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
 import EditBranchesView from '@/views/EditBranchesView.vue';
 import CreatePlacesView from '@/views/CreatePlacesView.vue';
+import EditPlacesView from '@/views/EditPlacesView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -55,6 +56,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/locais',
     name: 'places',
     component: PlacesView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/locais/:id',
+    name: 'editPlaces',
+    component: EditPlacesView,
     meta: {
       requiresAuth: true,
     },
