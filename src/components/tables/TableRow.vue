@@ -30,6 +30,7 @@ const showActions = computed(() => props.canEdit || props.canDelete);
 
 const toggleItemsOptions = () => {
   itemsOptions.value?.classList.toggle('opacity-0');
+  itemsOptions.value?.classList.toggle('-z-50');
 };
 
 const confirmDelete = () => {
@@ -57,7 +58,7 @@ const confirmDelete = () => {
       </button>
       <div
         ref="itemsOptions"
-        class="absolute mr-6 rounded-lg p-2 flex gap-2 bg-light shadow-sm border-2 border-gray-light opacity-0 transition-all duration-700"
+        class="absolute right-8 rounded-lg p-2 grid grid-flow-col gap-2 bg-light shadow-sm border-2 border-gray-light -z-50 opacity-0 transition-all duration-700 md:flex"
       >
         <button
           class="bg-success text-light px-2 rounded-md"
