@@ -21,9 +21,9 @@ const { t } = useI18n();
       v-if="props.modelValue"
       class="fixed inset-0 z-50 bg-dark-transparent flex justify-center items-center w-full h-full"
     >
-      <div class="flex flex-col bg-light px-4 py-2 rounded-lg gap-4">
+      <div class="grid bg-light px-4 py-2 rounded-lg gap-4">
         <h1>{{ props.title }}</h1>
-        <div class="flex justify-between gap-2">
+        <div class="grid grid-flow-col gap-2">
           <button
             class="bg-success text-light py-2 px-2 rounded-md w-full"
             @click="emit('confirm')"
