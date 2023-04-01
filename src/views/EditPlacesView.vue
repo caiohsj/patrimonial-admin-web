@@ -36,18 +36,19 @@ watch(place, (place) => {
 
 <template>
   <div class="w-full">
-    <FormCard :title="t('views.editPlacesView.form.title', { id: placeId })">
-      <form class="flex flex-col gap-6" @submit="onSubmit">
-        <InputGroup
-          :label="t('views.editPlacesView.form.labels.description')"
-          type="text"
-          name="description"
-          rules="required"
-        />
-        <BaseButton type="submit" class="md:w-56 md:self-end">
-          {{ t('views.editPlacesView.form.submit') }}
-        </BaseButton>
-      </form>
+    <FormCard
+      :title="t('views.editPlacesView.form.title', { id: placeId })"
+      @submit="onSubmit"
+    >
+      <InputGroup
+        :label="t('views.editPlacesView.form.labels.description')"
+        type="text"
+        name="description"
+        rules="required"
+      />
+      <BaseButton type="submit" class="md:w-56 md:self-end">
+        {{ t('views.editPlacesView.form.submit') }}
+      </BaseButton>
     </FormCard>
   </div>
 </template>

@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 const props = defineProps<{ title: string }>();
+const emit = defineEmits(['submit']);
+
+const onSubmit = (e: Event) => {
+  e.preventDefault();
+  emit('submit');
+};
 </script>
 
 <template>
@@ -9,8 +15,10 @@ const props = defineProps<{ title: string }>();
         {{ props.title }}
       </h1>
     </div>
-    <div class="content-form px-8 pt-8">
-      <slot></slot>
+    <div class="content-form px-8 pt-8 h-fit">
+      <form class="flex flex-col gap-6" @submit="onSubmit">
+        <slot></slot>
+      </form>
     </div>
   </div>
 </template>

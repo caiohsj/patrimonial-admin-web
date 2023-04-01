@@ -55,7 +55,7 @@ const onSubmit = handleSubmit(({ branch, place }) => {
         'items-center',
         'rounded-lg',
         'shadow-lg',
-        'py-10',
+        'py-6',
         'w-full',
         'gap-8',
         'lg:h-fit',
@@ -68,11 +68,11 @@ const onSubmit = handleSubmit(({ branch, place }) => {
         '2xl:w-3/6',
       ]"
     >
-      <h1 class="font-baloo2-bold text-2xl text-center">
+      <h1 class="font-baloo2-bold text-2xl text-center mb-6 lg:mb-0">
         {{ t('views.applicationConfigurationsView.title') }}
       </h1>
 
-      <form class="w-2/4 grid gap-4" @submit="onSubmit">
+      <form class="w-full px-6 lg:px-0 lg:w-2/4 grid gap-4" @submit="onSubmit">
         <SelectGroup
           :label="t('views.applicationConfigurationsView.form.labels.branch')"
           name="branch"

@@ -9,9 +9,9 @@ import AsideNav from '@/components/navs/AsideNav.vue';
     <LoadingScreen />
     <AsideNav />
     <div class="flex flex-col w-full">
-      <AppHeader class="px-8" />
+      <AppHeader class="pr-2 md:px-8" />
       <main class="overflow-y-auto flex-1">
-        <RouterView class="px-8" />
+        <RouterView class="px-2 sm:px-8" />
       </main>
     </div>
   </div>

@@ -84,7 +84,7 @@ const logout = () => {
   </div>
   <div v-if="hasSession && isMobile">
     <button
-      class="absolute z-10 top-5 left-3 w-12 h-12"
+      class="absolute z-10 top-5 left-2 w-12 h-12"
       @click="toggleNavMobile"
     >
       <HamburgerIcon class="w-full h-full text-gray-darken active:text-light" />

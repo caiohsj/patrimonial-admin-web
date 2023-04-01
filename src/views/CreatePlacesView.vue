@@ -22,18 +22,19 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
   <div class="w-full">
-    <FormCard :title="t('views.createPlacesView.form.title')">
-      <form class="flex flex-col gap-6" @submit="onSubmit">
-        <InputGroup
-          type="text"
-          :label="t('views.createPlacesView.form.labels.description')"
-          name="description"
-          rules="required"
-        />
-        <BaseButton type="submit" class="md:w-56 md:self-end">
-          {{ t('views.createPlacesView.form.submit') }}
-        </BaseButton>
-      </form>
+    <FormCard
+      :title="t('views.createPlacesView.form.title')"
+      @submit="onSubmit"
+    >
+      <InputGroup
+        type="text"
+        :label="t('views.createPlacesView.form.labels.description')"
+        name="description"
+        rules="required"
+      />
+      <BaseButton type="submit" class="md:w-56 md:self-end">
+        {{ t('views.createPlacesView.form.submit') }}
+      </BaseButton>
     </FormCard>
   </div>
 </template>

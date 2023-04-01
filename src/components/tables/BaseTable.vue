@@ -36,10 +36,10 @@ const editItem = (item: any) => {
 <template>
   <div class="base-table">
     <div
-      class="header flex flex-col justify-between items-center px-2 py-2 gap-4 bg-light md:flex-row md:h-20"
+      class="header items-center justify-items-center px-2 py-2 gap-4 grid grid-rows-3 bg-light md:flex md:justify-between md:flex-row md:h-20"
     >
       <div class="content-title flex items-center gap-2">
-        <h1 class="font-baloo2-semibold text-xl">
+        <h1 class="font-baloo2-semibold text-xl mr-2 lg:mr-0">
           {{ props.title }}
         </h1>
         <BaseButton
@@ -54,7 +54,7 @@ const editItem = (item: any) => {
       <form class="flex">
         <input
           type="search"
-          class="h-8 rounded-sm border-2 border-primary outline-none px-2"
+          class="w-full h-8 rounded-sm border-2 border-primary outline-none px-2"
         />
         <BaseButton
           type="submit"
@@ -107,11 +107,6 @@ const editItem = (item: any) => {
 .base-table .table {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-}
-
-.base-table .table thead tr th:first-child,
-.base-table .table tbody tr td:first-child {
-  padding-left: 32px;
 }
 
 .base-table .table thead tr th:last-child {
