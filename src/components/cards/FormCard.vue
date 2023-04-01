@@ -16,7 +16,7 @@ const onSubmit = (e: Event) => {
       </h1>
     </div>
     <div class="content-form px-8 pt-8 h-fit">
-      <form class="flex flex-col gap-6" @submit="onSubmit">
+      <form class="grid gap-6" @submit="onSubmit">
         <slot></slot>
       </form>
     </div>
