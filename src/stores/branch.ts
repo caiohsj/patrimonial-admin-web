@@ -16,9 +16,9 @@ export const useBranchStore = defineStore('branch', {
 
   getters: {
     branchesOptions: (state) => {
-      return state.branches.map((branch, index) => ({
+      return state.branches.map((branch) => ({
         text: branch.description,
-        value: index,
+        value: branch.id,
       }));
     },
   },

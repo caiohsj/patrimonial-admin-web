@@ -66,6 +66,7 @@ export default {
         title: 'Local',
         labels: {
           description: 'Descrição',
+          branch: 'Filial',
         },
         submit: 'Cadastrar',
       },
