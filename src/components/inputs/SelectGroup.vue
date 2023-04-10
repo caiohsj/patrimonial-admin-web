@@ -24,19 +24,19 @@ type SelectOption = {
 type SelectGroupProps = {
   label: string;
   name: string;
-  modelValue?: string;
+  modelValue?: string | number;
   rules?: string;
   options: Array<SelectOption>;
 };
 
 const props = defineProps<SelectGroupProps>();
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string | null): void;
+  (event: 'update:modelValue', value: string | number): void;
 }>();
 
 const updateModelValue = () => emit('update:modelValue', value.value);
 
-const { errorMessage, value, meta } = useField<string>(
+const { errorMessage, value, meta } = useField<string | number>(
   props.name,
   props.rules,
   {
@@ -57,9 +57,9 @@ const errorSelectClass = computed(() =>
     <select
       :id="props.name"
       :name="props.name"
+      :class="[...defaultSelectClasses, errorSelectClass]"
       v-model="value"
       @change="updateModelValue"
-      :class="[...defaultSelectClasses, errorSelectClass]"
     >
       <option
         v-for="{ value, text } in props.options"

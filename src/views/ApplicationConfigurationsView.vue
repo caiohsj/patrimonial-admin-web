@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, ref } from 'vue';
 import { useForm } from 'vee-validate';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
@@ -12,6 +12,7 @@ import { useSessionStore } from '@/stores/session';
 
 const router = useRouter();
 const { t } = useI18n();
+const branch = ref(undefined);
 
 const branchStore = useBranchStore();
 const { branchesOptions } = storeToRefs(branchStore);
@@ -26,12 +27,13 @@ onMounted(() => {
   if (hasApplicationConfigurations) router.push({ name: 'home' });
 
   branchStore.fetchBranches();
-  placeStore.fetchPlaces();
 });
 
 watch(hasApplicationConfigurations, (value) => {
   if (value === true) router.push({ name: 'home' });
 });
+
+watch(branch, (branch_id) => placeStore.fetchPlaces({ branch_id }));
 
 const { handleSubmit } = useForm<{
   branch: number;
@@ -78,6 +80,7 @@ const onSubmit = handleSubmit(({ branch, place }) => {
           name="branch"
           rules="required"
           :options="branchesOptions"
+          v-model="branch"
         />
         <SelectGroup
           :label="t('views.applicationConfigurationsView.form.labels.place')"

@@ -55,14 +55,16 @@ export const useSessionStore = defineStore('session', {
       });
     },
 
-    setCurrentBranch(index: number) {
+    async setCurrentBranch(id: number) {
       const branchStore = useBranchStore();
-      this.currentBranch = branchStore.branches[index];
+      await branchStore.fetchBranch(id);
+      this.currentBranch = branchStore.branch;
     },
 
-    setCurrentPlace(index: number) {
+    async setCurrentPlace(id: number) {
       const placeStore = usePlaceStore();
-      this.currentPlace = placeStore.places[index];
+      await placeStore.fetchPlace(id);
+      this.currentPlace = placeStore.place;
     },
   },
   persist: true,

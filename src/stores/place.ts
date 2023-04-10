@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import type { Place } from '@/@types/interfaces/models/place';
 import type { CreatePlaceFormData } from '@/@types/interfaces/CreatePlaceFormData';
+import type { FetchPlaceParams } from '@/@types/interfaces/FetchPlaceParams';
 import PlaceResource from '@/api/resources/place';
 
 type PlaceStoreState = {
@@ -16,16 +17,16 @@ export const usePlaceStore = defineStore('place', {
 
   getters: {
     placesOptions: (state) => {
-      return state.places.map((place, index) => ({
+      return state.places.map((place) => ({
         text: place.description,
-        value: index,
+        value: place.id,
       }));
     },
   },
 
   actions: {
-    async fetchPlaces() {
-      const { data } = await PlaceResource.index();
+    async fetchPlaces(params?: FetchPlaceParams) {
+      const { data } = await PlaceResource.index(params);
       this.places = data;
     },
 
