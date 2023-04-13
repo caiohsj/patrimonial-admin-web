@@ -43,6 +43,16 @@ export default {
         },
       },
     },
+    accountsView: {
+      table: {
+        title: 'Contas',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+          tax_rate: 'Taxa Fiscal',
+        },
+      },
+    },
     createBranchesView: {
       form: {
         title: 'Filial',
@@ -93,6 +103,7 @@ export default {
         items: {
           branches: 'Filiais',
           places: 'Locais',
+          accounts: 'Contas',
         },
       },
     },

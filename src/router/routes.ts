@@ -3,6 +3,7 @@ import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
 import BranchesView from '@/views/BranchesView.vue';
 import PlacesView from '@/views/PlacesView.vue';
+import AccountsView from '@/views/AccountsView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
 import EditBranchesView from '@/views/EditBranchesView.vue';
 import CreatePlacesView from '@/views/CreatePlacesView.vue';
@@ -72,6 +73,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/locais/cadastro',
     name: 'createPlaces',
     component: CreatePlacesView,
+  },
+  {
+    path: '/contas',
+    name: 'accounts',
+    component: AccountsView,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
