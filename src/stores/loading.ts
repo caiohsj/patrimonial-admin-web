@@ -1,6 +1,7 @@
 import type { AxiosError } from 'axios';
 import { defineStore } from 'pinia';
 import i18n from '@/locales';
+import { useTransform } from '@/composables/transform';
 
 type LoadingStoreState = {
   loading: boolean;
@@ -32,13 +33,21 @@ export const useLoadingStore = defineStore('loading', {
     },
 
     setError(axiosError: AxiosError<any, any>) {
+      const { objectToArray } = useTransform();
       this.error = true;
       switch (axiosError.response?.status) {
         case 401:
           this.errorMessages.push(i18n.global.t('errors.unauthorized'));
           break;
         case 422:
-          this.errorMessages.push(...axiosError.response.data.errors);
+          if (typeof axiosError.response.data.errors == 'object') {
+            const errors = objectToArray(
+              axiosError.response.data.errors
+            ).flat();
+            this.errorMessages.push(...errors);
+          } else {
+            this.errorMessages.push(...axiosError.response.data.errors);
+          }
           break;
         default:
           this.errorMessages.push(i18n.global.t('errors.responseInvalid'));

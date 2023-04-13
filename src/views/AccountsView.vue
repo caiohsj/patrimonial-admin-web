@@ -41,7 +41,7 @@ const navigateToEditAccount = (account: Account) => {
     :headers="headers"
     :items="accounts"
     :total="accounts.length"
-    @create="router.push({ name: 'createAccounts' })"
+    @create="router.push({ name: 'createAccount' })"
     @edit="navigateToEditAccount"
     @delete="deleteAccount"
   />

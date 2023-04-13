@@ -5,6 +5,7 @@ import BranchesView from '@/views/BranchesView.vue';
 import PlacesView from '@/views/PlacesView.vue';
 import AccountsView from '@/views/AccountsView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
+import CreateAccountsView from '@/views/CreateAccountsView.vue';
 import EditBranchesView from '@/views/EditBranchesView.vue';
 import CreatePlacesView from '@/views/CreatePlacesView.vue';
 import EditPlacesView from '@/views/EditPlacesView.vue';
@@ -81,6 +82,11 @@ const routes: readonly RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/contas/cadastro',
+    name: 'createAccount',
+    component: CreateAccountsView,
   },
 ];
 
