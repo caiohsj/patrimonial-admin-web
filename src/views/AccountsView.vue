@@ -28,7 +28,7 @@ const deleteAccount = (item: Account) => {
 };
 
 const navigateToEditAccount = (account: Account) => {
-  router.push({ name: 'editAccount', params: { id: account.id } });
+  router.push({ name: 'editAccounts', params: { id: account.id } });
 };
 </script>
 

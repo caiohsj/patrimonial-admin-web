@@ -2,13 +2,14 @@ import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
 import BranchesView from '@/views/BranchesView.vue';
-import PlacesView from '@/views/PlacesView.vue';
-import AccountsView from '@/views/AccountsView.vue';
 import CreateBranchesView from '@/views/CreateBranchesView.vue';
-import CreateAccountsView from '@/views/CreateAccountsView.vue';
 import EditBranchesView from '@/views/EditBranchesView.vue';
+import PlacesView from '@/views/PlacesView.vue';
 import CreatePlacesView from '@/views/CreatePlacesView.vue';
 import EditPlacesView from '@/views/EditPlacesView.vue';
+import AccountsView from '@/views/AccountsView.vue';
+import CreateAccountsView from '@/views/CreateAccountsView.vue';
+import EditAccountsView from '@/views/EditAccountsView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -79,6 +80,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/contas',
     name: 'accounts',
     component: AccountsView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/contas/:id',
+    name: 'editAccounts',
+    component: EditAccountsView,
     meta: {
       requiresAuth: true,
     },

@@ -63,6 +63,16 @@ export default {
         submit: 'Cadastrar',
       },
     },
+    editAccountsView: {
+      form: {
+        title: 'Conta #{id}',
+        labels: {
+          description: 'Descrição',
+          tax_rate: 'Taxa Fiscal',
+        },
+        submit: 'Salvar',
+      },
+    },
     createBranchesView: {
       form: {
         title: 'Filial',
