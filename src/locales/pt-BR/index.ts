@@ -128,6 +128,15 @@ export default {
         submit: 'Salvar',
       },
     },
+    editCostCentersView: {
+      form: {
+        title: 'Centro de Custo #{id}',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
+      },
+    },
   },
   components: {
     headers: {
