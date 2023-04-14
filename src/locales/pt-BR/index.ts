@@ -43,6 +43,36 @@ export default {
         },
       },
     },
+    accountsView: {
+      table: {
+        title: 'Contas',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+          tax_rate: 'Taxa Fiscal',
+        },
+      },
+    },
+    createAccountsView: {
+      form: {
+        title: 'Conta',
+        labels: {
+          description: 'Descrição',
+          tax_rate: 'Taxa Fiscal',
+        },
+        submit: 'Cadastrar',
+      },
+    },
+    editAccountsView: {
+      form: {
+        title: 'Conta #{id}',
+        labels: {
+          description: 'Descrição',
+          tax_rate: 'Taxa Fiscal',
+        },
+        submit: 'Salvar',
+      },
+    },
     createBranchesView: {
       form: {
         title: 'Filial',
@@ -94,6 +124,7 @@ export default {
         items: {
           branches: 'Filiais',
           places: 'Locais',
+          accounts: 'Contas',
         },
       },
     },

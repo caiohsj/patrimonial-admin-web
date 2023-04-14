@@ -31,6 +31,9 @@ const navItems = [
   {
     route: 'places',
   },
+  {
+    route: 'accounts',
+  },
 ];
 
 const itemActive = (name: string) => {
