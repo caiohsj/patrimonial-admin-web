@@ -10,6 +10,9 @@ import EditPlacesView from '@/views/EditPlacesView.vue';
 import AccountsView from '@/views/AccountsView.vue';
 import CreateAccountsView from '@/views/CreateAccountsView.vue';
 import EditAccountsView from '@/views/EditAccountsView.vue';
+import CostCentersView from '@/views/CostCentersView.vue';
+import CreateCostCentersView from '@/views/CreateCostCentersView.vue';
+import EditCostCentersView from '@/views/EditCostCentersView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -54,6 +57,9 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/filiais/cadastro',
     name: 'createBranches',
     component: CreateBranchesView,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/locais',
@@ -75,6 +81,9 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/locais/cadastro',
     name: 'createPlaces',
     component: CreatePlacesView,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/contas',
@@ -96,6 +105,33 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/contas/cadastro',
     name: 'createAccount',
     component: CreateAccountsView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/centros_de_custos',
+    name: 'costCenters',
+    component: CostCentersView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/centros_de_custos/cadastro',
+    name: 'createCostCenters',
+    component: CreateCostCentersView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/centros_de_custos/:id',
+    name: 'editCostCenters',
+    component: EditCostCentersView,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 

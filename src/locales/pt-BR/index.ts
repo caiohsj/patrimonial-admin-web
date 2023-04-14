@@ -110,6 +110,33 @@ export default {
         submit: 'Salvar',
       },
     },
+    costCentersView: {
+      table: {
+        title: 'Centros de Custos',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+        },
+      },
+    },
+    createCostCentersView: {
+      form: {
+        title: 'Centro de Custo',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
+      },
+    },
+    editCostCentersView: {
+      form: {
+        title: 'Centro de Custo #{id}',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
+      },
+    },
   },
   components: {
     headers: {
@@ -125,6 +152,7 @@ export default {
           branches: 'Filiais',
           places: 'Locais',
           accounts: 'Contas',
+          costCenters: 'Centros de Custos',
         },
       },
     },
