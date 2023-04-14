@@ -119,6 +119,15 @@ export default {
         },
       },
     },
+    createCostCentersView: {
+      form: {
+        title: 'Centro de Custo',
+        labels: {
+          description: 'Descrição',
+        },
+        submit: 'Salvar',
+      },
+    },
   },
   components: {
     headers: {
