@@ -10,6 +10,7 @@ import EditPlacesView from '@/views/EditPlacesView.vue';
 import AccountsView from '@/views/AccountsView.vue';
 import CreateAccountsView from '@/views/CreateAccountsView.vue';
 import EditAccountsView from '@/views/EditAccountsView.vue';
+import CostCentersView from '@/views/CostCentersView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -96,6 +97,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/contas/cadastro',
     name: 'createAccount',
     component: CreateAccountsView,
+  },
+  {
+    path: '/centros_de_custos',
+    name: 'costCenters',
+    component: CostCentersView,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
