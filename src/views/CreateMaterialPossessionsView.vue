@@ -69,7 +69,7 @@ const getImageSrc = (file: File) => {
           :multiple="true"
           accept="image/*"
           capture="user"
-          label="Adicionar imagem"
+          :label="t('views.createMaterialPossessionsView.form.labels.images')"
           name="images"
           rules="required"
           class="mb-6"

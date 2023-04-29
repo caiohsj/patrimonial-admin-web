@@ -143,6 +143,7 @@ export default {
         labels: {
           number: 'Número',
           description: 'Descrição',
+          images: 'Adicionar imagem',
         },
         submit: 'Salvar',
         nextStep: 'Avançar',
