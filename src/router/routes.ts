@@ -13,6 +13,7 @@ import EditAccountsView from '@/views/EditAccountsView.vue';
 import CostCentersView from '@/views/CostCentersView.vue';
 import CreateCostCentersView from '@/views/CreateCostCentersView.vue';
 import EditCostCentersView from '@/views/EditCostCentersView.vue';
+import CreateMaterialPossessionsView from '@/views/CreateMaterialPossessionsView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -129,6 +130,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/centros_de_custos/:id',
     name: 'editCostCenters',
     component: EditCostCentersView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/bens/cadastro',
+    name: 'createMaterialPossessions',
+    component: CreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
     },

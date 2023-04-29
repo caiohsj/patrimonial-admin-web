@@ -137,6 +137,18 @@ export default {
         submit: 'Salvar',
       },
     },
+    createMaterialPossessionsView: {
+      form: {
+        title: 'Adicionar um bem',
+        labels: {
+          number: 'Número',
+          description: 'Descrição',
+          images: 'Adicionar imagem',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+      },
+    },
   },
   components: {
     headers: {

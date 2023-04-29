@@ -8,4 +8,4 @@ export function useTransform() {
   };
 
   return { objectToArray };
-};
+}
