@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useForm } from 'vee-validate';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
@@ -12,7 +12,7 @@ import BaseButton from '@/components/buttons/BaseButton.vue';
 
 const step = ref(1);
 const images = ref<Array<File>>([]);
-// const router = useRouter();
+const router = useRouter();
 const { t } = useI18n();
 const { handleSubmit, validate } = useForm<CreateMaterialPossessionFormData>();
 const materialPossessionStore = useMaterialPossessionStore();
@@ -24,7 +24,11 @@ const nextStep = async () => {
 };
 
 const onSubmit = handleSubmit((values) => {
-  materialPossessionStore.createMaterialPossession(values, images.value);
+  materialPossessionStore
+    .createMaterialPossession(values, images.value)
+    .then(() => {
+      router.push({ name: 'MaterialPossessions' });
+    });
 });
 
 const handleImageSelected = (fileList: FileList | null | undefined) => {
