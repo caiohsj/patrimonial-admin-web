@@ -51,7 +51,8 @@ const editItem = (item: any) => {
           +
         </BaseButton>
       </div>
-      <form class="flex">
+      <!-- TODO: search bar -->
+      <form class="flex" v-if="false">
         <input
           type="search"
           class="w-full h-8 rounded-sm border-2 border-primary outline-none px-2"
