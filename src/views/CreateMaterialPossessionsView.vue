@@ -27,7 +27,7 @@ const onSubmit = handleSubmit((values) => {
   materialPossessionStore
     .createMaterialPossession(values, images.value)
     .then(() => {
-      router.push({ name: 'MaterialPossessions' });
+      router.push({ name: 'materialPossessions' });
     });
 });
 
