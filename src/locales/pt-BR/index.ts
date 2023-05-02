@@ -137,6 +137,16 @@ export default {
         submit: 'Salvar',
       },
     },
+    materialPossessionsView: {
+      table: {
+        title: 'Bens',
+        headers: {
+          id: 'ID',
+          description: 'Descrição',
+          number: 'Número',
+        },
+      },
+    },
     createMaterialPossessionsView: {
       form: {
         title: 'Adicionar um bem',
@@ -165,6 +175,7 @@ export default {
           places: 'Locais',
           accounts: 'Contas',
           costCenters: 'Centros de Custos',
+          materialPossessions: 'Bens',
         },
       },
     },

@@ -26,6 +26,9 @@ const { userHasPermission } = usePermissions();
 
 const navItems = [
   {
+    route: 'materialPossessions',
+  },
+  {
     route: 'branches',
   },
   {
