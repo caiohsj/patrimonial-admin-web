@@ -157,6 +157,10 @@ export default {
         },
         submit: 'Salvar',
         nextStep: 'Avançar',
+        stepTwo: {
+          labelImages: 'Imagens',
+          countImages: '{count} imagem(ns)',
+        },
       },
     },
   },

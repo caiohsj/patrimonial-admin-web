@@ -79,6 +79,21 @@ const getImageSrc = (file: File) => {
           class="mb-6"
         />
         <div>
+          <h1 class="font-baloo2-bold text-dark">
+            {{
+              t('views.createMaterialPossessionsView.form.stepTwo.labelImages')
+            }}
+          </h1>
+          <p class="text-gray-darken">
+            {{
+              t(
+                'views.createMaterialPossessionsView.form.stepTwo.countImages',
+                {
+                  count: images.length,
+                }
+              )
+            }}
+          </p>
           <img
             v-for="(image, index) in images"
             :key="index"
