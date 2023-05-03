@@ -27,23 +27,28 @@ const { userHasPermission } = usePermissions();
 const navItems = [
   {
     route: 'materialPossessions',
+    activeRoutes: ['materialPossessions', 'createMaterialPossessions'],
   },
   {
     route: 'branches',
+    activeRoutes: ['branches', 'editBranches', 'createBranches'],
   },
   {
     route: 'places',
+    activeRoutes: ['places', 'editPlaces', 'createPlaces'],
   },
   {
     route: 'accounts',
+    activeRoutes: ['accounts', 'editAccounts', 'createAccounts'],
   },
   {
     route: 'costCenters',
+    activeRoutes: ['costCenters', 'editCostCenters', 'createCostCenters'],
   },
 ];
 
-const itemActive = (name: string) => {
-  return name == route.name;
+const itemActive = (activeRoutes: string[]) => {
+  return activeRoutes.includes(String(route.name));
 };
 
 const toggleNavMobile = () => {
@@ -80,7 +85,7 @@ const logout = () => {
     <nav class="px-8">
       <ul class="grid gap-4">
         <MenuItem
-          :active="itemActive(item.route)"
+          :active="itemActive(item.activeRoutes)"
           :show="userHasPermission(item.route)"
           :key="item.route"
           v-for="item in navItems"
@@ -133,7 +138,7 @@ const logout = () => {
       <nav>
         <ul class="grid gap-4">
           <MenuItem
-            :active="itemActive(item.route)"
+            :active="itemActive(item.activeRoutes)"
             :show="userHasPermission(item.route)"
             :key="item.route"
             v-for="item in navItems"
