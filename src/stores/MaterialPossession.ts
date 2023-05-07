@@ -31,5 +31,10 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       }
       return MaterialPossessionResource.create(formData);
     },
+
+    async deleteMaterialPossession(materialPossession: MaterialPossession) {
+      await MaterialPossessionResource.delete(materialPossession);
+      this.fetchMaterialPossessions();
+    },
   },
 });

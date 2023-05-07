@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import { usePermissions } from '@/composables/permissions';
+import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import BaseTable from '@/components/tables/BaseTable.vue';
 
 const { t } = useI18n();
@@ -21,6 +22,10 @@ const headers = computed(() => [
 ]);
 
 onMounted(() => materialPossessionStore.fetchMaterialPossessions());
+
+const deleteMaterialPossession = (item: MaterialPossession) => {
+  materialPossessionStore.deleteMaterialPossession(item);
+};
 </script>
 
 <template>
@@ -28,10 +33,11 @@ onMounted(() => materialPossessionStore.fetchMaterialPossessions());
     :title="t('views.materialPossessionsView.table.title')"
     :can-create="userHasPermission('create-material-possessions')"
     :can-edit="false"
-    :can-delete="false"
+    :can-delete="userHasPermission('delete-material-possessions')"
     :headers="headers"
     :items="materialPossessions"
     :total="materialPossessions.length"
     @create="router.push({ name: 'createMaterialPossessions' })"
+    @delete="deleteMaterialPossession"
   />
 </template>

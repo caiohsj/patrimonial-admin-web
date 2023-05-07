@@ -9,4 +9,7 @@ export default {
   create(params: FormData) {
     return client.post('/material_possessions', params, true);
   },
+  delete(materialPossession: MaterialPossession) {
+    return client.delete(`/material_possessions/${materialPossession.id}`);
+  },
 };
