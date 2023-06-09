@@ -14,6 +14,7 @@ import CostCentersView from '@/views/CostCentersView.vue';
 import CreateCostCentersView from '@/views/CreateCostCentersView.vue';
 import EditCostCentersView from '@/views/EditCostCentersView.vue';
 import CreateMaterialPossessionsView from '@/views/CreateMaterialPossessionsView.vue';
+import BulkCreateMaterialPossessionsView from '@/views/BulkCreateMaterialPossessionsView.vue';
 import MaterialPossessionsView from '@/views/MaterialPossessionsView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -147,6 +148,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/bens/cadastro',
     name: 'createMaterialPossessions',
     component: CreateMaterialPossessionsView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/bens/multiplo_cadastro',
+    name: 'bulkCreateMaterialPossessions',
+    component: BulkCreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
     },

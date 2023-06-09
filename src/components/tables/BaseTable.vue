@@ -2,12 +2,14 @@
 import { useI18n } from 'vue-i18n';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import TableRow from './TableRow.vue';
+import AddMultipleIcon from '@/components/icons/AddMultipleIcon.vue';
 
 const { t } = useI18n();
 
 type TableProps = {
   title: string;
   canCreate: boolean;
+  canBulkCreate?: boolean;
   canEdit: boolean;
   canDelete: boolean;
   headers: Array<string>;
@@ -17,6 +19,7 @@ type TableProps = {
 
 type BaseTableEmits = {
   (event: 'create'): void;
+  (event: 'bulkCreate'): void;
   (event: 'edit', value: any): void;
   (event: 'delete', value: any): void;
 };
@@ -50,6 +53,14 @@ const editItem = (item: any) => {
         >
           +
         </BaseButton>
+        <button
+          type="button"
+          class="w-6 h-6 flex items-center justify-center bg-light text-primary hover:text-primary-darken active:opacity-30"
+          v-if="props.canBulkCreate"
+          @click="emit('bulkCreate')"
+        >
+          <AddMultipleIcon />
+        </button>
       </div>
       <!-- TODO: search bar -->
       <form class="flex" v-if="false">

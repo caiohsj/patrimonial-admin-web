@@ -163,6 +163,24 @@ export default {
         },
       },
     },
+    bulkCreateMaterialPossessionsView: {
+      form: {
+        title: 'Adicionar múltiplos bens',
+        labels: {
+          from: 'De',
+          to: 'Até',
+          numberPrefix: 'Prefixo do número',
+          description: 'Descrição',
+          images: 'Adicionar imagem',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+        stepTwo: {
+          labelImages: 'Imagens',
+          countImages: '{count} imagem(ns)',
+        },
+      },
+    },
   },
   components: {
     headers: {

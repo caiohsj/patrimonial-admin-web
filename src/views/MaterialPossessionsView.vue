@@ -32,12 +32,14 @@ const deleteMaterialPossession = (item: MaterialPossession) => {
   <BaseTable
     :title="t('views.materialPossessionsView.table.title')"
     :can-create="userHasPermission('create-material-possessions')"
+    :can-bulk-create="userHasPermission('bulk-create-material-possessions')"
     :can-edit="false"
     :can-delete="userHasPermission('delete-material-possessions')"
     :headers="headers"
     :items="materialPossessions"
     :total="materialPossessions.length"
     @create="router.push({ name: 'createMaterialPossessions' })"
+    @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
     @delete="deleteMaterialPossession"
   />
 </template>

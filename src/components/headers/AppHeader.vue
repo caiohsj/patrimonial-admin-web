@@ -47,7 +47,7 @@ const changeApplicationConfigurations = () => {
 <template>
   <div
     v-if="hasSession"
-    class="h-24 flex justify-end md:justify-between items-center"
+    class="h-24 flex justify-end md:justify-between items-center px-2"
   >
     <div>
       <div

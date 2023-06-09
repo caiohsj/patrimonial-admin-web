@@ -8,8 +8,8 @@ import AsideNav from '@/components/navs/AsideNav.vue';
   <div class="bg-gray-light flex h-screen">
     <LoadingScreen />
     <AsideNav />
-    <div class="flex flex-col w-full">
-      <AppHeader class="pr-2 md:px-8" />
+    <div class="pt-20 flex flex-col w-full md:pt-0">
+      <AppHeader class="md:px-8" />
       <main class="overflow-y-auto flex-1">
         <RouterView class="px-2 sm:px-8" />
       </main>

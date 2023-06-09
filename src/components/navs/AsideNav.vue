@@ -27,7 +27,11 @@ const { userHasPermission } = usePermissions();
 const navItems = [
   {
     route: 'materialPossessions',
-    activeRoutes: ['materialPossessions', 'createMaterialPossessions'],
+    activeRoutes: [
+      'materialPossessions',
+      'createMaterialPossessions',
+      'bulkCreateMaterialPossessions',
+    ],
   },
   {
     route: 'branches',
