@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { onMounted, watch, ref } from 'vue';
-import { useForm } from 'vee-validate';
+import { onMounted, watch, ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import BaseButton from '@/components/buttons/BaseButton.vue';
-import SelectGroup from '@/components/inputs/SelectGroup.vue';
 import { useBranchStore } from '@/stores/branch';
 import { usePlaceStore } from '@/stores/place';
 import { useSessionStore } from '@/stores/session';
+import SelectableList from '@/components/inputs/SelectableList.vue';
 
 const router = useRouter();
 const { t } = useI18n();
-const branch = ref(undefined);
+const branch = ref(0);
+const place = ref(0);
 
 const branchStore = useBranchStore();
 const { branchesOptions } = storeToRefs(branchStore);
@@ -33,17 +32,22 @@ watch(hasApplicationConfigurations, (value) => {
   if (value === true) router.push({ name: 'home' });
 });
 
-watch(branch, (branch_id) => placeStore.fetchPlaces({ branch_id }));
-
-const { handleSubmit } = useForm<{
-  branch: number;
-  place: number;
-}>();
-
-const onSubmit = handleSubmit(({ branch, place }) => {
-  sessionStore.setCurrentBranch(branch);
-  sessionStore.setCurrentPlace(place);
+watch(branch, (branch_id) => {
+  placeStore.fetchPlaces({ branch_id });
+  sessionStore.setCurrentBranch(branch_id);
 });
+
+watch(place, (place_id) => {
+  sessionStore.setCurrentPlace(place_id);
+});
+
+const hasNoBranchSelected = computed(() => branch.value == 0);
+
+const title = computed(() =>
+  hasNoBranchSelected.value
+    ? t('views.applicationConfigurationsView.selectBranch')
+    : t('views.applicationConfigurationsView.selectPlace')
+);
 </script>
 
 <template>
@@ -71,27 +75,16 @@ const onSubmit = handleSubmit(({ branch, place }) => {
       ]"
     >
       <h1 class="font-baloo2-bold text-2xl text-center mb-6 lg:mb-0">
-        {{ t('views.applicationConfigurationsView.title') }}
+        {{ title }}
       </h1>
 
-      <form class="w-full px-6 lg:px-0 lg:w-2/4 grid gap-4" @submit="onSubmit">
-        <SelectGroup
-          :label="t('views.applicationConfigurationsView.form.labels.branch')"
-          name="branch"
-          rules="required"
-          :options="branchesOptions"
-          v-model="branch"
-        />
-        <SelectGroup
-          :label="t('views.applicationConfigurationsView.form.labels.place')"
-          name="place"
-          rules="required"
-          :options="placesOptions"
-        />
-        <BaseButton type="submit">
-          {{ t('views.applicationConfigurationsView.form.submit') }}
-        </BaseButton>
-      </form>
+      <SelectableList
+        :options="branchesOptions"
+        v-model="branch"
+        v-if="hasNoBranchSelected"
+      />
+
+      <SelectableList :options="placesOptions" v-model="place" v-else />
     </div>
   </div>
 </template>

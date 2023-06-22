@@ -16,7 +16,8 @@ export default {
       },
     },
     applicationConfigurationsView: {
-      title: 'Configure a aplicação',
+      selectBranch: 'Selecione uma filial',
+      selectPlace: 'Selecione um local',
       form: {
         labels: {
           branch: 'Filial',

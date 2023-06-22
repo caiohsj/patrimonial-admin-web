@@ -41,7 +41,7 @@ const confirmDelete = () => {
 </script>
 
 <template>
-  <tr class="h-20 border-b-2 border-gray-light">
+  <tr class="border-b-2 border-gray-light">
     <td
       v-for="(value, index) in objectToArray(props.item)"
       :key="index"
@@ -49,12 +49,12 @@ const confirmDelete = () => {
     >
       {{ value }}
     </td>
-    <td class="flex justify-end items-center relative" v-if="showActions">
+    <td class="flex justify-end items-center relative h-14" v-if="showActions">
       <button
         class="hover:opacity-50 transition-opacity"
         @click="toggleItemsOptions"
       >
-        <OptionsIcon class="w-6" />
+        <OptionsIcon class="w-6 h-full" />
       </button>
       <div
         ref="itemsOptions"
