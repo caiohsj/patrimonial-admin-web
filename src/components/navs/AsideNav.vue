@@ -46,6 +46,10 @@ const navItems = [
     activeRoutes: ['accounts', 'editAccounts', 'createAccounts'],
   },
   {
+    route: 'roles',
+    activeRoutes: ['roles'],
+  },
+  {
     route: 'costCenters',
     activeRoutes: ['costCenters', 'editCostCenters', 'createCostCenters'],
   },

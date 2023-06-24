@@ -182,6 +182,15 @@ export default {
         },
       },
     },
+    rolesView: {
+      table: {
+        title: 'Cargos',
+        headers: {
+          id: 'ID',
+          name: 'Nome',
+        },
+      },
+    },
   },
   components: {
     headers: {
@@ -199,6 +208,7 @@ export default {
           accounts: 'Contas',
           costCenters: 'Centros de Custos',
           materialPossessions: 'Bens',
+          roles: 'Cargos',
         },
       },
     },
