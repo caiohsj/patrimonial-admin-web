@@ -16,7 +16,11 @@ router.beforeEach(async (to) => {
     await router.push({ name: 'login' });
   }
 
-  if (sessionStore.hasSession && !userHasPermission(String(to.name))) {
+  if (
+    sessionStore.hasSession &&
+    !userHasPermission(String(to.meta?.permission)) &&
+    to.name != 'home'
+  ) {
     await router.push({ name: 'home' });
   }
 
@@ -24,7 +28,7 @@ router.beforeEach(async (to) => {
     sessionStore.hasSession &&
     to.name != 'applicationConfigurations' &&
     !sessionStore.hasApplicationConfigurations &&
-    userHasPermission('applicationConfigurations')
+    userHasPermission('application-configurations')
   ) {
     await router.push({ name: 'applicationConfigurations' });
   }

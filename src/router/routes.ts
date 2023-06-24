@@ -38,6 +38,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: ApplicationConfigurationsView,
     meta: {
       requiresAuth: true,
+      permission: 'application-configurations',
     },
   },
   {
@@ -46,6 +47,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: BranchesView,
     meta: {
       requiresAuth: true,
+      permission: 'list-branches',
     },
   },
   {
@@ -54,6 +56,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditBranchesView,
     meta: {
       requiresAuth: true,
+      permission: 'update-branches',
     },
   },
   {
@@ -62,6 +65,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateBranchesView,
     meta: {
       requiresAuth: true,
+      permission: 'create-branches',
     },
   },
   {
@@ -70,6 +74,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: PlacesView,
     meta: {
       requiresAuth: true,
+      permission: 'list-places',
     },
   },
   {
@@ -78,6 +83,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditPlacesView,
     meta: {
       requiresAuth: true,
+      permission: 'update-places',
     },
   },
   {
@@ -86,6 +92,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreatePlacesView,
     meta: {
       requiresAuth: true,
+      permission: 'create-places',
     },
   },
   {
@@ -94,6 +101,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: AccountsView,
     meta: {
       requiresAuth: true,
+      permission: 'list-accounts',
     },
   },
   {
@@ -102,6 +110,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditAccountsView,
     meta: {
       requiresAuth: true,
+      permission: 'update-accounts',
     },
   },
   {
@@ -110,6 +119,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateAccountsView,
     meta: {
       requiresAuth: true,
+      permission: 'create-accounts',
     },
   },
   {
@@ -118,6 +128,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CostCentersView,
     meta: {
       requiresAuth: true,
+      permission: 'list-cost-centers',
     },
   },
   {
@@ -126,6 +137,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateCostCentersView,
     meta: {
       requiresAuth: true,
+      permission: 'create-cost-centers',
     },
   },
   {
@@ -134,6 +146,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditCostCentersView,
     meta: {
       requiresAuth: true,
+      permission: 'update-cost-centers',
     },
   },
   {
@@ -142,6 +155,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: MaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      permission: 'list-material-possessions',
     },
   },
   {
@@ -150,6 +164,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      permission: 'create-material-possessions',
     },
   },
   {
@@ -158,6 +173,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: BulkCreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      permission: 'bulk-create-material-possessions',
     },
   },
 ];
