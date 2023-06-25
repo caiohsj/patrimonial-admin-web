@@ -41,7 +41,7 @@ const confirmDelete = () => {
 </script>
 
 <template>
-  <tr class="table-roww border-b-2 border-gray-light">
+  <tr class="table-row border-b-2 border-gray-light">
     <td
       v-for="(value, index) in objectToArray(props.item)"
       :key="index"

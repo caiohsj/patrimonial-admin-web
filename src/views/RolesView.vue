@@ -41,7 +41,7 @@ onMounted(() => roleStore.fetchRoles());
   &.list-roles {
     .table {
       tbody {
-        .table-roww {
+        .table-row {
           height: 36px;
         }
       }
