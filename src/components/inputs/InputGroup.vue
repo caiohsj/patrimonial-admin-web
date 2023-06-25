@@ -5,7 +5,7 @@ import { computed } from 'vue';
 const defaultInputClasses = [
   'bg-light',
   'border-dark',
-  'h-16',
+  'h-12',
   'rounded-md',
   'shadow-lg',
   'outline-none',
