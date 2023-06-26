@@ -15,7 +15,7 @@ describe('SelectableList', () => {
     await wrapper.find('ul > li').trigger('click');
 
     expect(wrapper.emitted()).toHaveProperty('update:modelValue');
-    expect(wrapper.emitted('update:modelValue')?.flat()).toContain(12)
+    expect(wrapper.emitted('update:modelValue')?.flat()).toContain(12);
   });
 
   it('selected last item of list with four items', async () => {
@@ -34,6 +34,6 @@ describe('SelectableList', () => {
     await wrapper.find('ul > li:last-child').trigger('click');
 
     expect(wrapper.emitted()).toHaveProperty('update:modelValue');
-    expect(wrapper.emitted('update:modelValue')?.flat()).toContain(19)
+    expect(wrapper.emitted('update:modelValue')?.flat()).toContain(19);
   });
 });

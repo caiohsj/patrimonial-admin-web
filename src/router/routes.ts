@@ -16,6 +16,8 @@ import EditCostCentersView from '@/views/EditCostCentersView.vue';
 import CreateMaterialPossessionsView from '@/views/CreateMaterialPossessionsView.vue';
 import BulkCreateMaterialPossessionsView from '@/views/BulkCreateMaterialPossessionsView.vue';
 import MaterialPossessionsView from '@/views/MaterialPossessionsView.vue';
+import RolesView from '@/views/RolesView.vue';
+import CreateRolesView from '@/views/CreateRolesView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -174,6 +176,24 @@ const routes: readonly RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
       permission: 'bulk-create-material-possessions',
+    },
+  },
+  {
+    path: '/cargos',
+    name: 'roles',
+    component: RolesView,
+    meta: {
+      requiresAuth: true,
+      permission: 'list-roles',
+    },
+  },
+  {
+    path: '/cargos/cadastro',
+    name: 'createRoles',
+    component: CreateRolesView,
+    meta: {
+      requiresAuth: true,
+      permission: 'create-roles',
     },
   },
 ];

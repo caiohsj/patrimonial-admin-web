@@ -182,6 +182,27 @@ export default {
         },
       },
     },
+    rolesView: {
+      table: {
+        title: 'Cargos',
+        headers: {
+          id: 'ID',
+          name: 'Nome',
+        },
+      },
+    },
+    createRolesView: {
+      form: {
+        title: 'Adicionar um cargo',
+        labels: {
+          name: 'Nome do cargo',
+          permissions: 'Permissões',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+        stepTwo: {},
+      },
+    },
   },
   components: {
     headers: {
@@ -199,6 +220,7 @@ export default {
           accounts: 'Contas',
           costCenters: 'Centros de Custos',
           materialPossessions: 'Bens',
+          roles: 'Cargos',
         },
       },
     },
