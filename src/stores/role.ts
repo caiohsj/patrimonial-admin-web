@@ -1,16 +1,15 @@
 import { defineStore } from 'pinia';
 import type { Role } from '@/@types/interfaces/models/role';
+import type { CreateRoleFormData } from '@/@types/interfaces/CreateRoleFormData';
 import RoleResource from '@/api/resources/role';
 
 type RoleStoreState = {
-  roles: Array<Place>;
-  role: Role | null;
+  roles: Array<Role>;
 };
 
 export const useRoleStore = defineStore('role', {
   state: (): RoleStoreState => ({
     roles: [],
-    place: null,
   }),
 
   getters: {},
@@ -19,6 +18,10 @@ export const useRoleStore = defineStore('role', {
     async fetchRoles() {
       const { data } = await RoleResource.index();
       this.roles = data;
+    },
+
+    createRole(params: CreateRoleFormData) {
+      return RoleResource.create(params);
     },
   },
 });

@@ -47,7 +47,7 @@ const navItems = [
   },
   {
     route: 'roles',
-    activeRoutes: ['roles'],
+    activeRoutes: ['roles', 'createRoles'],
   },
   {
     route: 'costCenters',
@@ -112,7 +112,7 @@ const logout = () => {
       <HamburgerIcon class="w-full h-full text-gray-darken active:text-light" />
     </button>
     <div
-      class="bg-white pt-3 w-0 opacity-0 fixed inset-0 z-10 transition-all duration-700 px-8"
+      class="bg-white pt-3 w-0 opacity-0 fixed inset-0 z-10 transition-all duration-700 px-8 overflow-auto"
       ref="navMobile"
     >
       <div class="flex justify-center mb-10">

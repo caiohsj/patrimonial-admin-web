@@ -191,6 +191,18 @@ export default {
         },
       },
     },
+    createRolesView: {
+      form: {
+        title: 'Adicionar um cargo',
+        labels: {
+          name: 'Nome do cargo',
+          permissions: 'Permissões',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+        stepTwo: {},
+      },
+    },
   },
   components: {
     headers: {
