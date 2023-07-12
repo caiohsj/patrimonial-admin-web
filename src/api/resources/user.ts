@@ -13,4 +13,7 @@ export default {
   signIn(data: SignInFormData): Promise<AxiosResponse<SignInResponse>> {
     return client.post('/users/sign_in', data, true);
   },
+  index(): Promise<AxiosResponse<Array<User>>> {
+    return client.get('/users');
+  },
 };
