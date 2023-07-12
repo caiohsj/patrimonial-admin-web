@@ -203,6 +203,17 @@ export default {
         stepTwo: {},
       },
     },
+    usersView: {
+      table: {
+        title: 'Usuários',
+        headers: {
+          id: 'ID',
+          name: 'Nome',
+          email: 'E-mail',
+          role_name: 'Cargo',
+        },
+      },
+    },
   },
   components: {
     headers: {
@@ -221,6 +232,7 @@ export default {
           costCenters: 'Centros de Custos',
           materialPossessions: 'Bens',
           roles: 'Cargos',
+          users: 'Usuários',
         },
       },
     },
