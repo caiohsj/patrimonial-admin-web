@@ -24,9 +24,8 @@ const navItemActiveClasses = computed(() => {
 </script>
 
 <template>
-  <li>
+  <li v-if="props.show">
     <a
-      v-if="props.show"
       :class="[
         ...navItemActiveClasses,
         'flex',

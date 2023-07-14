@@ -214,6 +214,19 @@ export default {
         },
       },
     },
+    createUsersView: {
+      form: {
+        title: 'Adicionar um novo usuário',
+        labels: {
+          name: 'Nome',
+          email: 'Email',
+          role: 'Cargo do usuário',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+        stepTwo: {},
+      },
+    },
   },
   components: {
     headers: {

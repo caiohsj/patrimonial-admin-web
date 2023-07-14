@@ -19,6 +19,7 @@ import MaterialPossessionsView from '@/views/MaterialPossessionsView.vue';
 import RolesView from '@/views/RolesView.vue';
 import CreateRolesView from '@/views/CreateRolesView.vue';
 import UsersView from '@/views/UsersView.vue';
+import CreateUsersView from '@/views/CreateUsersView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -204,6 +205,15 @@ const routes: readonly RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
       permission: 'create-roles',
+    },
+  },
+  {
+    path: '/usuarios/cadastro',
+    name: 'createUsers',
+    component: CreateUsersView,
+    meta: {
+      requiresAuth: true,
+      permission: 'create-users',
     },
   },
 ];

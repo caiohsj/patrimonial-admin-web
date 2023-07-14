@@ -12,7 +12,14 @@ export const useRoleStore = defineStore('role', {
     roles: [],
   }),
 
-  getters: {},
+  getters: {
+    rolesOptions: (state) => {
+      return state.roles.map((role) => ({
+        text: role.name,
+        value: role.id,
+      }));
+    },
+  },
 
   actions: {
     async fetchRoles() {

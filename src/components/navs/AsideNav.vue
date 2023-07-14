@@ -27,6 +27,7 @@ const { userHasPermission } = usePermissions();
 const navItems = [
   {
     route: 'materialPossessions',
+    permission: 'list-material-possessions',
     activeRoutes: [
       'materialPossessions',
       'createMaterialPossessions',
@@ -35,26 +36,32 @@ const navItems = [
   },
   {
     route: 'branches',
+    permission: 'list-branches',
     activeRoutes: ['branches', 'editBranches', 'createBranches'],
   },
   {
     route: 'places',
+    permission: 'list-places',
     activeRoutes: ['places', 'editPlaces', 'createPlaces'],
   },
   {
     route: 'accounts',
+    permission: 'list-accounts',
     activeRoutes: ['accounts', 'editAccounts', 'createAccounts'],
   },
   {
     route: 'roles',
+    permission: 'list-roles',
     activeRoutes: ['roles', 'createRoles'],
   },
   {
     route: 'users',
+    permission: 'list-users',
     activeRoutes: ['users', 'createUsers'],
   },
   {
     route: 'costCenters',
+    permission: 'list-cost-centers',
     activeRoutes: ['costCenters', 'editCostCenters', 'createCostCenters'],
   },
 ];
@@ -98,7 +105,7 @@ const logout = () => {
       <ul class="grid gap-4">
         <MenuItem
           :active="itemActive(item.activeRoutes)"
-          :show="userHasPermission(item.route)"
+          :show="userHasPermission(item.permission)"
           :key="item.route"
           v-for="item in navItems"
           @navigate="navigate(item.route)"
@@ -151,7 +158,7 @@ const logout = () => {
         <ul class="grid gap-4">
           <MenuItem
             :active="itemActive(item.activeRoutes)"
-            :show="userHasPermission(item.route)"
+            :show="userHasPermission(item.permission)"
             :key="item.route"
             v-for="item in navItems"
             @navigate="navigate(item.route)"
