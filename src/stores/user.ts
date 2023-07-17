@@ -23,5 +23,17 @@ export const useUserStore = defineStore('user', {
     createUser(params: CreateUserFormData) {
       return UserResource.create(params);
     },
+
+    createPassword(
+      password: string,
+      password_confirmation: string,
+      token: string
+    ) {
+      return UserResource.updatePassword(
+        password,
+        password_confirmation,
+        token
+      );
+    },
   },
 });

@@ -2,6 +2,7 @@ export default {
   altLogo: 'SMX Inventários',
   errors: {
     unauthorized: 'Não autorizado',
+    notFound: 'Não encontrado',
     responseInvalid: 'Não conseguimos processar sua requisição',
   },
   views: {
@@ -225,6 +226,16 @@ export default {
         submit: 'Salvar',
         nextStep: 'Avançar',
         stepTwo: {},
+      },
+    },
+    createPasswordView: {
+      title: 'Cadastre a senha da sua conta',
+      form: {
+        labels: {
+          password: 'Senha',
+          password_confirmation: 'Confirmação da senha',
+        },
+        submit: 'Enviar',
       },
     },
   },

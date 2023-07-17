@@ -20,6 +20,7 @@ import RolesView from '@/views/RolesView.vue';
 import CreateRolesView from '@/views/CreateRolesView.vue';
 import UsersView from '@/views/UsersView.vue';
 import CreateUsersView from '@/views/CreateUsersView.vue';
+import CreatePasswordView from '@/views/CreatePasswordView.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: readonly RouteRecordRaw[] = [
@@ -215,6 +216,11 @@ const routes: readonly RouteRecordRaw[] = [
       requiresAuth: true,
       permission: 'create-users',
     },
+  },
+  {
+    path: '/nova_senha',
+    name: 'createPassword',
+    component: CreatePasswordView,
   },
 ];
 

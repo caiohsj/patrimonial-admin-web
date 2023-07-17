@@ -20,4 +20,15 @@ export default {
   create(params: CreateUserFormData) {
     return client.post('/users', params, true);
   },
+  updatePassword(
+    password: string,
+    password_confirmation: string,
+    token: string
+  ) {
+    return client.put(
+      '/users/update_password',
+      { password, password_confirmation, token },
+      true
+    );
+  },
 };

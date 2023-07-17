@@ -39,6 +39,9 @@ export const useLoadingStore = defineStore('loading', {
         case 401:
           this.errorMessages.push(i18n.global.t('errors.unauthorized'));
           break;
+        case 404:
+          this.errorMessages.push(i18n.global.t('errors.notFound'));
+          break;
         case 422:
           if (typeof axiosError.response.data.errors == 'object') {
             const errors = objectToArray(
