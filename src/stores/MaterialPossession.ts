@@ -1,21 +1,26 @@
 import { defineStore } from 'pinia';
 import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
-import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 import type { BulkCreateMaterialPossessionFormData } from '@/@types/interfaces/BulkCreateMaterialPossessionFormData';
+import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
+import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<MaterialPossession>;
+  filters: MaterialPossessionFilters;
 };
 
 export const useMaterialPossessionStore = defineStore('material_possession', {
   state: (): MaterialPossessionStoreState => ({
     materialPossessions: [],
+    filters: {
+      approved: 0,
+    },
   }),
 
   actions: {
     async fetchMaterialPossessions() {
-      const { data } = await MaterialPossessionResource.index();
+      const { data } = await MaterialPossessionResource.index(this.filters);
       this.materialPossessions = data;
     },
 
@@ -49,6 +54,16 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
 
     async deleteMaterialPossession(materialPossession: MaterialPossession) {
       await MaterialPossessionResource.delete(materialPossession);
+      this.fetchMaterialPossessions();
+    },
+
+    fetchApprovedMaterialPossessions() {
+      this.filters.approved = 1;
+      this.fetchMaterialPossessions();
+    },
+
+    fetchDisapprovedMaterialPossessions() {
+      this.filters.approved = 0;
       this.fetchMaterialPossessions();
     },
   },

@@ -140,6 +140,10 @@ export default {
       },
     },
     materialPossessionsView: {
+      tabs: {
+        approveds: 'Aprovados',
+        disapproveds: 'Reprovados',
+      },
       table: {
         title: 'Bens',
         headers: {
