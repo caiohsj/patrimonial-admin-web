@@ -45,7 +45,11 @@ const linkClasses = (active: boolean | undefined) => {
 
 <template>
   <ul class="flex gap-4" v-if="props.show">
-    <li v-for="(item, index) in props.items" :key="index" class="w-fit h-fit">
+    <li
+      v-for="(item, index) in props.items"
+      :key="index"
+      class="w-fit h-fit font-baloo2-bold"
+    >
       <a :class="linkClasses(item.active)" @click="item.click">
         {{ item.text }}
       </a>
