@@ -36,14 +36,14 @@ const deleteMaterialPossession = (item: MaterialPossession) => {
         {
           text: t('views.materialPossessionsView.tabs.approveds'),
           click: () =>
-            materialPossessionStore.fetchDisapprovedMaterialPossessions(),
-          active: filters.approved === 0,
+            materialPossessionStore.fetchApprovedMaterialPossessions(),
+          active: filters.approved === 1,
         },
         {
           text: t('views.materialPossessionsView.tabs.disapproveds'),
           click: () =>
-            materialPossessionStore.fetchApprovedMaterialPossessions(),
-          active: filters.approved === 1,
+            materialPossessionStore.fetchDisapprovedMaterialPossessions(),
+          active: filters.approved === 0,
         },
       ]"
       :show="true"

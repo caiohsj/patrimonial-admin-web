@@ -14,7 +14,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
   state: (): MaterialPossessionStoreState => ({
     materialPossessions: [],
     filters: {
-      approved: 0,
+      approved: 1,
     },
   }),
 
