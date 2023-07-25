@@ -103,7 +103,11 @@ const editItem = (item: any) => {
             :can-delete="props.canDelete"
             @delete="deleteItem"
             @edit="editItem"
-          />
+          >
+            <template #custom-actions="defaultProps">
+              <slot name="custom-actions" :item="defaultProps.item"></slot>
+            </template>
+          </TableRow>
         </tbody>
       </table>
     </div>

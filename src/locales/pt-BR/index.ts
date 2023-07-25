@@ -151,6 +151,7 @@ export default {
           description: 'Descrição',
           number: 'Número',
         },
+        approve: 'Aprovar',
       },
     },
     createMaterialPossessionsView: {

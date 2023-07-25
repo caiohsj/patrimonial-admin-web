@@ -66,5 +66,10 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       this.filters.approved = 0;
       this.fetchMaterialPossessions();
     },
+
+    async approveMaterialPossession(id: number) {
+      await MaterialPossessionResource.approve(id);
+      this.fetchMaterialPossessions();
+    },
   },
 });

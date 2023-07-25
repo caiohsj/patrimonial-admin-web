@@ -18,4 +18,7 @@ export default {
   delete(materialPossession: MaterialPossession) {
     return client.delete(`/material_possessions/${materialPossession.id}`);
   },
+  approve(id: number) {
+    return client.put(`/material_possessions/${id}/approve`, null, true);
+  },
 };

@@ -74,6 +74,7 @@ const confirmDelete = () => {
         >
           {{ t('components.tables.tableRow.buttons.delete') }}
         </button>
+        <slot name="custom-actions" :item="props.item"></slot>
       </div>
     </td>
     <ConfirmationScreen

@@ -27,6 +27,10 @@ onMounted(() => materialPossessionStore.fetchMaterialPossessions());
 const deleteMaterialPossession = (item: MaterialPossession) => {
   materialPossessionStore.deleteMaterialPossession(item);
 };
+
+const approveMaterialPossession = (id: number) => {
+  materialPossessionStore.approveMaterialPossession(id);
+};
 </script>
 
 <template>
@@ -61,7 +65,20 @@ const deleteMaterialPossession = (item: MaterialPossession) => {
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
       @delete="deleteMaterialPossession"
-    />
+    >
+      <template #custom-actions="customActionProps">
+        <button
+          class="bg-primary text-light px-2 rounded-md"
+          @click="approveMaterialPossession(customActionProps.item.id)"
+          v-if="
+            userHasPermission('approve-material-possessions') &&
+            customActionProps.item.approved === 0
+          "
+        >
+          {{ t('views.materialPossessionsView.table.approve') }}
+        </button>
+      </template>
+    </BaseTable>
   </div>
 </template>
 
