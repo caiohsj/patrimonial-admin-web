@@ -1,8 +1,13 @@
 export function useTransform() {
-  const objectToArray = (data: any): Array<any> => {
+  const objectToArray = (data: any, exceptKeys?: Array<string>): Array<any> => {
     const arr: any[] = [];
     Object.keys(data).forEach((key) => {
-      if (Object.prototype.hasOwnProperty.call(data, key)) arr.push(data[key]);
+      if (
+        Object.prototype.hasOwnProperty.call(data, key) &&
+        !exceptKeys?.includes(key)
+      ) {
+        arr.push(data[key]);
+      }
     });
     return arr;
   };

@@ -61,6 +61,7 @@ const approveMaterialPossession = (id: number) => {
       :can-delete="userHasPermission('delete-material-possessions')"
       :headers="headers"
       :items="materialPossessions"
+      :except-items-keys="['approved']"
       :total="materialPossessions.length"
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"

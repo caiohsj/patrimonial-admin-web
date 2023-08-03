@@ -14,6 +14,7 @@ type TableProps = {
   canDelete: boolean;
   headers: Array<string>;
   items: Array<any>;
+  exceptItemsKeys?: Array<string>;
   total: number;
 };
 
@@ -98,6 +99,7 @@ const editItem = (item: any) => {
             v-for="(item, index) in props.items"
             :key="index"
             :item="item"
+            :except-item-keys="props.exceptItemsKeys"
             :can-create="props.canCreate"
             :can-edit="props.canEdit"
             :can-delete="props.canDelete"

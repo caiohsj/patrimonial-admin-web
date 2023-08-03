@@ -16,6 +16,7 @@ type TableRowProps = {
   canEdit: boolean;
   canDelete: boolean;
   item: any;
+  exceptItemKeys?: Array<string>;
 };
 
 type TableRowEmits = {
@@ -43,7 +44,7 @@ const confirmDelete = () => {
 <template>
   <tr class="table-row border-b-2 border-gray-light">
     <td
-      v-for="(value, index) in objectToArray(props.item)"
+      v-for="(value, index) in objectToArray(props.item, props.exceptItemKeys)"
       :key="index"
       class="px-4"
     >
