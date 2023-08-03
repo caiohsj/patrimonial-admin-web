@@ -3,6 +3,7 @@ type TabItem = {
   text: string;
   active?: boolean;
   click: Function;
+  show: boolean;
 };
 
 type TabsNavProps = {
@@ -50,7 +51,7 @@ const linkClasses = (active: boolean | undefined) => {
       :key="index"
       class="w-fit h-fit font-baloo2-bold"
     >
-      <a :class="linkClasses(item.active)" @click="item.click">
+      <a v-if="item.show" :class="linkClasses(item.active)" @click="item.click">
         {{ item.text }}
       </a>
     </li>

@@ -42,12 +42,14 @@ const approveMaterialPossession = (id: number) => {
           click: () =>
             materialPossessionStore.fetchApprovedMaterialPossessions(),
           active: filters.approved === 1,
+          show: true,
         },
         {
           text: t('views.materialPossessionsView.tabs.disapproveds'),
           click: () =>
             materialPossessionStore.fetchDisapprovedMaterialPossessions(),
           active: filters.approved === 0,
+          show: userHasPermission('approve-material-possessions'),
         },
       ]"
       :show="true"
