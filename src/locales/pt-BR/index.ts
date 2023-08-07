@@ -150,6 +150,8 @@ export default {
           id: 'ID',
           description: 'Descrição',
           number: 'Número',
+          placeDescription: 'Local',
+          branchDescription: 'Filial',
         },
         approve: 'Aprovar',
       },

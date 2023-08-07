@@ -17,9 +17,10 @@ const materialPossessionStore = useMaterialPossessionStore();
 const { materialPossessions, filters } = storeToRefs(materialPossessionStore);
 
 const headers = computed(() => [
-  t('views.materialPossessionsView.table.headers.id'),
   t('views.materialPossessionsView.table.headers.number'),
   t('views.materialPossessionsView.table.headers.description'),
+  t('views.materialPossessionsView.table.headers.placeDescription'),
+  t('views.materialPossessionsView.table.headers.branchDescription'),
 ]);
 
 onMounted(() => materialPossessionStore.fetchMaterialPossessions());
@@ -63,7 +64,7 @@ const approveMaterialPossession = (id: number) => {
       :can-delete="userHasPermission('delete-material-possessions')"
       :headers="headers"
       :items="materialPossessions"
-      :except-items-keys="['approved']"
+      :except-items-keys="['id', 'approved']"
       :total="materialPossessions.length"
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"

@@ -25,13 +25,16 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     },
 
     createMaterialPossession(
-      params: CreateMaterialPossessionFormData,
+      number: string,
+      description: string,
+      place_id: number,
       images: Array<File>
     ) {
       const formData = new FormData();
-      for (const [key, value] of Object.entries(params)) {
-        formData.append(key, value);
-      }
+      formData.append('number', number);
+      formData.append('description', description);
+      formData.append('place_id', String(place_id));
+
       for (const image of images) {
         formData.append('images[]', image);
       }
