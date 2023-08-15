@@ -14,7 +14,14 @@ export const useCostCenterStore = defineStore('cost_center', {
     costCenter: null,
   }),
 
-  getters: {},
+  getters: {
+    costCentersOptions: (state) => {
+      return state.costCenters.map((costCenter) => ({
+        text: costCenter.description,
+        value: costCenter.id,
+      }));
+    },
+  },
 
   actions: {
     async fetchCostCenters() {

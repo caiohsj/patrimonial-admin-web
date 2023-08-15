@@ -12,5 +12,18 @@ export function useTransform() {
     return arr;
   };
 
-  return { objectToArray };
+  const currencyBRLToNumber = (currencyFormattedValue: string): number => {
+    return parseFloat(
+      currencyFormattedValue.trim().replace(/[R$.]/g, '').replace(',', '.')
+    );
+  };
+
+  const numberToCurrencyBRL = (value: number): string => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
+  };
+
+  return { objectToArray, currencyBRLToNumber, numberToCurrencyBRL };
 }

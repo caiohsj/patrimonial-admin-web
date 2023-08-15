@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import { required } from '@vee-validate/rules';
 import { useField } from 'vee-validate';
 import { computed } from 'vue';
-import { vMaska } from 'maska';
-import type { MaskInputOptions } from 'maska';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const defaultInputClasses = [
   'bg-light',
@@ -21,11 +23,8 @@ type InputGroupProps = {
   label: string;
   name: string;
   modelValue?: string;
-  type: 'email' | 'text' | 'date' | 'number' | 'password' | 'search';
-  autocomplete?: 'on' | 'off';
-  rules?: string;
-  mask?: string | Array<string> | Function;
-  maskOptions?: MaskInputOptions;
+  required?: boolean;
+  currency: string;
 };
 
 const props = defineProps<InputGroupProps>();
@@ -37,7 +36,24 @@ const updateModelValue = () => emit('update:modelValue', value.value);
 
 const { errorMessage, value, meta } = useField<string>(
   props.name,
-  props.rules,
+  (value: string) => {
+    if (props.required) {
+      return required(value);
+    }
+
+    let currencyPattern: RegExp;
+    switch (props.currency) {
+      case 'BRL':
+        currencyPattern = /^R\$ (\d{1,3}(?:\.\d{3})*|\d+)(,\d{2})?$/;
+        break;
+      default:
+        currencyPattern = /^R\$ (\d{1,3}(?:\.\d{3})*|\d+)(,\d{2})?$/;
+    }
+
+    return currencyPattern.test(value)
+      ? true
+      : t('validations.errors.currency', { currency: props.currency });
+  },
   {
     label: props.label.toLocaleLowerCase(),
   }
@@ -55,12 +71,9 @@ const errorInputClass = computed(() =>
     </label>
     <input
       :id="props.name"
-      :type="props.type"
+      type="text"
       :name="props.name"
-      :autocomplete="props.autocomplete"
       v-model="value"
-      v-maska:[props.maskOptions]
-      :data-maska="props.mask"
       @input="updateModelValue"
       :class="[...defaultInputClasses, errorInputClass]"
     />
