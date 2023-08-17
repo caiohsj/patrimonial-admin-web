@@ -21,6 +21,12 @@ const headers = computed(() => [
   t('views.materialPossessionsView.table.headers.description'),
   t('views.materialPossessionsView.table.headers.placeDescription'),
   t('views.materialPossessionsView.table.headers.branchDescription'),
+  t('views.materialPossessionsView.table.headers.brandName'),
+  t('views.materialPossessionsView.table.headers.templateName'),
+  t('views.materialPossessionsView.table.headers.dateOfAquisition'),
+  t('views.materialPossessionsView.table.headers.aquisitionValue'),
+  t('views.materialPossessionsView.table.headers.costCenter'),
+  t('views.materialPossessionsView.table.headers.account'),
 ]);
 
 onMounted(() => materialPossessionStore.fetchMaterialPossessions());

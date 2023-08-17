@@ -5,6 +5,11 @@ export default {
     notFound: 'Não encontrado',
     responseInvalid: 'Não conseguimos processar sua requisição',
   },
+  validations: {
+    errors: {
+      currency: 'Deve ser um valor monetário do tipo {currency}',
+    },
+  },
   views: {
     loginView: {
       title: 'Autenticação',
@@ -152,6 +157,12 @@ export default {
           number: 'Número',
           placeDescription: 'Local',
           branchDescription: 'Filial',
+          brandName: 'Marca',
+          templateName: 'Modelo',
+          dateOfAquisition: 'Data de aquisição',
+          aquisitionValue: 'Valor de aquisição',
+          costCenter: 'Centro de custo',
+          account: 'Conta',
         },
         approve: 'Aprovar',
       },
@@ -160,9 +171,17 @@ export default {
       form: {
         title: 'Adicionar um bem',
         labels: {
+          branch: 'Selecione uma filial',
+          place: 'Selecione um local',
           number: 'Número',
           description: 'Descrição',
           images: 'Adicionar imagem',
+          brandName: 'Marca',
+          templateName: 'Modelo',
+          dateOfAquisition: 'Data de aquisição',
+          aquisitionValue: 'Valor de aquisição',
+          costCenter: 'Centro de custo',
+          account: 'Conta',
         },
         submit: 'Salvar',
         nextStep: 'Avançar',

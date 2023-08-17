@@ -53,7 +53,7 @@ const changeApplicationConfigurations = () => {
       <div
         v-if="hasApplicationConfigurations"
         @click="changeApplicationConfigurations"
-        class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer text-sm md:text-base"
+        class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer text-sm md:text-base shadow-lg"
       >
         <span
           class="flex flex-col items-start px-8 justify-center border-gray-light border-r-2"

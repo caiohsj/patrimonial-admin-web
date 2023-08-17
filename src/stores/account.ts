@@ -14,7 +14,14 @@ export const useAccountStore = defineStore('account', {
     account: null,
   }),
 
-  getters: {},
+  getters: {
+    accountsOptions: (state) => {
+      return state.accounts.map((account) => ({
+        text: account.description,
+        value: account.id,
+      }));
+    },
+  },
 
   actions: {
     async fetchAccounts() {

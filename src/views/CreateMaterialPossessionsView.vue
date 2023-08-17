@@ -7,21 +7,29 @@ import { storeToRefs } from 'pinia';
 import { useBranchStore } from '@/stores/branch';
 import { usePlaceStore } from '@/stores/place';
 import { useSessionStore } from '@/stores/session';
+import { useCostCenterStore } from '@/stores/CostCenter';
+import { useAccountStore } from '@/stores/account';
+import { useTransform } from '@/composables/transform';
 import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import FormCard from '@/components/cards/FormCard.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
+import SelectGroup from '@/components/inputs/SelectGroup.vue';
 import FileInputGroup from '@/components/inputs/FileInputGroup.vue';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import SelectableList from '@/components/inputs/SelectableList.vue';
+import CurrencyInputGroup from '@/components/inputs/CurrencyInputGroup.vue';
 
 const step = ref(1);
 const branch = ref(0);
 const place = ref(0);
 const images = ref<Array<File>>([]);
+
 const router = useRouter();
 const { t } = useI18n();
-const { handleSubmit, validate } = useForm<CreateMaterialPossessionFormData>();
+const { handleSubmit, validate, setFieldValue } =
+  useForm<CreateMaterialPossessionFormData>();
+const { currencyBRLToNumber } = useTransform();
 const materialPossessionStore = useMaterialPossessionStore();
 
 const branchStore = useBranchStore();
@@ -31,7 +39,14 @@ const placeStore = usePlaceStore();
 const { placesOptions } = storeToRefs(placeStore);
 
 const sessionStore = useSessionStore();
-const { hasApplicationConfigurations, currentPlace } = storeToRefs(sessionStore);
+const { hasApplicationConfigurations, currentPlace } =
+  storeToRefs(sessionStore);
+
+const costCenterStore = useCostCenterStore();
+const { costCentersOptions } = storeToRefs(costCenterStore);
+
+const accountStore = useAccountStore();
+const { accountsOptions } = storeToRefs(accountStore);
 
 const nextStep = async () => {
   const result = await validate();
@@ -41,7 +56,18 @@ const nextStep = async () => {
 
 const onSubmit = handleSubmit((values) => {
   materialPossessionStore
-    .createMaterialPossession(values.number, values.description, getPlaceId(), images.value)
+    .createMaterialPossession(
+      values.number,
+      values.description,
+      getPlaceId(),
+      images.value,
+      values.brand_name,
+      values.template_name,
+      values.date_of_aquisition,
+      currencyBRLToNumber(values.aquisition_value),
+      values.cost_center_id,
+      values.account_id
+    )
     .then(() => {
       router.push({ name: 'materialPossessions' });
     });
@@ -61,13 +87,17 @@ const getImageSrc = (file: File) => {
 
 const hasNoBranchSelected = computed(() => branch.value == 0);
 
-const getPlaceId = (): number =>
-  hasApplicationConfigurations.value ? Number(currentPlace.value?.id) : place.value;
+const getPlaceId = (): number => {
+  return hasApplicationConfigurations.value
+    ? Number(currentPlace.value?.id)
+    : place.value;
+};
 
 onMounted(() => {
   if (!hasApplicationConfigurations.value) return branchStore.fetchBranches();
 
   step.value++;
+  setFieldValue('aquisition_value', 'R$ 0');
 });
 
 watch(branch, (branch_id) => {
@@ -75,6 +105,13 @@ watch(branch, (branch_id) => {
 });
 
 watch(place, () => step.value++);
+
+watch(step, (value) => {
+  if (value == 3) {
+    costCenterStore.fetchCostCenters();
+    accountStore.fetchAccounts();
+  }
+});
 </script>
 
 <template>
@@ -86,14 +123,14 @@ watch(place, () => step.value++);
       <div v-show="step == 1">
         <div class="flex flex-col" v-if="hasNoBranchSelected">
           <label class="font-baloo2-bold text-dark mb-6">
-            Escolha uma filial
+            {{ t('views.createMaterialPossessionsView.form.labels.branch') }}
           </label>
           <SelectableList :options="branchesOptions" v-model="branch" />
         </div>
 
         <div class="flex flex-col">
           <label class="font-baloo2-bold text-dark mb-6">
-            Escolha um local
+            {{ t('views.createMaterialPossessionsView.form.labels.place') }}
           </label>
           <SelectableList :options="placesOptions" v-model="place" />
         </div>
@@ -114,9 +151,55 @@ watch(place, () => step.value++);
           name="description"
           rules="required"
         />
+        <InputGroup
+          type="text"
+          :label="
+            t('views.createMaterialPossessionsView.form.labels.brandName')
+          "
+          name="brand_name"
+        />
+        <InputGroup
+          type="text"
+          :label="
+            t('views.createMaterialPossessionsView.form.labels.templateName')
+          "
+          name="template_name"
+        />
+        <InputGroup
+          type="text"
+          :label="
+            t(
+              'views.createMaterialPossessionsView.form.labels.dateOfAquisition'
+            )
+          "
+          name="date_of_aquisition"
+          mask="##/##/####"
+        />
+        <CurrencyInputGroup
+          :label="
+            t('views.createMaterialPossessionsView.form.labels.aquisitionValue')
+          "
+          name="aquisition_value"
+          currency="BRL"
+        />
       </div>
 
       <div v-show="step == 3">
+        <SelectGroup
+          :options="costCentersOptions"
+          name="cost_center_id"
+          :label="
+            t('views.createMaterialPossessionsView.form.labels.costCenter')
+          "
+        />
+        <SelectGroup
+          :options="accountsOptions"
+          name="account_id"
+          :label="t('views.createMaterialPossessionsView.form.labels.account')"
+        />
+      </div>
+
+      <div v-show="step == 4">
         <FileInputGroup
           @selected-filed="handleImageSelected"
           :multiple="true"
@@ -153,7 +236,7 @@ watch(place, () => step.value++);
       </div>
 
       <BaseButton
-        v-if="step != 3"
+        v-if="step != 4"
         type="button"
         class="md:w-56 md:self-end"
         @click="nextStep"
