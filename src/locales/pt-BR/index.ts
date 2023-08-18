@@ -231,6 +231,10 @@ export default {
       },
     },
     usersView: {
+      tabs: {
+        approveds: 'Aprovados',
+        disapproveds: 'Reprovados',
+      },
       table: {
         title: 'Usuários',
         headers: {
