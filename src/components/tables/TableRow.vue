@@ -9,12 +9,13 @@ const { objectToArray } = useTransform();
 const { t } = useI18n();
 const itemsOptions = ref<HTMLDivElement>();
 
-const openConfirmationScreen = ref<boolean>(false);
+const openConfirmationDeleteScreen = ref<boolean>(false);
 
 type TableRowProps = {
   canCreate: boolean;
   canEdit: boolean;
   canDelete: boolean;
+  hasCustomActions: boolean;
   item: any;
   exceptItemKeys?: Array<string>;
 };
@@ -27,7 +28,9 @@ type TableRowEmits = {
 const props = defineProps<TableRowProps>();
 const emit = defineEmits<TableRowEmits>();
 
-const showActions = computed(() => props.canEdit || props.canDelete);
+const showActions = computed(
+  () => props.canEdit || props.canDelete || props.hasCustomActions
+);
 
 const toggleItemsOptions = () => {
   itemsOptions.value?.classList.toggle('opacity-0');
@@ -36,7 +39,7 @@ const toggleItemsOptions = () => {
 
 const confirmDelete = () => {
   emit('delete', props.item);
-  openConfirmationScreen.value = false;
+  openConfirmationDeleteScreen.value = false;
   toggleItemsOptions();
 };
 </script>
@@ -70,17 +73,17 @@ const confirmDelete = () => {
         </button>
         <button
           class="bg-danger text-light px-2 rounded-md"
-          @click="openConfirmationScreen = true"
+          @click="openConfirmationDeleteScreen = true"
           v-if="props.canDelete"
         >
           {{ t('components.tables.tableRow.buttons.delete') }}
         </button>
-        <slot name="custom-actions" :item="props.item"></slot>
+        <slot name="customActions" :item="props.item"></slot>
       </div>
     </td>
     <ConfirmationScreen
       :title="t('components.tables.tableRow.confirmationTitle')"
-      v-model="openConfirmationScreen"
+      v-model="openConfirmationDeleteScreen"
       @confirm="confirmDelete"
     />
   </tr>
