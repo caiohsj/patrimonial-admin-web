@@ -12,6 +12,7 @@ type TableProps = {
   canBulkCreate?: boolean;
   canEdit: boolean;
   canDelete: boolean;
+  hasCustomActions: boolean;
   headers: Array<string>;
   items: Array<any>;
   exceptItemsKeys?: Array<string>;
@@ -103,11 +104,12 @@ const editItem = (item: any) => {
             :can-create="props.canCreate"
             :can-edit="props.canEdit"
             :can-delete="props.canDelete"
+            :has-custom-actions="props.hasCustomActions"
             @delete="deleteItem"
             @edit="editItem"
           >
-            <template #custom-actions="defaultProps">
-              <slot name="custom-actions" :item="defaultProps.item"></slot>
+            <template #customActions="customActionProps">
+              <slot name="customActions" :item="customActionProps.item"></slot>
             </template>
           </TableRow>
         </tbody>

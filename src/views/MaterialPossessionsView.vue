@@ -68,6 +68,7 @@ const approveMaterialPossession = (id: number) => {
       :can-bulk-create="userHasPermission('bulk-create-material-possessions')"
       :can-edit="false"
       :can-delete="userHasPermission('delete-material-possessions')"
+      :has-custom-actions="true"
       :headers="headers"
       :items="materialPossessions"
       :except-items-keys="['id', 'approved']"
@@ -76,7 +77,7 @@ const approveMaterialPossession = (id: number) => {
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
       @delete="deleteMaterialPossession"
     >
-      <template #custom-actions="customActionProps">
+      <template #customActions="customActionProps">
         <button
           class="bg-primary text-light px-2 rounded-md"
           @click="approveMaterialPossession(customActionProps.item.id)"
