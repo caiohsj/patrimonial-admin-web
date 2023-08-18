@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import type { BulkCreateMaterialPossessionFormData } from '@/@types/interfaces/BulkCreateMaterialPossessionFormData';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
