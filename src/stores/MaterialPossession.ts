@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
-import type { BulkCreateMaterialPossessionFormData } from '@/@types/interfaces/BulkCreateMaterialPossessionFormData';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
@@ -53,13 +52,21 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     },
 
     bulkCreateMaterialPossession(
-      params: BulkCreateMaterialPossessionFormData,
+      description: string,
+      number_prefix: string,
+      to: number,
+      from: number,
+      place_id: number,
       images: Array<File>
     ) {
       const formData = new FormData();
-      for (const [key, value] of Object.entries(params)) {
-        formData.append(key, value);
-      }
+
+      formData.append('description', description);
+      formData.append('number_prefix', number_prefix);
+      formData.append('to', String(to));
+      formData.append('from', String(from));
+      formData.append('place_id', String(place_id));
+
       for (const image of images) {
         formData.append('images[]', image);
       }
