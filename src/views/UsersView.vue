@@ -14,17 +14,25 @@ const userStore = useUserStore();
 const { users, filters } = storeToRefs(userStore);
 const { userHasPermission } = usePermissions();
 const openConfirmationApproveScreen = ref<boolean>(false);
+const userToApprove = ref(0);
 
 const headers = computed(() => [
   t('views.usersView.table.headers.id'),
   t('views.usersView.table.headers.name'),
   t('views.usersView.table.headers.email'),
   t('views.usersView.table.headers.role_name'),
+  t('views.usersView.table.headers.branch_name'),
 ]);
 
-const approveUser = async (id: number) => {
-  await userStore.approveUser(id);
+const handleApprove = (id: number) => {
+  openConfirmationApproveScreen.value = true;
+  userToApprove.value = id;
+};
+
+const approveUser = async () => {
+  await userStore.approveUser(userToApprove.value);
   openConfirmationApproveScreen.value = false;
+  userToApprove.value = 0;
 };
 
 onMounted(() => userStore.fetchUsers());
@@ -64,7 +72,7 @@ onMounted(() => userStore.fetchUsers());
       <template #customActions="customActionProps">
         <button
           class="bg-primary text-light px-2 rounded-md"
-          @click="openConfirmationApproveScreen = true"
+          @click="handleApprove(customActionProps.item.id)"
           v-if="
             userHasPermission('approve-users') &&
             customActionProps.item.approved === 0
@@ -74,7 +82,7 @@ onMounted(() => userStore.fetchUsers());
         </button>
         <ConfirmationScreen
           :title="t('components.tables.tableRow.confirmationTitle')"
-          @confirm="approveUser(customActionProps.item.id)"
+          @confirm="approveUser"
           v-model="openConfirmationApproveScreen"
         />
       </template>

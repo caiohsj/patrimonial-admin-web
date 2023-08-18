@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia';
 import type { CreateUserFormData } from '@/@types/interfaces/CreateUserFormData';
 import { useUserStore } from '@/stores/user';
 import { useRoleStore } from '@/stores/role';
+import { useBranchStore } from '@/stores/branch';
 import FormCard from '@/components/cards/FormCard.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
 import SelectGroup from '@/components/inputs/SelectGroup.vue';
@@ -20,7 +21,13 @@ const userStore = useUserStore();
 const roleStore = useRoleStore();
 const { rolesOptions } = storeToRefs(roleStore);
 
-onMounted(() => roleStore.fetchRoles());
+const branchStore = useBranchStore();
+const { branchesOptions } = storeToRefs(branchStore);
+
+onMounted(() => {
+  roleStore.fetchRoles();
+  branchStore.fetchBranches();
+});
 
 const onSubmit = handleSubmit((values) => {
   userStore.createUser(values).then(() => {
@@ -49,6 +56,11 @@ const onSubmit = handleSubmit((values) => {
         name="role_id"
         rules="required"
         :options="rolesOptions"
+      />
+      <SelectGroup
+        :label="t('views.createUsersView.form.labels.branch')"
+        name="branch_id"
+        :options="branchesOptions"
       />
       <BaseButton type="submit" class="md:w-56 md:self-end">
         {{ t('views.createUsersView.form.submit') }}

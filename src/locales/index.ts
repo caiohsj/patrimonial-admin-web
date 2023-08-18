@@ -6,7 +6,7 @@ const messages = {
 };
 
 const i18nOptions: I18nOptions = {
-  locale: navigator.language,
+  locale: 'pt-BR',
   fallbackLocale: 'pt-BR',
   messages,
   allowComposition: true,
