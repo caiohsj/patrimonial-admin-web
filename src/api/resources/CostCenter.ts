@@ -5,18 +5,18 @@ import client from '../client';
 
 export default {
   index(): Promise<AxiosResponse<Array<CostCenter>>> {
-    return client.get('/cost_centers');
+    return client.get('/api/v1/cost_centers');
   },
   create(params: CreateCostCenterFormData) {
-    return client.post('/cost_centers', params, true);
+    return client.post('/api/v1/cost_centers', params, true);
   },
   show(id: number): Promise<AxiosResponse<CostCenter>> {
-    return client.get(`/cost_centers/${id}`);
+    return client.get(`/api/v1/cost_centers/${id}`);
   },
   update(params: CreateCostCenterFormData, id: number) {
-    return client.put(`/cost_centers/${id}`, params, true);
+    return client.put(`/api/v1/cost_centers/${id}`, params, true);
   },
   delete(branch: CostCenter) {
-    return client.delete(`/cost_centers/${branch.id}`);
+    return client.delete(`/api/v1/cost_centers/${branch.id}`);
   },
 };

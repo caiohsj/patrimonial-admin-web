@@ -4,6 +4,6 @@ import client from '../client';
 
 export default {
   index(): Promise<AxiosResponse<Array<Permission>>> {
-    return client.get('/permissions');
+    return client.get('/api/v1/permissions');
   },
 };

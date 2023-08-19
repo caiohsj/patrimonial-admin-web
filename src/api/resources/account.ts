@@ -5,18 +5,18 @@ import client from '../client';
 
 export default {
   index(): Promise<AxiosResponse<Array<Account>>> {
-    return client.get('/accounts');
+    return client.get('/api/v1/accounts');
   },
   create(params: CreateAccountFormData) {
-    return client.post('/accounts', params, true);
+    return client.post('/api/v1/accounts', params, true);
   },
   show(id: number): Promise<AxiosResponse<Account>> {
-    return client.get(`/accounts/${id}`);
+    return client.get(`/api/v1/accounts/${id}`);
   },
   update(params: CreateAccountFormData, id: number) {
-    return client.put(`/accounts/${id}`, params, true);
+    return client.put(`/api/v1/accounts/${id}`, params, true);
   },
   delete(branch: Account) {
-    return client.delete(`/accounts/${branch.id}`);
+    return client.delete(`/api/v1/accounts/${branch.id}`);
   },
 };

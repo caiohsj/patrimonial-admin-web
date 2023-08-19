@@ -5,9 +5,9 @@ import client from '../client';
 
 export default {
   index(): Promise<AxiosResponse<Array<Role>>> {
-    return client.get('/roles');
+    return client.get('/api/v1/roles');
   },
   create(params: CreateRoleFormData) {
-    return client.post('/roles', params, true);
+    return client.post('/api/v1/roles', params, true);
   },
 };

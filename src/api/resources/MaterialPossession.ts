@@ -7,18 +7,24 @@ export default {
   index(
     params: MaterialPossessionFilters
   ): Promise<AxiosResponse<Array<MaterialPossession>>> {
-    return client.get('/material_possessions', params);
+    return client.get('/api/v1/material_possessions', params);
   },
   create(params: FormData) {
-    return client.post('/material_possessions', params, true);
+    return client.post('/api/v1/material_possessions', params, true);
   },
   bulkCreate(params: FormData) {
-    return client.post('/material_possessions/bulk_create', params, true);
+    return client.post(
+      '/api/v1/material_possessions/bulk_create',
+      params,
+      true
+    );
   },
   delete(materialPossession: MaterialPossession) {
-    return client.delete(`/material_possessions/${materialPossession.id}`);
+    return client.delete(
+      `/api/v1/material_possessions/${materialPossession.id}`
+    );
   },
   approve(id: number) {
-    return client.put(`/material_possessions/${id}/approve`, null, true);
+    return client.put(`/api/v1/material_possessions/${id}/approve`, null, true);
   },
 };

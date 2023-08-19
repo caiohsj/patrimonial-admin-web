@@ -13,13 +13,13 @@ type SignInResponse = {
 
 export default {
   signIn(data: SignInFormData): Promise<AxiosResponse<SignInResponse>> {
-    return client.post('/users/sign_in', data, true);
+    return client.post('/api/v1/users/sign_in', data, true);
   },
   index(filters?: UserFilters): Promise<AxiosResponse<Array<User>>> {
-    return client.get('/users', filters);
+    return client.get('/api/v1/users', filters);
   },
   create(params: CreateUserFormData) {
-    return client.post('/users', params, true);
+    return client.post('/api/v1/users', params, true);
   },
   updatePassword(
     password: string,
@@ -27,12 +27,12 @@ export default {
     token: string
   ) {
     return client.put(
-      '/users/update_password',
+      '/api/v1/users/update_password',
       { password, password_confirmation, token },
       true
     );
   },
   approve(id: number) {
-    return client.put(`/users/${id}/approve`, null, true);
+    return client.put(`/api/v1/users/${id}/approve`, null, true);
   },
 };
