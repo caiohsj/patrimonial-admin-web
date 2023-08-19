@@ -12,7 +12,7 @@ type TableProps = {
   canBulkCreate?: boolean;
   canEdit: boolean;
   canDelete: boolean;
-  hasCustomActions: boolean;
+  hasCustomActions?: boolean;
   headers: Array<string>;
   items: Array<any>;
   exceptItemsKeys?: Array<string>;
