@@ -18,8 +18,18 @@ router.beforeEach(async (to) => {
 
   if (
     sessionStore.hasSession &&
+    !sessionStore.currentUser?.approved &&
+    to.name != 'pendingPayment'
+  ) {
+    await router.push({ name: 'pendingPayment' });
+  }
+
+  if (
+    sessionStore.hasSession &&
+    sessionStore.currentUser?.approved &&
     !userHasPermission(String(to.meta?.permission)) &&
-    to.name != 'home'
+    to.name != 'home' &&
+    to.name === 'pendingPayment'
   ) {
     await router.push({ name: 'home' });
   }
