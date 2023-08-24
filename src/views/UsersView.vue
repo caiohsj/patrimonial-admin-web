@@ -75,7 +75,7 @@ onMounted(() => userStore.fetchUsers());
           @click="handleApprove(customActionProps.item.id)"
           v-if="
             userHasPermission('approve-users') &&
-            customActionProps.item.approved === 0
+            customActionProps.item.approved === false
           "
         >
           {{ t('views.materialPossessionsView.table.approve') }}
