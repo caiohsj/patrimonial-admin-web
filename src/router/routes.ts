@@ -1,4 +1,5 @@
 import HomeView from '@/views/HomeView.vue';
+import PendingPaymentView from '@/views/PendingPaymentView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
 import BranchesView from '@/views/BranchesView.vue';
@@ -28,6 +29,14 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/',
     name: 'home',
     component: HomeView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/pagamento_pendente',
+    name: 'pendingPayment',
+    component: PendingPaymentView,
     meta: {
       requiresAuth: true,
     },
