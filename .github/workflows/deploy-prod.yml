@@ -1,0 +1,47 @@
+name: Deploy Prod
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+
+      - name: Copy .env
+        uses: canastro/copy-file-action@master
+        with:
+          source: ".env.production"
+          target: ".env"
+      - run: npm install
+      - run: npm run build
+      - run: mv -T dist distribution
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ftp.smxinventarios.com.br
+          local-dir: distribution/
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          exclude: |
+            **/.git**
+            **/.git*/**
+            **/.github**
+            **/.vscode**
+            **/node_modules/**
+            **/public**
+            **/src/**
+            **.json
+            **.ts
+            **.cjs
+            **.md
+            .editorconfig
+            .env
+            .env.staging
+            .env.development
+            .gitignore
