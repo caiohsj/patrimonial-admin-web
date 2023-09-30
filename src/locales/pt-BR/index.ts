@@ -270,6 +270,17 @@ export default {
         submit: 'Enviar',
       },
     },
+    pendingPaymentView: {
+      title:
+        'A sua conta não está aprovada. É necessário fazer um pagamento para aprovar sua conta!',
+      pixKeys: {
+        title: 'Chaves PIX',
+        cpf: 'CPF',
+        cnpj: 'CNPJ',
+        email: 'EMAIL',
+      },
+      contact: 'Entre em contato',
+    },
   },
   components: {
     headers: {
