@@ -7,6 +7,7 @@ describe('MultiSelectableList', () => {
   it('selected only first item of list with only one item', async () => {
     const wrapper = mount(MultiSelectableList, {
       props: {
+        name: 'city',
         options: [{ value: 12, text: 'Rio de Janeiro' }],
       },
     });
@@ -20,6 +21,7 @@ describe('MultiSelectableList', () => {
   it('selected first and last items of list with four items', async () => {
     const wrapper = mount(MultiSelectableList, {
       props: {
+        name: 'city',
         modelValue: [],
         options: [
           { value: 12, text: 'Rio de Janeiro' },
@@ -41,6 +43,7 @@ describe('MultiSelectableList', () => {
   it('toggle the first item of list with four items', async () => {
     const wrapper = mount(MultiSelectableList, {
       props: {
+        name: 'city',
         modelValue: [],
         options: [
           { value: 12, text: 'Rio de Janeiro' },

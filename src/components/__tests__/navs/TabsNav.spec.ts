@@ -7,8 +7,8 @@ describe('TabsNav', () => {
     const wrapper = mount(TabsNav, {
       props: {
         items: [
-          { text: 'Tab 1', click: () => {} },
-          { text: 'Tab 1', click: () => {} },
+          { text: 'Tab 1', click: () => {}, show: true },
+          { text: 'Tab 1', click: () => {}, show: true },
         ],
         show: true,
       },
@@ -25,8 +25,8 @@ describe('TabsNav', () => {
     const wrapper = mount(TabsNav, {
       props: {
         items: [
-          { text: 'Tab 1', click: () => {} },
-          { text: 'Tab 1', click: () => {} },
+          { text: 'Tab 1', click: () => {}, show: true },
+          { text: 'Tab 1', click: () => {}, show: true },
         ],
         show: false,
       },
