@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Baloo2 Regular";
+  src: url("@/assets/fonts/Baloo2-Regular.ttf") format(truetype);
+}
+
+@font-face {
+  font-family: "Baloo2 Medium";
+  src: url("@/assets/fonts/Baloo2-Medium.ttf") format(truetype);
+}
+
+@font-face {
+  font-family: "Baloo2 Bold";
+  src: url("@/assets/fonts/Baloo2-Bold.ttf") format(truetype);
+}
+
+@font-face {
+  font-family: "Baloo2 SemiBold";
+  src: url("@/assets/fonts/Baloo2-SemiBold.ttf") format(truetype);
+}
+
+@font-face {
+  font-family: "Baloo2 ExtraBold";
+  src: url("@/assets/fonts/Baloo2-ExtraBold.ttf") format(truetype);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Baloo2 Medium';
+}
