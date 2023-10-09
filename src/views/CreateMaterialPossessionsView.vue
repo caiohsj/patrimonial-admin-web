@@ -27,7 +27,7 @@ const images = ref<Array<File>>([]);
 
 const router = useRouter();
 const { t } = useI18n();
-const { handleSubmit, validate, setFieldValue } =
+const { handleSubmit, validate, setFieldValue, values } =
   useForm<CreateMaterialPossessionFormData>();
 const { currencyBRLToNumber } = useTransform();
 const materialPossessionStore = useMaterialPossessionStore();
@@ -112,6 +112,10 @@ watch(step, (value) => {
     accountStore.fetchAccounts();
   }
 });
+
+const templateRules = computed(() => {
+  return values.brand_name != '' ? 'required' : '';
+});
 </script>
 
 <template>
@@ -164,6 +168,7 @@ watch(step, (value) => {
             t('views.createMaterialPossessionsView.form.labels.templateName')
           "
           name="template_name"
+          :rules="templateRules"
         />
         <InputGroup
           type="text"
