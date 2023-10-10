@@ -52,8 +52,10 @@ export const useLoadingStore = defineStore('loading', {
             this.errorMessages.push(...axiosError.response.data.errors);
           }
           break;
-        default:
+        case 500:
           this.errorMessages.push(i18n.global.t('errors.responseInvalid'));
+          break;
+        default:
           break;
       }
     },
