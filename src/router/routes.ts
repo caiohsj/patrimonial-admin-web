@@ -28,10 +28,7 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
-    meta: {
-      requiresAuth: true,
-    },
+    redirect: () => ({ name: 'materialPossessions' }),
   },
   {
     path: '/pagamento_pendente',
