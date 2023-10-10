@@ -83,7 +83,7 @@ const approveMaterialPossession = (id: number) => {
           @click="approveMaterialPossession(customActionProps.item.id)"
           v-if="
             userHasPermission('approve-material-possessions') &&
-            customActionProps.item.approved === 0
+            customActionProps.item.approved === false
           "
         >
           {{ t('views.materialPossessionsView.table.approve') }}
