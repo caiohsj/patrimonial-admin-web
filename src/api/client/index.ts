@@ -1,6 +1,6 @@
 import { useSessionStore } from '@/stores/session';
 import { useLoadingStore } from '@/stores/loading';
-import axios, { type AxiosResponse } from 'axios';
+import axios, { AxiosError, type AxiosResponse } from 'axios';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,6 +17,12 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
+const checkIfUnathorized = (status?: number) => {
+  const sessionStore = useSessionStore();
+
+  if (status == 401) sessionStore.signOut();
+};
+
 const client = {
   get(endpoint: string, params?: any) {
     const loadingStore = useLoadingStore();
@@ -25,7 +31,10 @@ const client = {
       instance
         .get(endpoint, { params })
         .then((response) => resolve(response))
-        .catch((error) => reject(error))
+        .catch((error: AxiosError<any, any>) => {
+          checkIfUnathorized(error.response?.status);
+          reject(error);
+        })
         .finally(() => loadingStore.stopLoading());
     });
   },
@@ -40,7 +49,8 @@ const client = {
           if (showFeedback) loadingStore.setSuccess();
           resolve(response);
         })
-        .catch((error) => {
+        .catch((error: AxiosError<any, any>) => {
+          checkIfUnathorized(error.response?.status);
           if (showFeedback) loadingStore.setError(error);
           reject(error);
         })
@@ -58,7 +68,8 @@ const client = {
           if (showFeedback) loadingStore.setSuccess();
           resolve(response);
         })
-        .catch((error) => {
+        .catch((error: AxiosError<any, any>) => {
+          checkIfUnathorized(error.response?.status);
           if (showFeedback) loadingStore.setError(error);
           reject(error);
         })
@@ -76,7 +87,8 @@ const client = {
           if (showFeedback) loadingStore.setSuccess();
           resolve(response);
         })
-        .catch((error) => {
+        .catch((error: AxiosError<any, any>) => {
+          checkIfUnathorized(error.response?.status);
           if (showFeedback) loadingStore.setError(error);
           reject(error);
         })

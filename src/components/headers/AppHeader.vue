@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
@@ -42,6 +42,10 @@ const changeApplicationConfigurations = () => {
   sessionStore.clearApplicationConfigurations();
   router.push({ name: 'applicationConfigurations' });
 };
+
+watch(hasSession, (value) => {
+  if (!value) router.push({ name: 'login' });
+});
 </script>
 
 <template>
