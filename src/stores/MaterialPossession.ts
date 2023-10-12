@@ -26,10 +26,10 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     createMaterialPossession(
       number: string,
       description: string,
-      place_id: number,
+      placeId: number,
       images: Array<File>,
-      brand_name: string,
-      template_name: string,
+      brandName: string,
+      templateName: string,
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number | null,
@@ -38,9 +38,14 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       const formData = new FormData();
       formData.append('number', number);
       formData.append('description', description);
-      formData.append('place_id', String(place_id));
-      formData.append('brand_name', String(brand_name));
-      formData.append('template_name', String(template_name));
+      formData.append('place_id', String(placeId));
+
+      if (brandName != undefined)
+        formData.append('brand_name', String(brandName));
+
+      if (templateName != undefined)
+        formData.append('template_name', String(templateName));
+
       formData.append('date_of_aquisition', dateOfAquisition);
       formData.append('aquisition_value', String(aquisitionValue));
 
@@ -60,7 +65,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       number_prefix: string,
       to: number,
       from: number,
-      place_id: number,
+      placeId: number,
       images: Array<File>
     ) {
       const formData = new FormData();
@@ -69,7 +74,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       formData.append('number_prefix', number_prefix);
       formData.append('to', String(to));
       formData.append('from', String(from));
-      formData.append('place_id', String(place_id));
+      formData.append('place_id', String(placeId));
 
       for (const image of images) {
         formData.append('images[]', image);
@@ -80,8 +85,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     updateMaterialPossession(
       materialPossessionId: number,
       description: string,
-      brand_name: string,
-      template_name: string,
+      brandName: string,
+      templateName: string,
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number,
@@ -89,8 +94,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     ) {
       return MaterialPossessionResource.update(materialPossessionId, {
         description,
-        brand_name,
-        template_name,
+        brand_name: brandName,
+        template_name: templateName,
         date_of_aquisition: dateOfAquisition,
         aquisition_value: String(aquisitionValue),
         cost_center_id: costCenterId,
