@@ -69,6 +69,7 @@ const onSubmit = handleSubmit((values) => {
       values.account_id
     )
     .then(() => {
+      materialPossessionStore.filters.approved = 0;
       router.push({ name: 'materialPossessions' });
     });
 });
@@ -108,6 +109,9 @@ watch(place, () => step.value++);
 
 watch(step, (value) => {
   if (value == 3) {
+    setFieldValue('cost_center_id', null);
+    setFieldValue('account_id', null);
+
     costCenterStore.fetchCostCenters();
     accountStore.fetchAccounts();
   }

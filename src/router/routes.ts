@@ -1,4 +1,3 @@
-import HomeView from '@/views/HomeView.vue';
 import PendingPaymentView from '@/views/PendingPaymentView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
@@ -17,6 +16,7 @@ import EditCostCentersView from '@/views/EditCostCentersView.vue';
 import CreateMaterialPossessionsView from '@/views/CreateMaterialPossessionsView.vue';
 import BulkCreateMaterialPossessionsView from '@/views/BulkCreateMaterialPossessionsView.vue';
 import MaterialPossessionsView from '@/views/MaterialPossessionsView.vue';
+import EditMaterialPossessionsView from '@/views/EditMaterialPossessionsView.vue';
 import RolesView from '@/views/RolesView.vue';
 import CreateRolesView from '@/views/CreateRolesView.vue';
 import UsersView from '@/views/UsersView.vue';
@@ -167,6 +167,15 @@ const routes: readonly RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
       permission: 'list-material-possessions',
+    },
+  },
+  {
+    path: '/bens/:id',
+    name: 'editMaterialPossessions',
+    component: EditMaterialPossessionsView,
+    meta: {
+      requiresAuth: true,
+      permission: 'update-material-possessions',
     },
   },
   {

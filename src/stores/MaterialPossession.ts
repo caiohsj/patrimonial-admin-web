@@ -5,6 +5,7 @@ import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<MaterialPossession>;
+  materialPossession?: MaterialPossession;
   filters: MaterialPossessionFilters;
 };
 
@@ -31,8 +32,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       template_name: string,
       dateOfAquisition: string,
       aquisitionValue: number,
-      costCenterId: number,
-      accountId: number
+      costCenterId: number | null,
+      accountId: number | null
     ) {
       const formData = new FormData();
       formData.append('number', number);
@@ -42,8 +43,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       formData.append('template_name', String(template_name));
       formData.append('date_of_aquisition', dateOfAquisition);
       formData.append('aquisition_value', String(aquisitionValue));
-      formData.append('cost_center_id', String(costCenterId));
-      formData.append('account_id', String(accountId));
+
+      if (costCenterId != null)
+        formData.append('cost_center_id', String(costCenterId));
+
+      if (accountId != null) formData.append('account_id', String(accountId));
 
       for (const image of images) {
         formData.append('images[]', image);
@@ -73,9 +77,35 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       return MaterialPossessionResource.bulkCreate(formData);
     },
 
+    updateMaterialPossession(
+      materialPossessionId: number,
+      description: string,
+      brand_name: string,
+      template_name: string,
+      dateOfAquisition: string,
+      aquisitionValue: number,
+      costCenterId: number,
+      accountId: number
+    ) {
+      return MaterialPossessionResource.update(materialPossessionId, {
+        description,
+        brand_name,
+        template_name,
+        date_of_aquisition: dateOfAquisition,
+        aquisition_value: String(aquisitionValue),
+        cost_center_id: costCenterId,
+        account_id: accountId,
+      });
+    },
+
     async deleteMaterialPossession(materialPossession: MaterialPossession) {
       await MaterialPossessionResource.delete(materialPossession);
       this.fetchMaterialPossessions();
+    },
+
+    async fetchMaterialPossession(id: number) {
+      const { data } = await MaterialPossessionResource.show(id);
+      this.materialPossession = data;
     },
 
     fetchApprovedMaterialPossessions() {

@@ -191,6 +191,22 @@ export default {
         },
       },
     },
+    editMaterialPossessionsView: {
+      form: {
+        title: 'Editar bem | Número: {number}',
+        labels: {
+          description: 'Descrição',
+          brandName: 'Marca',
+          templateName: 'Modelo',
+          dateOfAquisition: 'Data de aquisição',
+          aquisitionValue: 'Valor de aquisição',
+          costCenter: 'Centro de custo',
+          account: 'Conta',
+        },
+        submit: 'Salvar',
+        nextStep: 'Avançar',
+      },
+    },
     bulkCreateMaterialPossessionsView: {
       form: {
         title: 'Adicionar múltiplos bens',
