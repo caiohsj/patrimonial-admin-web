@@ -114,7 +114,9 @@ watch(step, (value) => {
 });
 
 const templateRules = computed(() => {
-  return values.brand_name != '' ? 'required' : '';
+  return values.brand_name != '' && values.brand_name != undefined
+    ? 'required'
+    : '';
 });
 </script>
 
