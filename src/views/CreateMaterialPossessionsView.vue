@@ -69,6 +69,7 @@ const onSubmit = handleSubmit((values) => {
       values.account_id
     )
     .then(() => {
+      materialPossessionStore.filters.approved = 0;
       router.push({ name: 'materialPossessions' });
     });
 });
