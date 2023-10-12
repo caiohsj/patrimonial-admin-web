@@ -32,8 +32,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       template_name: string,
       dateOfAquisition: string,
       aquisitionValue: number,
-      costCenterId: number,
-      accountId: number
+      costCenterId: number | null,
+      accountId: number | null
     ) {
       const formData = new FormData();
       formData.append('number', number);
@@ -43,8 +43,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       formData.append('template_name', String(template_name));
       formData.append('date_of_aquisition', dateOfAquisition);
       formData.append('aquisition_value', String(aquisitionValue));
-      formData.append('cost_center_id', String(costCenterId));
-      formData.append('account_id', String(accountId));
+
+      if (costCenterId != null)
+        formData.append('cost_center_id', String(costCenterId));
+
+      if (accountId != null) formData.append('account_id', String(accountId));
 
       for (const image of images) {
         formData.append('images[]', image);

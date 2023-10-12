@@ -193,7 +193,7 @@ export default {
     },
     editMaterialPossessionsView: {
       form: {
-        title: 'Editar / Número: {number}',
+        title: 'Editar bem | Número: {number}',
         labels: {
           description: 'Descrição',
           brandName: 'Marca',
