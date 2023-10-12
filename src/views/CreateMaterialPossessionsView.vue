@@ -122,6 +122,10 @@ const templateRules = computed(() => {
     ? 'required'
     : '';
 });
+
+const templateNameInputDisabled = computed(
+  () => values.brand_name == '' || values.brand_name == undefined
+);
 </script>
 
 <template>
@@ -175,6 +179,7 @@ const templateRules = computed(() => {
           "
           name="template_name"
           :rules="templateRules"
+          :disabled="templateNameInputDisabled"
         />
         <InputGroup
           type="text"

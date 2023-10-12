@@ -20,6 +20,7 @@ const defaultInputClasses = [
 type InputGroupProps = {
   label: string;
   name: string;
+  disabled?: boolean;
   modelValue?: string;
   type: 'email' | 'text' | 'date' | 'number' | 'password' | 'search';
   autocomplete?: 'on' | 'off';
@@ -46,11 +47,18 @@ const { errorMessage, value, meta } = useField<string>(
 const errorInputClass = computed(() =>
   !meta.valid && meta.validated ? 'border-danger' : ''
 );
+
+const disabledLabelClasses = computed(() =>
+  props.disabled ? 'opacity-20' : ''
+);
 </script>
 
 <template>
   <div class="flex flex-col">
-    <label :for="props.name" class="font-baloo2-bold text-dark">
+    <label
+      :for="props.name"
+      :class="['font-baloo2-bold', 'text-dark', disabledLabelClasses]"
+    >
       {{ props.label }}
     </label>
     <input
@@ -58,6 +66,7 @@ const errorInputClass = computed(() =>
       :type="props.type"
       :name="props.name"
       :autocomplete="props.autocomplete"
+      :disabled="props.disabled"
       v-model="value"
       v-maska:[props.maskOptions]
       :data-maska="props.mask"
@@ -71,5 +80,9 @@ const errorInputClass = computed(() =>
 <style scoped>
 input {
   border-width: 1px;
+}
+
+input[disabled] {
+  opacity: 0.2;
 }
 </style>
