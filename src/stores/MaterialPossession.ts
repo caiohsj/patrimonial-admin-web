@@ -5,6 +5,7 @@ import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<MaterialPossession>;
+  materialPossession?: MaterialPossession;
   filters: MaterialPossessionFilters;
 };
 
@@ -73,9 +74,35 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       return MaterialPossessionResource.bulkCreate(formData);
     },
 
+    updateMaterialPossession(
+      materialPossessionId: number,
+      description: string,
+      brand_name: string,
+      template_name: string,
+      dateOfAquisition: string,
+      aquisitionValue: number,
+      costCenterId: number,
+      accountId: number
+    ) {
+      return MaterialPossessionResource.update(materialPossessionId, {
+        description,
+        brand_name,
+        template_name,
+        date_of_aquisition: dateOfAquisition,
+        aquisition_value: String(aquisitionValue),
+        cost_center_id: costCenterId,
+        account_id: accountId,
+      });
+    },
+
     async deleteMaterialPossession(materialPossession: MaterialPossession) {
       await MaterialPossessionResource.delete(materialPossession);
       this.fetchMaterialPossessions();
+    },
+
+    async fetchMaterialPossession(id: number) {
+      const { data } = await MaterialPossessionResource.show(id);
+      this.materialPossession = data;
     },
 
     fetchApprovedMaterialPossessions() {

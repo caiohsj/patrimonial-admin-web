@@ -38,6 +38,15 @@ const deleteMaterialPossession = (item: MaterialPossession) => {
 const approveMaterialPossession = (id: number) => {
   materialPossessionStore.approveMaterialPossession(id);
 };
+
+const navigateToEditMaterialPossession = (
+  materialPossession: MaterialPossession
+) => {
+  router.push({
+    name: 'editMaterialPossessions',
+    params: { id: materialPossession.id },
+  });
+};
 </script>
 
 <template>
@@ -66,16 +75,17 @@ const approveMaterialPossession = (id: number) => {
       :title="t('views.materialPossessionsView.table.title')"
       :can-create="userHasPermission('create-material-possessions')"
       :can-bulk-create="userHasPermission('bulk-create-material-possessions')"
-      :can-edit="false"
+      :can-edit="userHasPermission('update-material-possessions')"
       :can-delete="userHasPermission('delete-material-possessions')"
       :has-custom-actions="true"
       :headers="headers"
       :items="materialPossessions"
-      :except-items-keys="['id', 'approved']"
+      :except-items-keys="['id', 'approved', 'account_id', 'cost_center_id']"
       :total="materialPossessions.length"
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
       @delete="deleteMaterialPossession"
+      @edit="navigateToEditMaterialPossession"
     >
       <template #customActions="customActionProps">
         <button

@@ -18,12 +18,17 @@ export function useTransform() {
     );
   };
 
-  const numberToCurrencyBRL = (value: number): string => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
+  const numberToCurrencyBRL = (value?: number): string => {
+    return `R$ ${value?.toString().replace('.', ',')}`;
   };
 
-  return { objectToArray, currencyBRLToNumber, numberToCurrencyBRL };
+  const parseDate = (value?: string): string => {
+    if (!value) return '';
+
+    const date = value.split('-');
+
+    return `${date[2]}/${date[1]}/${date[0]}}`;
+  };
+
+  return { objectToArray, currencyBRLToNumber, numberToCurrencyBRL, parseDate };
 }
