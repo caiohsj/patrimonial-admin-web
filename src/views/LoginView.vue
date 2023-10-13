@@ -32,9 +32,7 @@ watch(hasSession, (value) => {
 </script>
 
 <template>
-  <div
-    class="bg-light h-screen w-full flex flex-col justify-center items-center"
-  >
+  <div class="bg-light h-full w-full flex flex-col justify-center items-center">
     <img src="@/assets/images/logo.png" :alt="t('altLogo')" class="w-48 h-40" />
     <h1 class="font-baloo2-bold text-gray-darken mb-8 text-xl">
       {{ t('views.loginView.title') }}

@@ -8,7 +8,7 @@ import AsideNav from '@/components/navs/AsideNav.vue';
   <div class="bg-gray-light flex h-screen">
     <LoadingScreen />
     <AsideNav />
-    <div class="pt-20 flex flex-col w-full md:pt-0 overflow-auto">
+    <div class="pt-0 flex flex-col w-full overflow-auto">
       <AppHeader class="md:px-8" />
       <main class="flex-1">
         <RouterView class="px-2 sm:px-8" />
