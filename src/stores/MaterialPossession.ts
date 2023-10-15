@@ -27,7 +27,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       number: string,
       description: string,
       placeId: number,
-      images: Array<File>,
+      images: Array<File | string>,
       brandName: string,
       templateName: string,
       dateOfAquisition: string,

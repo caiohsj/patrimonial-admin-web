@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const inputFile = ref<HTMLInputElement>();
 
@@ -34,11 +34,31 @@ type FileInputGroupProps = {
 
 const props = defineProps<FileInputGroupProps>();
 const emit = defineEmits<{
-  (event: 'selectedFiled', value: FileList | null | undefined): void;
+  (event: 'selectedFiled', value: FileList | string | null | undefined): void;
 }>();
 
 const selectFile = () => {
   emit('selectedFiled', inputFile.value?.files);
+};
+
+const onClick = (e: Event) => {
+  e.preventDefault();
+  navigator.camera.getPicture((imageData) => {
+    console.log(imageData);
+    emit('selectedFiled', imageData);
+  }, () => {
+    alert('deu ruim');
+  }, {
+        // Some common settings are 20, 50, and 100
+        quality: 100,
+        destinationType: Camera.DestinationType.DATA_URL,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: Camera.PictureSourceType.CAMERA,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: false,
+        correctOrientation: true,
+    });
 };
 </script>
 
@@ -49,6 +69,7 @@ const selectFile = () => {
     </label>
     <input
       @change="selectFile"
+      @click="onClick"
       :id="props.name"
       :accept="props.accept"
       :capture="props.capture"
