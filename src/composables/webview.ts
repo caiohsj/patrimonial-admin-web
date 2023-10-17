@@ -4,4 +4,4 @@ export function useWebView() {
   };
 
   return { isWebView };
-};
+}

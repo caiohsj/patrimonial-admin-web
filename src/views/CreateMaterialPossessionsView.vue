@@ -87,7 +87,7 @@ const handleImageSelected = (
 };
 
 const getImageSrc = (file: File | string) => {
-  if (typeof file == 'string') return `data:image/jpeg;base64,${file}`;
+  if (typeof file == 'string') return file;
 
   return URL.createObjectURL(file);
 };

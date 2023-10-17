@@ -66,7 +66,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       to: number,
       from: number,
       placeId: number,
-      images: Array<File>
+      images: Array<File | string>
     ) {
       const formData = new FormData();
 
