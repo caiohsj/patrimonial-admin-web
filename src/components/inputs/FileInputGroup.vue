@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { useWebView } from '@/composables/webview';
+import { ref } from 'vue';
+
+const { isWebView } = useWebView();
 
 const inputFile = ref<HTMLInputElement>();
 
@@ -42,23 +45,33 @@ const selectFile = () => {
 };
 
 const onClick = (e: Event) => {
+  if (!isWebView()) return;
+
   e.preventDefault();
-  navigator.camera.getPicture((imageData) => {
-    console.log(imageData);
-    emit('selectedFiled', imageData);
-  }, () => {
-    alert('deu ruim');
-  }, {
-        // Some common settings are 20, 50, and 100
-        quality: 100,
-        destinationType: Camera.DestinationType.DATA_URL,
-        // In this app, dynamically set the picture source, Camera or photo gallery
-        sourceType: Camera.PictureSourceType.CAMERA,
-        encodingType: Camera.EncodingType.JPEG,
-        mediaType: Camera.MediaType.PICTURE,
-        allowEdit: false,
-        correctOrientation: true,
-    });
+  // @ts-ignore
+  navigator.camera.getPicture(
+    (imageData: string) => {
+      emit('selectedFiled', `data:image/jpeg;base64,${imageData}`);
+    },
+    (err: any) => {
+      console.log(err);
+    },
+    {
+      quality: 100,
+      /* eslint-disable */
+      // @ts-ignore
+      destinationType: Camera.DestinationType.DATA_URL,
+      // @ts-ignore
+      sourceType: Camera.PictureSourceType.CAMERA,
+      // @ts-ignore
+      encodingType: Camera.EncodingType.JPEG,
+      // @ts-ignore
+      mediaType: Camera.MediaType.PICTURE,
+      allowEdit: false,
+      correctOrientation: true,
+      /* eslint-enable */
+    }
+  );
 };
 </script>
 
