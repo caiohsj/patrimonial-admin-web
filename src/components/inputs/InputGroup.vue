@@ -34,7 +34,12 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string | null): void;
 }>();
 
-const updateModelValue = () => emit('update:modelValue', value.value);
+const updateModelValue = (e: Event) => {
+  if (e.target instanceof HTMLInputElement) {
+    value.value = e.target.value;
+    emit('update:modelValue', value.value);
+  }
+};
 
 const { errorMessage, value, meta } = useField<string>(
   props.name,
@@ -67,7 +72,7 @@ const disabledLabelClasses = computed(() =>
       :name="props.name"
       :autocomplete="props.autocomplete"
       :disabled="props.disabled"
-      v-model="value"
+      :value="value"
       v-maska:[props.maskOptions]
       :data-maska="props.mask"
       @input="updateModelValue"
