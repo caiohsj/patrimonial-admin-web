@@ -11,9 +11,10 @@ import { useSessionStore } from '@/stores/session';
 import { useCostCenterStore } from '@/stores/CostCenter';
 import { useAccountStore } from '@/stores/account';
 import { useBrandStore } from '@/stores/brand';
+import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
+import { useTemplateStore } from '@/stores/template';
 import { useTransform } from '@/composables/transform';
 import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
-import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import FormCard from '@/components/cards/FormCard.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
 import SelectGroup from '@/components/inputs/SelectGroup.vue';
@@ -54,6 +55,9 @@ const { accountsOptions } = storeToRefs(accountStore);
 const brandStore = useBrandStore();
 const { brands } = storeToRefs(brandStore);
 
+const templateStore = useTemplateStore();
+const { templates } = storeToRefs(templateStore);
+
 const nextStep = async () => {
   const result = await validate();
 
@@ -83,6 +87,11 @@ const onSubmit = handleSubmit((values) => {
 const handleInputBrand = useDebounceFn(() => {
   brandStore.filters.name = values.brand_name;
   brandStore.fetchBrands();
+}, 1000);
+
+const handleInputTemplate = useDebounceFn(() => {
+  templateStore.filters.name = values.template_name;
+  templateStore.fetchTemplates();
 }, 1000);
 
 const handleImageSelected = (
@@ -177,12 +186,14 @@ watch(step, (value) => {
           @input="handleInputBrand"
           @selected="() => brandStore.clearBrands()"
         />
-        <InputGroup
-          type="text"
+        <InputWithSelect
           :label="
             t('views.createMaterialPossessionsView.form.labels.templateName')
           "
           name="template_name"
+          :list-items="templates.map((template) => template.name)"
+          @input="handleInputTemplate"
+          @selected="() => templateStore.clearTemplates()"
         />
         <InputGroup
           type="text"
