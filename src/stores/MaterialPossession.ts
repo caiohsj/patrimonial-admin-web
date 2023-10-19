@@ -27,7 +27,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       number: string,
       description: string,
       placeId: number,
-      images: Array<File>,
+      images: Array<File | string>,
       brandName: string,
       templateName: string,
       dateOfAquisition: string,
@@ -54,7 +54,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
 
       if (accountId != null) formData.append('account_id', String(accountId));
 
-      for (const image of images) {
+      for (let image of images) {
+        if (typeof image == 'string') {
+          image = image.replace('data:image/jpeg;base64,', '');
+        }
+
         formData.append('images[]', image);
       }
       return MaterialPossessionResource.create(formData);
@@ -66,7 +70,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       to: number,
       from: number,
       placeId: number,
-      images: Array<File>
+      images: Array<File | string>
     ) {
       const formData = new FormData();
 
@@ -76,7 +80,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       formData.append('from', String(from));
       formData.append('place_id', String(placeId));
 
-      for (const image of images) {
+      for (let image of images) {
+        if (typeof image == 'string') {
+          image = image.replace('data:image/jpeg;base64,', '');
+        }
+
         formData.append('images[]', image);
       }
       return MaterialPossessionResource.bulkCreate(formData);

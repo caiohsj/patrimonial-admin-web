@@ -27,7 +27,7 @@ import InputWithSelect from '@/components/inputs/InputWithSelect.vue';
 const step = ref(1);
 const branch = ref(0);
 const place = ref(0);
-const images = ref<Array<File>>([]);
+const images = ref<Array<File | string>>([]);
 
 const router = useRouter();
 const { t } = useI18n();
@@ -102,9 +102,13 @@ const handleImageSelected = (
       images.value.push(file);
     }
   }
+
+  if (typeof fileList == 'string') images.value.push(fileList);
 };
 
-const getImageSrc = (file: File) => {
+const getImageSrc = (file: File | string) => {
+  if (typeof file == 'string') return file;
+
   return URL.createObjectURL(file);
 };
 
