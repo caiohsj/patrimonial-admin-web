@@ -4,14 +4,17 @@ import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
+import { useDebounceFn } from '@vueuse/core';
 import { useBranchStore } from '@/stores/branch';
 import { usePlaceStore } from '@/stores/place';
 import { useSessionStore } from '@/stores/session';
 import { useCostCenterStore } from '@/stores/CostCenter';
 import { useAccountStore } from '@/stores/account';
+import { useBrandStore } from '@/stores/brand';
+import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
+import { useTemplateStore } from '@/stores/template';
 import { useTransform } from '@/composables/transform';
 import type { CreateMaterialPossessionFormData } from '@/@types/interfaces/CreateMaterialPossessionFormData';
-import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import FormCard from '@/components/cards/FormCard.vue';
 import InputGroup from '@/components/inputs/InputGroup.vue';
 import SelectGroup from '@/components/inputs/SelectGroup.vue';
@@ -19,6 +22,7 @@ import FileInputGroup from '@/components/inputs/FileInputGroup.vue';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import SelectableList from '@/components/inputs/SelectableList.vue';
 import CurrencyInputGroup from '@/components/inputs/CurrencyInputGroup.vue';
+import InputWithSelect from '@/components/inputs/InputWithSelect.vue';
 
 const step = ref(1);
 const branch = ref(0);
@@ -48,6 +52,12 @@ const { costCentersOptions } = storeToRefs(costCenterStore);
 const accountStore = useAccountStore();
 const { accountsOptions } = storeToRefs(accountStore);
 
+const brandStore = useBrandStore();
+const { brands } = storeToRefs(brandStore);
+
+const templateStore = useTemplateStore();
+const { templates } = storeToRefs(templateStore);
+
 const nextStep = async () => {
   const result = await validate();
 
@@ -73,6 +83,16 @@ const onSubmit = handleSubmit((values) => {
       router.push({ name: 'materialPossessions' });
     });
 });
+
+const handleInputBrand = useDebounceFn(() => {
+  brandStore.filters.name = values.brand_name;
+  brandStore.fetchBrands();
+}, 1000);
+
+const handleInputTemplate = useDebounceFn(() => {
+  templateStore.filters.name = values.template_name;
+  templateStore.fetchTemplates();
+}, 1000);
 
 const handleImageSelected = (
   fileList: FileList | string | null | undefined
@@ -122,16 +142,6 @@ watch(step, (value) => {
     accountStore.fetchAccounts();
   }
 });
-
-const templateRules = computed(() => {
-  return values.brand_name != '' && values.brand_name != undefined
-    ? 'required'
-    : '';
-});
-
-const templateNameInputDisabled = computed(
-  () => values.brand_name == '' || values.brand_name == undefined
-);
 </script>
 
 <template>
@@ -171,21 +181,23 @@ const templateNameInputDisabled = computed(
           name="description"
           rules="required"
         />
-        <InputGroup
-          type="text"
+        <InputWithSelect
           :label="
             t('views.createMaterialPossessionsView.form.labels.brandName')
           "
           name="brand_name"
+          :list-items="brands.map((brand) => brand.name)"
+          @input="handleInputBrand"
+          @selected="() => brandStore.clearBrands()"
         />
-        <InputGroup
-          type="text"
+        <InputWithSelect
           :label="
             t('views.createMaterialPossessionsView.form.labels.templateName')
           "
           name="template_name"
-          :rules="templateRules"
-          :disabled="templateNameInputDisabled"
+          :list-items="templates.map((template) => template.name)"
+          @input="handleInputTemplate"
+          @selected="() => templateStore.clearTemplates()"
         />
         <InputGroup
           type="text"

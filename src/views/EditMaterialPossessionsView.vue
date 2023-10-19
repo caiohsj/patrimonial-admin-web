@@ -4,8 +4,11 @@ import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
+import { useDebounceFn } from '@vueuse/core';
 import { useCostCenterStore } from '@/stores/CostCenter';
 import { useAccountStore } from '@/stores/account';
+import { useBrandStore } from '@/stores/brand';
+import { useTemplateStore } from '@/stores/template';
 import { useTransform } from '@/composables/transform';
 import type { UpdateMaterialPossessionFormData } from '@/@types/interfaces/UpdateMaterialPossessionFormData';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
@@ -14,6 +17,7 @@ import InputGroup from '@/components/inputs/InputGroup.vue';
 import SelectGroup from '@/components/inputs/SelectGroup.vue';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import CurrencyInputGroup from '@/components/inputs/CurrencyInputGroup.vue';
+import InputWithSelect from '@/components/inputs/InputWithSelect.vue';
 
 const step = ref(1);
 
@@ -33,6 +37,12 @@ const { costCentersOptions } = storeToRefs(costCenterStore);
 
 const accountStore = useAccountStore();
 const { accountsOptions } = storeToRefs(accountStore);
+
+const brandStore = useBrandStore();
+const { brands } = storeToRefs(brandStore);
+
+const templateStore = useTemplateStore();
+const { templates } = storeToRefs(templateStore);
 
 const nextStep = async () => {
   const result = await validate();
@@ -56,6 +66,16 @@ const onSubmit = handleSubmit((values) => {
       router.push({ name: 'materialPossessions' });
     });
 });
+
+const handleInputBrand = useDebounceFn(() => {
+  brandStore.filters.name = values.brand_name;
+  brandStore.fetchBrands();
+}, 1000);
+
+const handleInputTemplate = useDebounceFn(() => {
+  templateStore.filters.name = values.template_name;
+  templateStore.fetchTemplates();
+}, 1000);
 
 watch(step, (value) => {
   if (value == 2) {
@@ -87,12 +107,6 @@ onMounted(async () => {
       : undefined,
   });
 });
-
-const templateRules = computed(() => {
-  return values.brand_name != '' && values.brand_name != undefined
-    ? 'required'
-    : '';
-});
 </script>
 
 <template>
@@ -114,18 +128,23 @@ const templateRules = computed(() => {
           name="description"
           rules="required"
         />
-        <InputGroup
-          type="text"
-          :label="t('views.editMaterialPossessionsView.form.labels.brandName')"
-          name="brand_name"
-        />
-        <InputGroup
-          type="text"
+        <InputWithSelect
           :label="
-            t('views.editMaterialPossessionsView.form.labels.templateName')
+            t('views.createMaterialPossessionsView.form.labels.brandName')
+          "
+          name="brand_name"
+          :list-items="brands.map((brand) => brand.name)"
+          @input="handleInputBrand"
+          @selected="() => brandStore.clearBrands()"
+        />
+        <InputWithSelect
+          :label="
+            t('views.createMaterialPossessionsView.form.labels.templateName')
           "
           name="template_name"
-          :rules="templateRules"
+          :list-items="templates.map((template) => template.name)"
+          @input="handleInputTemplate"
+          @selected="() => templateStore.clearTemplates()"
         />
         <InputGroup
           type="text"

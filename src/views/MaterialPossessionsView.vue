@@ -80,7 +80,13 @@ const navigateToEditMaterialPossession = (
       :has-custom-actions="true"
       :headers="headers"
       :items="materialPossessions"
-      :except-items-keys="['id', 'approved', 'account_id', 'cost_center_id']"
+      :except-items-keys="[
+        'id',
+        'approved',
+        'account_id',
+        'cost_center_id',
+        'images',
+      ]"
       :total="materialPossessions.length"
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
