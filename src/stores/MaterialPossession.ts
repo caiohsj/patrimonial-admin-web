@@ -33,7 +33,9 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number | null,
-      accountId: number | null
+      accountId: number | null,
+      residualValueOfDiscard: number,
+      lifespan: number | null
     ) {
       const formData = new FormData();
       formData.append('number', number);
@@ -48,6 +50,12 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
 
       formData.append('date_of_aquisition', dateOfAquisition);
       formData.append('aquisition_value', String(aquisitionValue));
+      formData.append(
+        'residual_value_of_discard',
+        String(residualValueOfDiscard)
+      );
+
+      if (lifespan != undefined) formData.append('lifespan', String(lifespan));
 
       if (costCenterId != null)
         formData.append('cost_center_id', String(costCenterId));
@@ -98,7 +106,9 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number,
-      accountId: number
+      accountId: number,
+      residualValueOfDiscard: number,
+      lifespan: number
     ) {
       return MaterialPossessionResource.update(materialPossessionId, {
         description,
@@ -108,6 +118,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
         aquisition_value: String(aquisitionValue),
         cost_center_id: costCenterId,
         account_id: accountId,
+        residual_value_of_discard: String(residualValueOfDiscard),
+        lifespan,
       });
     },
 

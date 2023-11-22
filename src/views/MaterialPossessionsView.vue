@@ -85,6 +85,8 @@ const navigateToEditMaterialPossession = (
         'approved',
         'account_id',
         'cost_center_id',
+        'residual_value_of_discard',
+        'lifespan',
         'images',
       ]"
       :total="materialPossessions.length"

@@ -7,4 +7,6 @@ export interface CreateMaterialPossessionFormData {
   aquisition_value: string;
   cost_center_id: number | null;
   account_id: number | null;
+  residual_value_of_discard: string;
+  lifespan: number | null;
 }

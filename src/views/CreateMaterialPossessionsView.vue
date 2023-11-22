@@ -76,7 +76,9 @@ const onSubmit = handleSubmit((values) => {
       values.date_of_aquisition,
       currencyBRLToNumber(values.aquisition_value),
       values.cost_center_id,
-      values.account_id
+      values.account_id,
+      currencyBRLToNumber(values.residual_value_of_discard),
+      values.lifespan
     )
     .then(() => {
       materialPossessionStore.filters.approved = 0;
@@ -125,6 +127,7 @@ onMounted(() => {
 
   step.value++;
   setFieldValue('aquisition_value', 'R$ 0');
+  setFieldValue('residual_value_of_discard', 'R$ 0');
 });
 
 watch(branch, (branch_id) => {
@@ -230,6 +233,20 @@ watch(step, (value) => {
           :options="accountsOptions"
           name="account_id"
           :label="t('views.createMaterialPossessionsView.form.labels.account')"
+        />
+        <CurrencyInputGroup
+          :label="
+            t(
+              'views.createMaterialPossessionsView.form.labels.residualValueOfDiscard'
+            )
+          "
+          name="residual_value_of_discard"
+          currency="BRL"
+        />
+        <InputGroup
+          type="number"
+          :label="t('views.createMaterialPossessionsView.form.labels.lifespan')"
+          name="lifespan"
         />
       </div>
 
