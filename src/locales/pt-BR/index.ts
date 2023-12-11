@@ -211,6 +211,30 @@ export default {
         nextStep: 'Avançar',
       },
     },
+    showMaterialPossessionsView: {
+      lifespan: '{value} meses',
+      deprecated: 'Vencido',
+      labels: {
+        place: 'Local',
+        branch: 'Filial',
+        brand: 'Marca',
+        template: 'Modelo',
+        dateOfAquisition: 'Data de aquisição',
+        monthlyDepreciationQuota: 'Quota de depreciação mensal',
+        accumulatedDepreciation: 'Depreciação acumulada',
+        bookValue: 'Valor contábil',
+        economicDepreciation: {
+          title: 'Depreciação econômica',
+          residualValueOfDiscard: 'Valor residual de descarte',
+          depreciableValue: 'Valor depreciável',
+          lifespan: 'Vida útil',
+        },
+        taxDepreciation: {
+          title: 'Depreciação fiscal',
+          taxRate: 'Taxa fiscal',
+        },
+      },
+    },
     bulkCreateMaterialPossessionsView: {
       form: {
         title: 'Adicionar múltiplos bens',

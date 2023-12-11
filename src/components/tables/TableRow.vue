@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { useTransform } from '@/composables/transform';
 import OptionsIcon from '@/components/icons/OptionsIcon.vue';
 import ConfirmationScreen from '@/components/feedbacks/ConfirmationScreen.vue';
+import EyeIcon from '@/components/icons/EyeIcon.vue';
 
 const { objectToArray } = useTransform();
 const { t } = useI18n();
@@ -23,6 +24,7 @@ type TableRowProps = {
 type TableRowEmits = {
   (event: 'edit', value: any): void;
   (event: 'delete', value: any): void;
+  (event: 'show', value: any): void;
 };
 
 const props = defineProps<TableRowProps>();
@@ -54,6 +56,12 @@ const confirmDelete = () => {
       {{ value }}
     </td>
     <td class="flex justify-end items-center relative h-14" v-if="showActions">
+      <button
+        class="bg-success text-light px-2 rounded-md"
+        @click="emit('show', props.item)"
+      >
+        <EyeIcon class="h-5 w-fit" />
+      </button>
       <button
         class="hover:opacity-50 transition-opacity"
         @click="toggleItemsOptions"

@@ -12,4 +12,5 @@ export interface MaterialPossession {
   account_description: string;
   residual_value_of_discard: number;
   lifespan: number;
+  images_urls: Array<string>;
 }

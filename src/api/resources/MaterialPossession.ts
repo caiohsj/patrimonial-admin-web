@@ -3,6 +3,7 @@ import type { AxiosResponse } from 'axios';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
 import type { UpdateMaterialPossessionFormData } from '@/@types/interfaces/UpdateMaterialPossessionFormData';
+import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 
 export default {
   index(
@@ -10,7 +11,7 @@ export default {
   ): Promise<AxiosResponse<Array<MaterialPossession>>> {
     return client.get('/api/v1/material_possessions', params);
   },
-  show(id: number): Promise<AxiosResponse<MaterialPossession>> {
+  show(id: number): Promise<AxiosResponse<Show>> {
     return client.get(`/api/v1/material_possessions/${id}`);
   },
   create(params: FormData) {

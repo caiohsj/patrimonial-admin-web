@@ -32,6 +32,8 @@ const navItems = [
       'materialPossessions',
       'createMaterialPossessions',
       'bulkCreateMaterialPossessions',
+      'editMaterialPossessions',
+      'showMaterialPossessions',
     ],
   },
   {

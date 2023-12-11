@@ -24,6 +24,7 @@ type BaseTableEmits = {
   (event: 'bulkCreate'): void;
   (event: 'edit', value: any): void;
   (event: 'delete', value: any): void;
+  (event: 'show', value: any): void;
 };
 
 const props = defineProps<TableProps>();
@@ -35,6 +36,10 @@ const deleteItem = (item: any) => {
 
 const editItem = (item: any) => {
   emit('edit', item);
+};
+
+const showItem = (item: any) => {
+  emit('show', item);
 };
 </script>
 
@@ -107,6 +112,7 @@ const editItem = (item: any) => {
             :has-custom-actions="props.hasCustomActions"
             @delete="deleteItem"
             @edit="editItem"
+            @show="showItem"
           >
             <template #customActions="customActionProps">
               <slot name="customActions" :item="customActionProps.item"></slot>

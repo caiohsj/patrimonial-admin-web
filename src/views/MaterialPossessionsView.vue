@@ -47,6 +47,15 @@ const navigateToEditMaterialPossession = (
     params: { id: materialPossession.id },
   });
 };
+
+const navigateToShowMaterialPossession = (
+  materialPossession: MaterialPossession
+) => {
+  router.push({
+    name: 'showMaterialPossessions',
+    params: { id: materialPossession.id },
+  });
+};
 </script>
 
 <template>
@@ -94,6 +103,7 @@ const navigateToEditMaterialPossession = (
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
       @delete="deleteMaterialPossession"
       @edit="navigateToEditMaterialPossession"
+      @show="navigateToShowMaterialPossession"
     >
       <template #customActions="customActionProps">
         <button

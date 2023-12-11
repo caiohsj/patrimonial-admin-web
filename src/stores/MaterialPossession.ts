@@ -1,16 +1,18 @@
 import { defineStore } from 'pinia';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
+import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<MaterialPossession>;
-  materialPossession?: MaterialPossession;
+  materialPossession: Show | null;
   filters: MaterialPossessionFilters;
 };
 
 export const useMaterialPossessionStore = defineStore('material_possession', {
   state: (): MaterialPossessionStoreState => ({
+    materialPossession: null,
     materialPossessions: [],
     filters: {
       approved: 1,
@@ -128,9 +130,10 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       this.fetchMaterialPossessions();
     },
 
-    async fetchMaterialPossession(id: number) {
-      const { data } = await MaterialPossessionResource.show(id);
-      this.materialPossession = data;
+    fetchMaterialPossession(id: number) {
+      MaterialPossessionResource.show(id).then(
+        ({ data }) => (this.materialPossession = data)
+      );
     },
 
     fetchApprovedMaterialPossessions() {
