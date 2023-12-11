@@ -1,16 +1,18 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useSessionStore } from '@/stores/session';
+import { useAsideNavStore } from '@/stores/AsideNav';
 import { usePermissions } from '@/composables/permissions';
 import { useWindow } from '@/composables/window';
-import HamburgerIcon from '@/components/icons/HamburgerIcon.vue';
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 import MenuItem from './MenuItem.vue';
 
 const navMobile = ref<HTMLDivElement>();
+
+const { toggleNavMobile, setNavMobileRef } = useAsideNavStore();
 
 const { bodyWidth } = useWindow();
 const isMobile = computed(() => bodyWidth.value < 768);
@@ -72,12 +74,6 @@ const itemActive = (activeRoutes: string[]) => {
   return activeRoutes.includes(String(route.name));
 };
 
-const toggleNavMobile = () => {
-  navMobile.value?.classList.toggle('w-0');
-  navMobile.value?.classList.toggle('opacity-0');
-  navMobile.value?.classList.toggle('w-full');
-};
-
 const navigate = (name: string): void => {
   toggleNavMobile();
 
@@ -89,6 +85,8 @@ const logout = () => {
   sessionStore.signOut();
   router.push({ name: 'login' });
 };
+
+onMounted(() => setNavMobileRef(navMobile.value));
 </script>
 
 <template>
@@ -118,12 +116,6 @@ const logout = () => {
     </nav>
   </div>
   <div v-if="hasSession && isMobile">
-    <button
-      class="absolute z-10 top-5 left-2 w-12 h-12"
-      @click="toggleNavMobile"
-    >
-      <HamburgerIcon class="w-full h-full text-gray-darken active:text-light" />
-    </button>
     <div
       class="bg-white pt-3 w-0 opacity-0 fixed inset-0 z-10 transition-all duration-700 px-8 overflow-auto"
       ref="navMobile"
