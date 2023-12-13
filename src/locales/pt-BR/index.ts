@@ -366,5 +366,12 @@ export default {
         cancel: 'Cancelar',
       },
     },
+
+    materialPossessions: {
+      depreciationCard: {
+        incompleteData:
+          'Dados incompletos, não foi possível gerar as informações de depreciação',
+      },
+    },
   },
 };

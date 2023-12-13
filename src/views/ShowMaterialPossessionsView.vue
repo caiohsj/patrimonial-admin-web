@@ -119,6 +119,7 @@ onBeforeMount(() => {
             )
           "
           color="primary"
+          :complete="materialPossession?.economic_depreciation != null"
           :items="[
             [
               t(
@@ -176,6 +177,7 @@ onBeforeMount(() => {
             t('views.showMaterialPossessionsView.labels.taxDepreciation.title')
           "
           color="success"
+          :complete="materialPossession?.tax_depreciation != null"
           :items="[
             [
               t(
