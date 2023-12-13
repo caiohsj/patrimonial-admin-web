@@ -45,7 +45,7 @@ const confirmDelete = () => {
     <td
       v-for="(value, index) in objectToArray(props.item, props.exceptItemKeys)"
       :key="index"
-      class="px-4"
+      class="px-4 whitespace-nowrap"
     >
       {{ value }}
     </td>
@@ -59,21 +59,21 @@ const confirmDelete = () => {
         @click="emit('show', props.item)"
         v-if="props.canShow"
       >
-        <EyeIcon class="h-5 w-fit" />
+        <EyeIcon class="h-5 w-5" />
       </button>
       <button
         class="bg-primary text-light p-1 rounded-md"
         @click="emit('edit', props.item)"
         v-if="props.canEdit"
       >
-        <PencilIcon class="h-5 w-fit" />
+        <PencilIcon class="h-5 w-5" />
       </button>
       <button
         class="bg-danger text-light p-1 rounded-md"
         @click="openConfirmationDeleteScreen = true"
         v-if="props.canDelete"
       >
-        <TrashIcon class="h-5 w-fit" />
+        <TrashIcon class="h-5 w-5" />
       </button>
     </td>
     <ConfirmationScreen

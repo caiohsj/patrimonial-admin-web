@@ -116,7 +116,7 @@ const navigateToShowMaterialPossession = (
             customActionProps.item.approved === false
           "
         >
-          <CheckIcon class="h-5 w-fit" />
+          <CheckIcon class="h-5 w-5" />
         </button>
       </template>
     </BaseTable>

@@ -94,7 +94,7 @@ const showItem = (item: any) => {
             <th
               v-for="(item, index) in props.headers"
               :key="index"
-              class="px-4"
+              class="px-4 whitespace-nowrap"
             >
               {{ item }}
             </th>
