@@ -20,4 +20,6 @@ export interface Show {
   images_urls: Array<string>;
   economic_depreciation: EconomicDepreciation | null;
   tax_depreciation: TaxDepreciation | null;
+  cost_center_id: number;
+  account_id: number;
 }
