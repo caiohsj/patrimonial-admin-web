@@ -53,6 +53,7 @@ const confirmDelete = () => {
       class="flex justify-end items-center gap-1 relative h-14"
       v-if="showActions"
     >
+      <slot name="customActions" :item="props.item"></slot>
       <button
         class="bg-success text-light p-1 rounded-md"
         @click="emit('show', props.item)"
@@ -74,7 +75,6 @@ const confirmDelete = () => {
       >
         <TrashIcon class="h-5 w-fit" />
       </button>
-      <slot name="customActions" :item="props.item"></slot>
     </td>
     <ConfirmationScreen
       :title="t('components.tables.tableRow.confirmationTitle')"
