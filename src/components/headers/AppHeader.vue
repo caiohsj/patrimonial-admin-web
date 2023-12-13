@@ -54,7 +54,7 @@ watch(hasSession, (value) => {
 
 <template>
   <div v-if="hasSession" class="h-24 flex justify-between items-center px-2">
-    <div>
+    <div v-if="isMobile">
       <button class="w-12 h-12" @click="toggleNavMobile">
         <HamburgerIcon
           class="w-full h-full text-gray-darken active:text-light"
