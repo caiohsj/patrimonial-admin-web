@@ -2,20 +2,20 @@
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useTransform } from '@/composables/transform';
-import OptionsIcon from '@/components/icons/OptionsIcon.vue';
 import ConfirmationScreen from '@/components/feedbacks/ConfirmationScreen.vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';
+import PencilIcon from '@/components/icons/PencilIcon.vue';
+import TrashIcon from '@/components/icons/TrashIcon.vue';
 
 const { objectToArray } = useTransform();
 const { t } = useI18n();
-const itemsOptions = ref<HTMLDivElement>();
 
 const openConfirmationDeleteScreen = ref<boolean>(false);
 
 type TableRowProps = {
-  canCreate: boolean;
-  canEdit: boolean;
-  canDelete: boolean;
+  canEdit?: boolean;
+  canShow?: boolean;
+  canDelete?: boolean;
   hasCustomActions: boolean;
   item: any;
   exceptItemKeys?: Array<string>;
@@ -34,15 +34,9 @@ const showActions = computed(
   () => props.canEdit || props.canDelete || props.hasCustomActions
 );
 
-const toggleItemsOptions = () => {
-  itemsOptions.value?.classList.toggle('opacity-0');
-  itemsOptions.value?.classList.toggle('-z-50');
-};
-
 const confirmDelete = () => {
   emit('delete', props.item);
   openConfirmationDeleteScreen.value = false;
-  toggleItemsOptions();
 };
 </script>
 
@@ -55,39 +49,32 @@ const confirmDelete = () => {
     >
       {{ value }}
     </td>
-    <td class="flex justify-end items-center relative h-14" v-if="showActions">
+    <td
+      class="flex justify-end items-center gap-1 relative h-14"
+      v-if="showActions"
+    >
       <button
-        class="bg-success text-light px-2 rounded-md"
+        class="bg-success text-light p-1 rounded-md"
         @click="emit('show', props.item)"
+        v-if="props.canShow"
       >
         <EyeIcon class="h-5 w-fit" />
       </button>
       <button
-        class="hover:opacity-50 transition-opacity"
-        @click="toggleItemsOptions"
+        class="bg-primary text-light p-1 rounded-md"
+        @click="emit('edit', props.item)"
+        v-if="props.canEdit"
       >
-        <OptionsIcon class="w-6 h-full" />
+        <PencilIcon class="h-5 w-fit" />
       </button>
-      <div
-        ref="itemsOptions"
-        class="absolute right-8 rounded-lg p-2 grid grid-flow-col gap-2 bg-light shadow-sm border-2 border-gray-light -z-50 opacity-0 transition-all duration-700 md:flex"
+      <button
+        class="bg-danger text-light p-1 rounded-md"
+        @click="openConfirmationDeleteScreen = true"
+        v-if="props.canDelete"
       >
-        <button
-          class="bg-success text-light px-2 rounded-md"
-          @click="emit('edit', props.item)"
-          v-if="props.canEdit"
-        >
-          {{ t('components.tables.tableRow.buttons.edit') }}
-        </button>
-        <button
-          class="bg-danger text-light px-2 rounded-md"
-          @click="openConfirmationDeleteScreen = true"
-          v-if="props.canDelete"
-        >
-          {{ t('components.tables.tableRow.buttons.delete') }}
-        </button>
-        <slot name="customActions" :item="props.item"></slot>
-      </div>
+        <TrashIcon class="h-5 w-fit" />
+      </button>
+      <slot name="customActions" :item="props.item"></slot>
     </td>
     <ConfirmationScreen
       :title="t('components.tables.tableRow.confirmationTitle')"

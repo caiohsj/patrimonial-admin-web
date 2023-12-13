@@ -8,10 +8,11 @@ const { t } = useI18n();
 
 type TableProps = {
   title: string;
-  canCreate: boolean;
+  canCreate?: boolean;
   canBulkCreate?: boolean;
-  canEdit: boolean;
-  canDelete: boolean;
+  canEdit?: boolean;
+  canShow?: boolean;
+  canDelete?: boolean;
   hasCustomActions?: boolean;
   headers: Array<string>;
   items: Array<any>;
@@ -108,6 +109,7 @@ const showItem = (item: any) => {
             :except-item-keys="props.exceptItemsKeys"
             :can-create="props.canCreate"
             :can-edit="props.canEdit"
+            :can-show="$props.canShow"
             :can-delete="props.canDelete"
             :has-custom-actions="props.hasCustomActions"
             @delete="deleteItem"
