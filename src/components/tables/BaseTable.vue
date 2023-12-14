@@ -8,10 +8,11 @@ const { t } = useI18n();
 
 type TableProps = {
   title: string;
-  canCreate: boolean;
+  canCreate?: boolean;
   canBulkCreate?: boolean;
-  canEdit: boolean;
-  canDelete: boolean;
+  canEdit?: boolean;
+  canShow?: boolean;
+  canDelete?: boolean;
   hasCustomActions?: boolean;
   headers: Array<string>;
   items: Array<any>;
@@ -24,6 +25,7 @@ type BaseTableEmits = {
   (event: 'bulkCreate'): void;
   (event: 'edit', value: any): void;
   (event: 'delete', value: any): void;
+  (event: 'show', value: any): void;
 };
 
 const props = defineProps<TableProps>();
@@ -35,6 +37,10 @@ const deleteItem = (item: any) => {
 
 const editItem = (item: any) => {
   emit('edit', item);
+};
+
+const showItem = (item: any) => {
+  emit('show', item);
 };
 </script>
 
@@ -88,7 +94,7 @@ const editItem = (item: any) => {
             <th
               v-for="(item, index) in props.headers"
               :key="index"
-              class="px-4"
+              class="px-4 whitespace-nowrap"
             >
               {{ item }}
             </th>
@@ -103,10 +109,12 @@ const editItem = (item: any) => {
             :except-item-keys="props.exceptItemsKeys"
             :can-create="props.canCreate"
             :can-edit="props.canEdit"
+            :can-show="$props.canShow"
             :can-delete="props.canDelete"
             :has-custom-actions="props.hasCustomActions"
             @delete="deleteItem"
             @edit="editItem"
+            @show="showItem"
           >
             <template #customActions="customActionProps">
               <slot name="customActions" :item="customActionProps.item"></slot>

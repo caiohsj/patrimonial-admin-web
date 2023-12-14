@@ -4,12 +4,16 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useSessionStore } from '@/stores/session';
+import { useAsideNavStore } from '@/stores/AsideNav';
 import { useWindow } from '@/composables/window';
 import MapPinIcon from '@/components/icons/MapPinIcon.vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
+import HamburgerIcon from '@/components/icons/HamburgerIcon.vue';
 
 const { bodyWidth } = useWindow();
 const isMobile = computed(() => bodyWidth.value < 768);
+
+const { toggleNavMobile } = useAsideNavStore();
 
 const router = useRouter();
 const { t } = useI18n();
@@ -49,10 +53,14 @@ watch(hasSession, (value) => {
 </script>
 
 <template>
-  <div
-    v-if="hasSession"
-    class="h-24 flex justify-end md:justify-between items-center px-2"
-  >
+  <div v-if="hasSession" class="h-24 flex justify-between items-center px-2">
+    <div v-if="isMobile">
+      <button class="w-12 h-12" @click="toggleNavMobile">
+        <HamburgerIcon
+          class="w-full h-full text-gray-darken active:text-light"
+        />
+      </button>
+    </div>
     <div>
       <div
         v-if="hasApplicationConfigurations"

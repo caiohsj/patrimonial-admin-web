@@ -27,7 +27,7 @@ import InputWithSelect from '@/components/inputs/InputWithSelect.vue';
 const step = ref(1);
 const branch = ref(0);
 const place = ref(0);
-const images = ref<Array<File>>([]);
+const images = ref<Array<File | string>>([]);
 
 const router = useRouter();
 const { t } = useI18n();
@@ -76,7 +76,9 @@ const onSubmit = handleSubmit((values) => {
       values.date_of_aquisition,
       currencyBRLToNumber(values.aquisition_value),
       values.cost_center_id,
-      values.account_id
+      values.account_id,
+      currencyBRLToNumber(values.residual_value_of_discard),
+      values.lifespan
     )
     .then(() => {
       materialPossessionStore.filters.approved = 0;
@@ -102,9 +104,13 @@ const handleImageSelected = (
       images.value.push(file);
     }
   }
+
+  if (typeof fileList == 'string') images.value.push(fileList);
 };
 
-const getImageSrc = (file: File) => {
+const getImageSrc = (file: File | string) => {
+  if (typeof file == 'string') return file;
+
   return URL.createObjectURL(file);
 };
 
@@ -121,6 +127,7 @@ onMounted(() => {
 
   step.value++;
   setFieldValue('aquisition_value', 'R$ 0');
+  setFieldValue('residual_value_of_discard', 'R$ 0');
 });
 
 watch(branch, (branch_id) => {
@@ -226,6 +233,20 @@ watch(step, (value) => {
           :options="accountsOptions"
           name="account_id"
           :label="t('views.createMaterialPossessionsView.form.labels.account')"
+        />
+        <CurrencyInputGroup
+          :label="
+            t(
+              'views.createMaterialPossessionsView.form.labels.residualValueOfDiscard'
+            )
+          "
+          name="residual_value_of_discard"
+          currency="BRL"
+        />
+        <InputGroup
+          type="number"
+          :label="t('views.createMaterialPossessionsView.form.labels.lifespan')"
+          name="lifespan"
         />
       </div>
 

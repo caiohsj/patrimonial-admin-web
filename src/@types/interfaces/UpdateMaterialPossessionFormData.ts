@@ -6,4 +6,6 @@ export interface UpdateMaterialPossessionFormData {
   aquisition_value: string;
   cost_center_id: number;
   account_id: number;
+  residual_value_of_discard: string;
+  lifespan: number;
 }

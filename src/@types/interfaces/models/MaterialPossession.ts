@@ -10,4 +10,7 @@ export interface MaterialPossession {
   cost_center_description: string;
   account_id: number;
   account_description: string;
+  residual_value_of_discard: number;
+  lifespan: number;
+  images_urls: Array<string>;
 }

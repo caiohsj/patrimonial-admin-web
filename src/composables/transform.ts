@@ -27,7 +27,7 @@ export function useTransform() {
 
     const date = value.split('-');
 
-    return `${date[2]}/${date[1]}/${date[0]}}`;
+    return `${date[2]}/${date[1]}/${date[0]}`;
   };
 
   return { objectToArray, currencyBRLToNumber, numberToCurrencyBRL, parseDate };

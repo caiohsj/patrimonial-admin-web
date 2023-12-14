@@ -182,6 +182,8 @@ export default {
           aquisitionValue: 'Valor de aquisição',
           costCenter: 'Centro de custo',
           account: 'Conta',
+          residualValueOfDiscard: 'Valor residual de descarte',
+          lifespan: 'Vida útil (Em meses)',
         },
         submit: 'Salvar',
         nextStep: 'Avançar',
@@ -202,9 +204,35 @@ export default {
           aquisitionValue: 'Valor de aquisição',
           costCenter: 'Centro de custo',
           account: 'Conta',
+          residualValueOfDiscard: 'Valor residual de descarte',
+          lifespan: 'Vida útil (Em meses)',
         },
         submit: 'Salvar',
         nextStep: 'Avançar',
+      },
+    },
+    showMaterialPossessionsView: {
+      lifespan: '{value} meses',
+      deprecated: 'Vencido',
+      labels: {
+        place: 'Local',
+        branch: 'Filial',
+        brand: 'Marca',
+        template: 'Modelo',
+        dateOfAquisition: 'Data de aquisição',
+        monthlyDepreciationQuota: 'Quota de depreciação mensal',
+        accumulatedDepreciation: 'Depreciação acumulada',
+        bookValue: 'Valor contábil',
+        economicDepreciation: {
+          title: 'Depreciação econômica',
+          residualValueOfDiscard: 'Valor residual de descarte',
+          depreciableValue: 'Valor depreciável',
+          lifespan: 'Vida útil',
+        },
+        taxDepreciation: {
+          title: 'Depreciação fiscal',
+          taxRate: 'Taxa fiscal',
+        },
       },
     },
     bulkCreateMaterialPossessionsView: {
@@ -336,6 +364,13 @@ export default {
       confirmationScreen: {
         confirm: 'Sim',
         cancel: 'Cancelar',
+      },
+    },
+
+    materialPossessions: {
+      depreciationCard: {
+        incompleteData:
+          'Dados incompletos, não foi possível gerar as informações de depreciação',
       },
     },
   },

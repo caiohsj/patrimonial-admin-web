@@ -17,10 +17,11 @@ import BaseButton from '@/components/buttons/BaseButton.vue';
 const step = ref(1);
 const branch = ref(0);
 const place = ref(0);
-const images = ref<Array<File>>([]);
+const images = ref<Array<File | string>>([]);
 const router = useRouter();
 const { t } = useI18n();
-const { handleSubmit, validate } = useForm<BulkCreateMaterialPossessionFormData>();
+const { handleSubmit, validate } =
+  useForm<BulkCreateMaterialPossessionFormData>();
 const materialPossessionStore = useMaterialPossessionStore();
 
 const branchStore = useBranchStore();
@@ -54,15 +55,21 @@ const onSubmit = handleSubmit((values) => {
     });
 });
 
-const handleImageSelected = (fileList: FileList | null | undefined) => {
-  if (fileList) {
+const handleImageSelected = (
+  fileList: FileList | string | null | undefined
+) => {
+  if (fileList && typeof fileList != 'string') {
     for (const file of fileList) {
       images.value.push(file);
     }
   }
+
+  if (typeof fileList == 'string') images.value.push(fileList);
 };
 
-const getImageSrc = (file: File) => {
+const getImageSrc = (file: File | string) => {
+  if (typeof file == 'string') return file;
+
   return URL.createObjectURL(file);
 };
 

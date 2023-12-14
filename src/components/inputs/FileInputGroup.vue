@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import { useWebView } from '@/composables/webview';
 import { ref } from 'vue';
+
+const { isWebView } = useWebView();
 
 const inputFile = ref<HTMLInputElement>();
 
@@ -34,11 +37,41 @@ type FileInputGroupProps = {
 
 const props = defineProps<FileInputGroupProps>();
 const emit = defineEmits<{
-  (event: 'selectedFiled', value: FileList | null | undefined): void;
+  (event: 'selectedFiled', value: FileList | string | null | undefined): void;
 }>();
 
 const selectFile = () => {
   emit('selectedFiled', inputFile.value?.files);
+};
+
+const onClick = (e: Event) => {
+  if (!isWebView()) return;
+
+  e.preventDefault();
+  // @ts-ignore
+  navigator.camera.getPicture(
+    (imageData: string) => {
+      emit('selectedFiled', `data:image/jpeg;base64,${imageData}`);
+    },
+    (err: any) => {
+      console.log(err);
+    },
+    {
+      quality: 100,
+      /* eslint-disable */
+      // @ts-ignore
+      destinationType: Camera.DestinationType.DATA_URL,
+      // @ts-ignore
+      sourceType: Camera.PictureSourceType.CAMERA,
+      // @ts-ignore
+      encodingType: Camera.EncodingType.JPEG,
+      // @ts-ignore
+      mediaType: Camera.MediaType.PICTURE,
+      allowEdit: false,
+      correctOrientation: true,
+      /* eslint-enable */
+    }
+  );
 };
 </script>
 
@@ -49,6 +82,7 @@ const selectFile = () => {
     </label>
     <input
       @change="selectFile"
+      @click="onClick"
       :id="props.name"
       :accept="props.accept"
       :capture="props.capture"

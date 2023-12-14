@@ -60,7 +60,9 @@ const onSubmit = handleSubmit((values) => {
       values.date_of_aquisition,
       currencyBRLToNumber(values.aquisition_value),
       values.cost_center_id,
-      values.account_id
+      values.account_id,
+      currencyBRLToNumber(values.residual_value_of_discard),
+      values.lifespan
     )
     .then(() => {
       router.push({ name: 'materialPossessions' });
@@ -105,6 +107,10 @@ onMounted(async () => {
     account_id: materialPossessionStore.materialPossession?.account_id
       ? materialPossessionStore.materialPossession?.account_id
       : undefined,
+    residual_value_of_discard: numberToCurrencyBRL(
+      materialPossessionStore.materialPossession?.residual_value_of_discard
+    ),
+    lifespan: materialPossessionStore.materialPossession?.lifespan,
   });
 });
 </script>
@@ -173,6 +179,20 @@ onMounted(async () => {
           :options="accountsOptions"
           name="account_id"
           :label="t('views.editMaterialPossessionsView.form.labels.account')"
+        />
+        <CurrencyInputGroup
+          :label="
+            t(
+              'views.editMaterialPossessionsView.form.labels.residualValueOfDiscard'
+            )
+          "
+          name="residual_value_of_discard"
+          currency="BRL"
+        />
+        <InputGroup
+          type="number"
+          :label="t('views.editMaterialPossessionsView.form.labels.lifespan')"
+          name="lifespan"
         />
       </div>
 

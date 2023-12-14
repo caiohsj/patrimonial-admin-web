@@ -1,16 +1,18 @@
 import { defineStore } from 'pinia';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
+import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<MaterialPossession>;
-  materialPossession?: MaterialPossession;
+  materialPossession: Show | null;
   filters: MaterialPossessionFilters;
 };
 
 export const useMaterialPossessionStore = defineStore('material_possession', {
   state: (): MaterialPossessionStoreState => ({
+    materialPossession: null,
     materialPossessions: [],
     filters: {
       approved: 1,
@@ -27,13 +29,15 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       number: string,
       description: string,
       placeId: number,
-      images: Array<File>,
+      images: Array<File | string>,
       brandName: string,
       templateName: string,
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number | null,
-      accountId: number | null
+      accountId: number | null,
+      residualValueOfDiscard: number,
+      lifespan: number | null
     ) {
       const formData = new FormData();
       formData.append('number', number);
@@ -48,13 +52,23 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
 
       formData.append('date_of_aquisition', dateOfAquisition);
       formData.append('aquisition_value', String(aquisitionValue));
+      formData.append(
+        'residual_value_of_discard',
+        String(residualValueOfDiscard)
+      );
+
+      if (lifespan != undefined) formData.append('lifespan', String(lifespan));
 
       if (costCenterId != null)
         formData.append('cost_center_id', String(costCenterId));
 
       if (accountId != null) formData.append('account_id', String(accountId));
 
-      for (const image of images) {
+      for (let image of images) {
+        if (typeof image == 'string') {
+          image = image.replace('data:image/jpeg;base64,', '');
+        }
+
         formData.append('images[]', image);
       }
       return MaterialPossessionResource.create(formData);
@@ -66,7 +80,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       to: number,
       from: number,
       placeId: number,
-      images: Array<File>
+      images: Array<File | string>
     ) {
       const formData = new FormData();
 
@@ -76,7 +90,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       formData.append('from', String(from));
       formData.append('place_id', String(placeId));
 
-      for (const image of images) {
+      for (let image of images) {
+        if (typeof image == 'string') {
+          image = image.replace('data:image/jpeg;base64,', '');
+        }
+
         formData.append('images[]', image);
       }
       return MaterialPossessionResource.bulkCreate(formData);
@@ -90,7 +108,9 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       dateOfAquisition: string,
       aquisitionValue: number,
       costCenterId: number,
-      accountId: number
+      accountId: number,
+      residualValueOfDiscard: number,
+      lifespan: number
     ) {
       return MaterialPossessionResource.update(materialPossessionId, {
         description,
@@ -100,6 +120,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
         aquisition_value: String(aquisitionValue),
         cost_center_id: costCenterId,
         account_id: accountId,
+        residual_value_of_discard: String(residualValueOfDiscard),
+        lifespan,
       });
     },
 
@@ -108,9 +130,10 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       this.fetchMaterialPossessions();
     },
 
-    async fetchMaterialPossession(id: number) {
-      const { data } = await MaterialPossessionResource.show(id);
-      this.materialPossession = data;
+    fetchMaterialPossession(id: number) {
+      MaterialPossessionResource.show(id).then(
+        ({ data }) => (this.materialPossession = data)
+      );
     },
 
     fetchApprovedMaterialPossessions() {

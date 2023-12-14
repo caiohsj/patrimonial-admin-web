@@ -1,3 +1,4 @@
+import type { RouteRecordRaw } from 'vue-router';
 import PendingPaymentView from '@/views/PendingPaymentView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ApplicationConfigurationsView from '@/views/ApplicationConfigurationsView.vue';
@@ -22,7 +23,7 @@ import CreateRolesView from '@/views/CreateRolesView.vue';
 import UsersView from '@/views/UsersView.vue';
 import CreateUsersView from '@/views/CreateUsersView.vue';
 import CreatePasswordView from '@/views/CreatePasswordView.vue';
-import type { RouteRecordRaw } from 'vue-router';
+import ShowMaterialPossessionsView from '@/views/ShowMaterialPossessionsView.vue';
 
 const routes: readonly RouteRecordRaw[] = [
   {
@@ -170,9 +171,18 @@ const routes: readonly RouteRecordRaw[] = [
     },
   },
   {
-    path: '/bens/:id',
+    path: '/bens/:id/edit',
     name: 'editMaterialPossessions',
     component: EditMaterialPossessionsView,
+    meta: {
+      requiresAuth: true,
+      permission: 'update-material-possessions',
+    },
+  },
+  {
+    path: '/bens/:id',
+    name: 'showMaterialPossessions',
+    component: ShowMaterialPossessionsView,
     meta: {
       requiresAuth: true,
       permission: 'update-material-possessions',

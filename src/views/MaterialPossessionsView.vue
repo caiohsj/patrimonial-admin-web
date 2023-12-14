@@ -8,6 +8,7 @@ import { usePermissions } from '@/composables/permissions';
 import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import BaseTable from '@/components/tables/BaseTable.vue';
 import TabsNav from '@/components/navs/TabsNav.vue';
+import CheckIcon from '@/components/icons/CheckIcon.vue';
 
 const { t } = useI18n();
 const { userHasPermission } = usePermissions();
@@ -47,6 +48,15 @@ const navigateToEditMaterialPossession = (
     params: { id: materialPossession.id },
   });
 };
+
+const navigateToShowMaterialPossession = (
+  materialPossession: MaterialPossession
+) => {
+  router.push({
+    name: 'showMaterialPossessions',
+    params: { id: materialPossession.id },
+  });
+};
 </script>
 
 <template>
@@ -76,6 +86,7 @@ const navigateToEditMaterialPossession = (
       :can-create="userHasPermission('create-material-possessions')"
       :can-bulk-create="userHasPermission('bulk-create-material-possessions')"
       :can-edit="userHasPermission('update-material-possessions')"
+      :can-show="userHasPermission('show-material-possessions')"
       :can-delete="userHasPermission('delete-material-possessions')"
       :has-custom-actions="true"
       :headers="headers"
@@ -85,6 +96,8 @@ const navigateToEditMaterialPossession = (
         'approved',
         'account_id',
         'cost_center_id',
+        'residual_value_of_discard',
+        'lifespan',
         'images',
       ]"
       :total="materialPossessions.length"
@@ -92,17 +105,18 @@ const navigateToEditMaterialPossession = (
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
       @delete="deleteMaterialPossession"
       @edit="navigateToEditMaterialPossession"
+      @show="navigateToShowMaterialPossession"
     >
       <template #customActions="customActionProps">
         <button
-          class="bg-primary text-light px-2 rounded-md"
+          class="bg-sky-500 text-light p-1 rounded-md"
           @click="approveMaterialPossession(customActionProps.item.id)"
           v-if="
             userHasPermission('approve-material-possessions') &&
             customActionProps.item.approved === false
           "
         >
-          {{ t('views.materialPossessionsView.table.approve') }}
+          <CheckIcon class="h-5 w-5" />
         </button>
       </template>
     </BaseTable>
