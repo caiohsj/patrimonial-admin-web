@@ -38,14 +38,14 @@ const handleDisapprove = (id: number) => {
   userToDisapprove.value = id;
 };
 
-const approveUser = async () => {
-  await userStore.approveUser(userToApprove.value);
+const approveUser = () => {
+  userStore.approveUser(userToApprove.value);
   openConfirmationApproveScreen.value = false;
   userToApprove.value = 0;
 };
 
-const disapproveUser = async () => {
-  await userStore.disapproveUser(userToDisapprove.value);
+const disapproveUser = () => {
+  userStore.disapproveUser(userToDisapprove.value);
   openConfirmationDisapproveScreen.value = false;
   userToDisapprove.value = 0;
 };
