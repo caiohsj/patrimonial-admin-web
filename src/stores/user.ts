@@ -60,5 +60,10 @@ export const useUserStore = defineStore('user', {
         token
       );
     },
+
+    async deleteUser(id: number) {
+      await UserResource.delete(id);
+      this.fetchUsers();
+    },
   },
 });

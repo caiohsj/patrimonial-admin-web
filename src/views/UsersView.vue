@@ -10,6 +10,8 @@ import ConfirmationScreen from '@/components/feedbacks/ConfirmationScreen.vue';
 import CheckIcon from '@/components/icons/CheckIcon.vue';
 import BlockIcon from '@/components/icons/BlockIcon.vue';
 
+import type { User } from '@/@types/interfaces/models/user';
+
 const { t } = useI18n();
 
 const userStore = useUserStore();
@@ -36,6 +38,10 @@ const handleApprove = (id: number) => {
 const handleDisapprove = (id: number) => {
   openConfirmationDisapproveScreen.value = true;
   userToDisapprove.value = id;
+};
+
+const handleDelete = (user: User) => {
+  userStore.deleteUser(user.id);
 };
 
 const approveUser = () => {
@@ -76,13 +82,14 @@ onMounted(() => userStore.fetchUsers());
       :title="t('views.usersView.table.title')"
       :can-create="userHasPermission('create-users')"
       :can-edit="false"
-      :can-delete="false"
+      :can-delete="userHasPermission('delete-users')"
       :has-custom-actions="true"
       :headers="headers"
       :items="users"
       :except-items-keys="['approved']"
       :total="users.length"
       @create="$router.push({ name: 'createUsers' })"
+      @delete="handleDelete"
     >
       <template #customActions="customActionProps">
         <button

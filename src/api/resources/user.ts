@@ -21,6 +21,9 @@ export default {
   create(params: CreateUserFormData) {
     return client.post('/api/v1/users', params, true);
   },
+  delete(id: number) {
+    return client.delete(`/api/v1/users/${id}`, true);
+  },
   updatePassword(
     password: string,
     password_confirmation: string,
