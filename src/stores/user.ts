@@ -44,6 +44,11 @@ export const useUserStore = defineStore('user', {
       this.fetchApprovedUsers();
     },
 
+    async disapproveUser(id: number) {
+      await UserResource.disapprove(id);
+      this.fetchDisapprovedUsers();
+    },
+
     createPassword(
       password: string,
       password_confirmation: string,

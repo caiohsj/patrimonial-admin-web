@@ -86,7 +86,9 @@ const logout = () => {
   router.push({ name: 'login' });
 };
 
-onMounted(() => setNavMobileRef(navMobile.value));
+onMounted(() => {
+  setNavMobileRef(navMobile.value);
+});
 </script>
 
 <template>

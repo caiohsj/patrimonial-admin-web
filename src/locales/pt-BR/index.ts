@@ -289,6 +289,9 @@ export default {
           branch_name: 'Filial',
         },
       },
+      confirmationTitleApproveUser: 'Deseja realmente aprovar este usuário?',
+      confirmationTitleDisapproveUser:
+        'Deseja realmente desaprovar este usuário?',
     },
     createUsersView: {
       form: {

@@ -50,7 +50,7 @@ const confirmDelete = () => {
       {{ value }}
     </td>
     <td
-      class="flex justify-end items-center gap-1 relative h-14"
+      class="flex justify-end items-center gap-1 relative h-14 pr-1"
       v-if="showActions"
     >
       <slot name="customActions" :item="props.item"></slot>

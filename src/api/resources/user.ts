@@ -35,4 +35,7 @@ export default {
   approve(id: number) {
     return client.put(`/api/v1/users/${id}/approve`, null, true);
   },
+  disapprove(id: number) {
+    return client.put(`/api/v1/users/${id}/disapprove`, null, true);
+  },
 };
