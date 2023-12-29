@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import { computed, onBeforeMount } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n';
 import { useTransform } from '@/composables/transform';
 import DepreciationCard from '@/components/MaterialPossessions/DepreciationCard.vue';
-import { useI18n } from 'vue-i18n';
+import ImageDialog from '@/components/dialogs/ImageDialog.vue';
 
+const openImageDialog = ref(false);
+const currentImageUrl = ref('');
 const { t } = useI18n();
 const route = useRoute();
 const { numberToCurrencyBRL, parseDate } = useTransform();
@@ -16,7 +19,15 @@ const { materialPossession } = storeToRefs(materialPossessionStore);
 
 const materialPossessionId = computed(() => Number(route.params.id));
 
-const openImage = (url: string) => window.open(url, '_blank');
+const openImage = (url: string) => {
+  currentImageUrl.value = url;
+  openImageDialog.value = true;
+};
+
+const closeImage = () => {
+  currentImageUrl.value = '';
+  openImageDialog.value = false;
+};
 
 onBeforeMount(() => {
   materialPossessionStore.fetchMaterialPossession(materialPossessionId.value);
@@ -25,6 +36,13 @@ onBeforeMount(() => {
 
 <template>
   <div>
+    <ImageDialog
+      :alt="materialPossession?.description"
+      :src="currentImageUrl"
+      :open="openImageDialog"
+      @close="closeImage"
+    />
+
     <div
       class="flex flex-col bg-light rounded-lg p-2 shadow-md md:flex-row md:p-8"
     >
