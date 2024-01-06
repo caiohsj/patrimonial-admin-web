@@ -145,6 +145,12 @@ onMounted(() => {
             {{ currentUser?.role.name }}
           </span>
           <a
+            @click="navigate('userProfile')"
+            class="cursor-pointer mt-8 py-1 text-light rounded-bl-lg rounded-br-lg"
+          >
+            {{ t('components.headers.appHeader.profile') }}
+          </a>
+          <a
             @click="logout"
             class="bg-danger cursor-pointer mt-8 py-1 text-light rounded-bl-lg rounded-br-lg"
           >

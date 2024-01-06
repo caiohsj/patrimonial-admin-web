@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onBeforeMount, computed, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
@@ -29,6 +29,7 @@ const { handleSubmit, validate, values, setValues } =
 const { currencyBRLToNumber, numberToCurrencyBRL, parseDate } = useTransform();
 
 const materialPossessionStore = useMaterialPossessionStore();
+const { materialPossession } = storeToRefs(materialPossessionStore);
 
 const materialPossessionId = computed(() => Number(route.params.id));
 
@@ -86,31 +87,29 @@ watch(step, (value) => {
   }
 });
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await materialPossessionStore.fetchMaterialPossession(
     materialPossessionId.value
   );
 
   setValues({
-    description: materialPossessionStore.materialPossession?.description,
-    date_of_aquisition: parseDate(
-      materialPossessionStore.materialPossession?.date_of_aquisition
-    ),
+    description: materialPossession.value?.description,
+    date_of_aquisition: parseDate(materialPossession.value?.date_of_aquisition),
     aquisition_value: numberToCurrencyBRL(
-      materialPossessionStore.materialPossession?.aquisition_value
+      materialPossession.value?.aquisition_value
     ),
-    brand_name: materialPossessionStore.materialPossession?.brand_name,
-    template_name: materialPossessionStore.materialPossession?.template_name,
-    cost_center_id: materialPossessionStore.materialPossession?.cost_center_id
-      ? materialPossessionStore.materialPossession?.cost_center_id
+    brand_name: materialPossession.value?.brand_name,
+    template_name: materialPossession.value?.template_name,
+    cost_center_id: materialPossession.value?.cost_center_id
+      ? materialPossession.value?.cost_center_id
       : undefined,
-    account_id: materialPossessionStore.materialPossession?.account_id
-      ? materialPossessionStore.materialPossession?.account_id
+    account_id: materialPossession.value?.account_id
+      ? materialPossession.value?.account_id
       : undefined,
     residual_value_of_discard: numberToCurrencyBRL(
-      materialPossessionStore.materialPossession?.residual_value_of_discard
+      materialPossession.value?.residual_value_of_discard
     ),
-    lifespan: materialPossessionStore.materialPossession?.lifespan,
+    lifespan: materialPossession.value?.lifespan,
   });
 });
 </script>

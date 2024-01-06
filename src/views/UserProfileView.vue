@@ -53,15 +53,20 @@ onMounted(() => {
 <template>
   <div>
     <div class="user-profile-view flex bg-light p-10 w-full rounded-md">
-      <form class="flex w-full" @submit="onSubmit">
-        <div class="flex flex-col w-fit items-center pr-10">
+      <form
+        class="flex flex-col gap-12 items-center w-full md:flex-row md:gap-0"
+        @submit="onSubmit"
+      >
+        <div class="flex flex-col w-fit items-center md:pr-10">
           <SafeImage
             :src="userAvatar"
             :alt="t('views.userProfileView.avatarAlt')"
             placeholder="/images/Avatar.jpg"
           />
           <span class="text-xl font-baloo2-bold">{{ currentUser?.name }}</span>
-          <span class="text-gray-darken mb-4">{{ currentUser?.role.name }}</span>
+          <span class="text-gray-darken mb-4">{{
+            currentUser?.role.name
+          }}</span>
 
           <FileInputGroup
             @selected-filed="handleImageSelected"

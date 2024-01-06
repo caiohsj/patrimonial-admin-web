@@ -329,7 +329,7 @@ export default {
       contact: 'Entre em contato',
     },
     userProfileView: {
-      title: 'Meu perfil',
+      title: 'Meus dados',
       avatarAlt: 'Foto do perfil',
       form: {
         submit: 'Salvar',
