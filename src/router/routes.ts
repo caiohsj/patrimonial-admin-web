@@ -24,7 +24,7 @@ import UsersView from '@/views/UsersView.vue';
 import CreateUsersView from '@/views/CreateUsersView.vue';
 import CreatePasswordView from '@/views/CreatePasswordView.vue';
 import ShowMaterialPossessionsView from '@/views/ShowMaterialPossessionsView.vue';
-import UserProfile from '@/views/UserProfile.vue';
+import UserProfileView from '@/views/UserProfileView.vue';
 
 const routes: readonly RouteRecordRaw[] = [
   {
@@ -48,7 +48,7 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/perfil',
     name: 'userProfile',
-    component: UserProfile,
+    component: UserProfileView,
     meta: {
       requiresAuth: true,
     },
