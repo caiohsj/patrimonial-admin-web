@@ -35,6 +35,13 @@ export default {
       true
     );
   },
+  updateProfile(name: string, email: string, avatar: string) {
+    return client.put(
+      '/api/v1/users/update_profile',
+      { name, email, avatar },
+      true
+    );
+  },
   approve(id: number) {
     return client.put(`/api/v1/users/${id}/approve`, null, true);
   },

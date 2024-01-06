@@ -13,6 +13,7 @@ instance.interceptors.request.use((config) => {
 
   const sessionStore = useSessionStore();
   config.headers.Authorization = `Bearer ${sessionStore.token}`;
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
   return config;
 });

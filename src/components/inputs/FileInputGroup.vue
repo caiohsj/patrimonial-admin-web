@@ -2,12 +2,23 @@
 import { useWebView } from '@/composables/webview';
 import { ref } from 'vue';
 
+type FileInputGroupProps = {
+  label: string;
+  name: string;
+  multiple?: boolean;
+  capture?: 'user' | 'environment';
+  accept?: string;
+  size: 'small' | 'large';
+};
+
 const { isWebView } = useWebView();
-
 const inputFile = ref<HTMLInputElement>();
+const props = defineProps<FileInputGroupProps>();
+const emit = defineEmits<{
+  (event: 'selectedFiled', value: FileList | string | null | undefined): void;
+}>();
 
-const defaultInputClasses = [
-  'h-16',
+const defaultLabelClasses = [
   'rounded-md',
   'shadow-lg',
   'cursor-pointer',
@@ -25,20 +36,9 @@ const defaultInputClasses = [
   'border-2',
   'hover:bg-white',
   'hover:text-success',
+  { 'h-10': props.size == 'small' },
+  { 'h-16': props.size == 'large' },
 ];
-
-type FileInputGroupProps = {
-  label: string;
-  name: string;
-  multiple?: boolean;
-  capture?: 'user' | 'environment';
-  accept?: string;
-};
-
-const props = defineProps<FileInputGroupProps>();
-const emit = defineEmits<{
-  (event: 'selectedFiled', value: FileList | string | null | undefined): void;
-}>();
 
 const selectFile = () => {
   emit('selectedFiled', inputFile.value?.files);
@@ -76,8 +76,8 @@ const onClick = (e: Event) => {
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <label :for="props.name" :class="defaultInputClasses">
+  <div class="file-input-group flex flex-col">
+    <label :for="props.name" :class="defaultLabelClasses">
       {{ props.label }}
     </label>
     <input

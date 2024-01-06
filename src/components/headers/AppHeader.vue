@@ -9,6 +9,7 @@ import { useWindow } from '@/composables/window';
 import MapPinIcon from '@/components/icons/MapPinIcon.vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
 import HamburgerIcon from '@/components/icons/HamburgerIcon.vue';
+import SafeImage from '@/components/common/SafeImage.vue';
 
 const { bodyWidth } = useWindow();
 const isMobile = computed(() => bodyWidth.value < 768);
@@ -18,7 +19,7 @@ const { toggleNavMobile } = useAsideNavStore();
 const router = useRouter();
 const { t } = useI18n();
 
-const settingsContainer = ref<HTMLDivElement | null>(null);
+const settingsContainer = ref<HTMLDivElement>();
 
 const sessionStore = useSessionStore();
 const {
@@ -35,11 +36,13 @@ const logout = () => {
 };
 
 const toggleSettings = () => {
-  if (settingsContainer.value != null) {
-    const opacity = settingsContainer.value.style.opacity;
-    settingsContainer.value.style.opacity =
-      opacity == '0' || opacity == '' ? '1' : '0';
-  }
+  settingsContainer.value?.classList.toggle('hidden');
+  settingsContainer.value?.classList.toggle('flex');
+};
+
+const navigate = (routeName: string) => {
+  toggleSettings();
+  router.push({ name: routeName });
 };
 
 const changeApplicationConfigurations = () => {
@@ -94,13 +97,14 @@ watch(hasSession, (value) => {
       v-if="!isMobile"
     >
       <a
-        class="rounded-full bg-light p-2 hover:opacity-60"
+        class="avatar-link bg-light p-1 hover:opacity-60"
         @click="toggleSettings"
       >
-        <img
-          src="@/assets/images/Avatar.jpg"
-          :alt="currentUser?.name"
-          class="h-8 rounded-full"
+        <SafeImage
+          :src="currentUser?.avatar"
+          :alt="t('components.headers.appHeader.avatarAlt')"
+          class="h-12"
+          placeholder="/public/images/Avatar.jpg"
         />
       </a>
       <div class="font-baloo2-bold flex flex-col">
@@ -111,8 +115,14 @@ watch(hasSession, (value) => {
       </div>
       <div
         ref="settingsContainer"
-        class="settings cursor-default absolute top-16 right-2 bg-white px-6 py-4 w-56 rounded-md shadow-lg font-baloo2-bold"
+        class="settings hidden flex-col cursor-default absolute top-16 right-2 bg-white px-6 py-4 w-56 rounded-md shadow-lg font-baloo2-bold"
       >
+        <a
+          @click="navigate('userProfile')"
+          class="hover:text-success cursor-pointer"
+        >
+          {{ t('components.headers.appHeader.profile') }}
+        </a>
         <a @click="logout" class="hover:text-success cursor-pointer">
           {{ t('components.headers.appHeader.logout') }}
         </a>
@@ -121,10 +131,19 @@ watch(hasSession, (value) => {
   </div>
 </template>
 
-<style lang="css" scoped>
-.profile .settings {
-  opacity: 0;
-  z-index: 2;
-  transition: all 0.7s;
+<style lang="scss" scoped>
+.profile {
+  .settings {
+    z-index: 2;
+    transition: all 0.7s;
+  }
+
+  .avatar-link {
+    clip-path: circle();
+
+    .safe-image {
+      clip-path: circle();
+    }
+  }
 }
 </style>
