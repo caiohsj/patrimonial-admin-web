@@ -57,7 +57,7 @@ onMounted(() => {
         <SafeImage
           :src="userAvatar"
           :alt="t('views.userProfileView.avatarAlt')"
-          placeholder="/public/images/Avatar.jpg"
+          placeholder="/images/Avatar.jpg"
         />
         <span class="text-xl font-baloo2-bold">{{ currentUser?.name }}</span>
         <span class="text-gray-darken mb-4">{{ currentUser?.role.name }}</span>

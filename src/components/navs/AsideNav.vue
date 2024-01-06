@@ -136,7 +136,7 @@ onMounted(() => {
             :src="currentUser?.avatar"
             :alt="t('components.headers.appHeader.avatarAlt')"
             class="h-12 shadow-lg rounded-full border-white border-4"
-            placeholder="/public/images/Avatar.jpg"
+            placeholder="/images/Avatar.jpg"
           />
         </div>
         <div class="font-baloo2-bold flex flex-col text-center w-full">

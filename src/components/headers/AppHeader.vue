@@ -104,7 +104,7 @@ watch(hasSession, (value) => {
           :src="currentUser?.avatar"
           :alt="t('components.headers.appHeader.avatarAlt')"
           class="h-12"
-          placeholder="/public/images/Avatar.jpg"
+          placeholder="/images/Avatar.jpg"
         />
       </a>
       <div class="font-baloo2-bold flex flex-col">
