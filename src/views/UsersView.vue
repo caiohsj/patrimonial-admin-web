@@ -7,6 +7,10 @@ import { usePermissions } from '@/composables/permissions';
 import BaseTable from '@/components/tables/BaseTable.vue';
 import TabsNav from '@/components/navs/TabsNav.vue';
 import ConfirmationScreen from '@/components/feedbacks/ConfirmationScreen.vue';
+import CheckIcon from '@/components/icons/CheckIcon.vue';
+import BlockIcon from '@/components/icons/BlockIcon.vue';
+
+import type { User } from '@/@types/interfaces/models/user';
 
 const { t } = useI18n();
 
@@ -14,7 +18,9 @@ const userStore = useUserStore();
 const { users, filters } = storeToRefs(userStore);
 const { userHasPermission } = usePermissions();
 const openConfirmationApproveScreen = ref<boolean>(false);
+const openConfirmationDisapproveScreen = ref<boolean>(false);
 const userToApprove = ref(0);
+const userToDisapprove = ref(0);
 
 const headers = computed(() => [
   t('views.usersView.table.headers.id'),
@@ -29,10 +35,25 @@ const handleApprove = (id: number) => {
   userToApprove.value = id;
 };
 
-const approveUser = async () => {
-  await userStore.approveUser(userToApprove.value);
+const handleDisapprove = (id: number) => {
+  openConfirmationDisapproveScreen.value = true;
+  userToDisapprove.value = id;
+};
+
+const handleDelete = (user: User) => {
+  userStore.deleteUser(user.id);
+};
+
+const approveUser = () => {
+  userStore.approveUser(userToApprove.value);
   openConfirmationApproveScreen.value = false;
   userToApprove.value = 0;
+};
+
+const disapproveUser = () => {
+  userStore.disapproveUser(userToDisapprove.value);
+  openConfirmationDisapproveScreen.value = false;
+  userToDisapprove.value = 0;
 };
 
 onMounted(() => userStore.fetchUsers());
@@ -61,29 +82,45 @@ onMounted(() => userStore.fetchUsers());
       :title="t('views.usersView.table.title')"
       :can-create="userHasPermission('create-users')"
       :can-edit="false"
-      :can-delete="false"
-      :has-custom-actions="filters.approved === 0"
+      :can-delete="userHasPermission('delete-users')"
+      :has-custom-actions="true"
       :headers="headers"
       :items="users"
       :except-items-keys="['approved']"
       :total="users.length"
       @create="$router.push({ name: 'createUsers' })"
+      @delete="handleDelete"
     >
       <template #customActions="customActionProps">
         <button
-          class="bg-primary text-light px-2 rounded-md"
+          class="bg-sky-500 text-light p-1 rounded-md"
           @click="handleApprove(customActionProps.item.id)"
           v-if="
             userHasPermission('approve-users') &&
             customActionProps.item.approved === false
           "
         >
-          {{ t('views.materialPossessionsView.table.approve') }}
+          <CheckIcon class="h-5 w-5" />
+        </button>
+        <button
+          class="bg-gray-darken text-light p-1 rounded-md"
+          @click="handleDisapprove(customActionProps.item.id)"
+          v-if="
+            userHasPermission('disapprove-users') &&
+            customActionProps.item.approved === true
+          "
+        >
+          <BlockIcon class="h-5 w-5" />
         </button>
         <ConfirmationScreen
-          :title="t('components.tables.tableRow.confirmationTitle')"
+          :title="t('views.usersView.confirmationTitleApproveUser')"
           @confirm="approveUser"
           v-model="openConfirmationApproveScreen"
+        />
+        <ConfirmationScreen
+          :title="t('views.usersView.confirmationTitleDisapproveUser')"
+          @confirm="disapproveUser"
+          v-model="openConfirmationDisapproveScreen"
         />
       </template>
     </BaseTable>

@@ -289,6 +289,9 @@ export default {
           branch_name: 'Filial',
         },
       },
+      confirmationTitleApproveUser: 'Deseja realmente aprovar este usuário?',
+      confirmationTitleDisapproveUser:
+        'Deseja realmente desaprovar este usuário?',
     },
     createUsersView: {
       form: {
@@ -325,12 +328,26 @@ export default {
       },
       contact: 'Entre em contato',
     },
+    userProfileView: {
+      title: 'Meu perfil',
+      avatarAlt: 'Foto do perfil',
+      form: {
+        submit: 'Salvar',
+        labels: {
+          avatar: 'Nova foto',
+          name: 'Nome',
+          email: 'Email',
+        },
+      },
+    },
   },
   components: {
     headers: {
       appHeader: {
+        avatarAlt: 'Foto de perfil',
         branch: 'Filial',
         place: 'Local',
+        profile: 'Perfil',
         logout: 'Sair',
       },
     },

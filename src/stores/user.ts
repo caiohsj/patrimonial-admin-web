@@ -3,6 +3,7 @@ import type { User } from '@/@types/interfaces/models/user';
 import type { CreateUserFormData } from '@/@types/interfaces/CreateUserFormData';
 import type { UserFilters } from '@/@types/interfaces/api/UserFilters';
 import UserResource from '@/api/resources/user';
+import { useTransform } from '@/composables/transform';
 
 type UserStoreState = {
   users: Array<User>;
@@ -44,6 +45,11 @@ export const useUserStore = defineStore('user', {
       this.fetchApprovedUsers();
     },
 
+    async disapproveUser(id: number) {
+      await UserResource.disapprove(id);
+      this.fetchDisapprovedUsers();
+    },
+
     createPassword(
       password: string,
       password_confirmation: string,
@@ -54,6 +60,24 @@ export const useUserStore = defineStore('user', {
         password_confirmation,
         token
       );
+    },
+
+    async updateProfile(name: string, email: string, avatar: File | string) {
+      const { fileToBase64 } = useTransform();
+
+      const avatarBase64 =
+        avatar instanceof File ? await fileToBase64(avatar) : avatar;
+
+      return UserResource.updateProfile(
+        name,
+        email,
+        avatarBase64.replace('data:image/jpeg;base64,', '')
+      );
+    },
+
+    async deleteUser(id: number) {
+      await UserResource.delete(id);
+      this.fetchUsers();
     },
   },
 });

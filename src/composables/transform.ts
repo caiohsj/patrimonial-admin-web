@@ -30,5 +30,22 @@ export function useTransform() {
     return `${date[2]}/${date[1]}/${date[0]}`;
   };
 
-  return { objectToArray, currencyBRLToNumber, numberToCurrencyBRL, parseDate };
+  const fileToBase64 = (file: File) => {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (typeof reader.result == 'string') resolve(reader.result);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  return {
+    objectToArray,
+    currencyBRLToNumber,
+    numberToCurrencyBRL,
+    parseDate,
+    fileToBase64,
+  };
 }
