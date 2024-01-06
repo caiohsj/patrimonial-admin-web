@@ -9,6 +9,7 @@ import { usePermissions } from '@/composables/permissions';
 import { useWindow } from '@/composables/window';
 import CloseIcon from '@/components/icons/CloseIcon.vue';
 import MenuItem from './MenuItem.vue';
+import SafeImage from '@/components/common/SafeImage.vue';
 
 const navMobile = ref<HTMLDivElement>();
 
@@ -131,10 +132,11 @@ onMounted(() => {
       </div>
       <div class="flex relative bg-gray-darken pt-8 mb-6 rounded-lg">
         <div class="absolute flex justify-center -top-6 w-full">
-          <img
-            src="@/assets/images/Avatar.jpg"
-            :alt="currentUser?.name"
+          <SafeImage
+            :src="currentUser?.avatar"
+            :alt="t('components.headers.appHeader.avatarAlt')"
             class="h-12 shadow-lg rounded-full border-white border-4"
+            placeholder="/public/images/Avatar.jpg"
           />
         </div>
         <div class="font-baloo2-bold flex flex-col text-center w-full">
