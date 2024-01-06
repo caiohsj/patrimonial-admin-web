@@ -51,53 +51,55 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="user-profile-view flex bg-light p-10 w-full rounded-md">
-    <form class="flex w-full" @submit="onSubmit">
-      <div class="flex flex-col w-fit items-center pr-10">
-        <SafeImage
-          :src="userAvatar"
-          :alt="t('views.userProfileView.avatarAlt')"
-          placeholder="/images/Avatar.jpg"
-        />
-        <span class="text-xl font-baloo2-bold">{{ currentUser?.name }}</span>
-        <span class="text-gray-darken mb-4">{{ currentUser?.role.name }}</span>
+  <div>
+    <div class="user-profile-view flex bg-light p-10 w-full rounded-md">
+      <form class="flex w-full" @submit="onSubmit">
+        <div class="flex flex-col w-fit items-center pr-10">
+          <SafeImage
+            :src="userAvatar"
+            :alt="t('views.userProfileView.avatarAlt')"
+            placeholder="/images/Avatar.jpg"
+          />
+          <span class="text-xl font-baloo2-bold">{{ currentUser?.name }}</span>
+          <span class="text-gray-darken mb-4">{{ currentUser?.role.name }}</span>
 
-        <FileInputGroup
-          @selected-filed="handleImageSelected"
-          :multiple="true"
-          :label="t('views.userProfileView.form.labels.avatar')"
-          accept="image/*"
-          capture="user"
-          name="images"
-          rules="required"
-          size="small"
-        />
-      </div>
-
-      <div class="flex flex-col gap-4 w-full" @submit="onSubmit">
-        <div class="flex justify-between">
-          <span class="text-lg font-baloo2-bold">{{
-            t('views.userProfileView.title')
-          }}</span>
-
-          <BaseButton class="px-4" type="submit">{{
-            t('views.userProfileView.form.submit')
-          }}</BaseButton>
+          <FileInputGroup
+            @selected-filed="handleImageSelected"
+            :multiple="true"
+            :label="t('views.userProfileView.form.labels.avatar')"
+            accept="image/*"
+            capture="user"
+            name="images"
+            rules="required"
+            size="small"
+          />
         </div>
 
-        <InputGroup
-          :label="t('views.userProfileView.form.labels.name')"
-          name="name"
-          type="text"
-        />
+        <div class="flex flex-col gap-4 w-full" @submit="onSubmit">
+          <div class="flex justify-between">
+            <span class="text-lg font-baloo2-bold">{{
+              t('views.userProfileView.title')
+            }}</span>
 
-        <InputGroup
-          :label="t('views.userProfileView.form.labels.email')"
-          name="email"
-          type="email"
-        />
-      </div>
-    </form>
+            <BaseButton class="px-4" type="submit">{{
+              t('views.userProfileView.form.submit')
+            }}</BaseButton>
+          </div>
+
+          <InputGroup
+            :label="t('views.userProfileView.form.labels.name')"
+            name="name"
+            type="text"
+          />
+
+          <InputGroup
+            :label="t('views.userProfileView.form.labels.email')"
+            name="email"
+            type="email"
+          />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
