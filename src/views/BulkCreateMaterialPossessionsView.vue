@@ -158,14 +158,15 @@ watch(branch, (branch_id) => {
         <FileInputGroup
           @selected-filed="handleImageSelected"
           :multiple="true"
-          accept="image/*"
-          capture="user"
           :label="
             t('views.bulkCreateMaterialPossessionsView.form.labels.images')
           "
+          accept="image/*"
+          capture="user"
           name="images"
           rules="required"
           class="mb-6"
+          size="large"
         />
         <div>
           <h1 class="font-baloo2-bold text-dark">
