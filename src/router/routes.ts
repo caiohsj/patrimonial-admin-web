@@ -25,6 +25,7 @@ import CreateUsersView from '@/views/CreateUsersView.vue';
 import CreatePasswordView from '@/views/CreatePasswordView.vue';
 import ShowMaterialPossessionsView from '@/views/ShowMaterialPossessionsView.vue';
 import UserProfileView from '@/views/UserProfileView.vue';
+import SettingsView from '@/views/SettingsView.vue';
 
 const routes: readonly RouteRecordRaw[] = [
   {
@@ -38,12 +39,17 @@ const routes: readonly RouteRecordRaw[] = [
     component: PendingPaymentView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
     },
   },
   {
     path: '/entrar',
     name: 'login',
     component: LoginView,
+    meta: {
+      requiresAuth: false,
+      needsAppBar: true,
+    },
   },
   {
     path: '/perfil',
@@ -51,6 +57,16 @@ const routes: readonly RouteRecordRaw[] = [
     component: UserProfileView,
     meta: {
       requiresAuth: true,
+      needsAppBar: false,
+    },
+  },
+  {
+    path: '/configurações',
+    name: 'settings',
+    component: SettingsView,
+    meta: {
+      requiresAuth: true,
+      needsAppBar: false,
     },
   },
   {
@@ -59,6 +75,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: ApplicationConfigurationsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'application-configurations',
     },
   },
@@ -68,6 +85,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: BranchesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-branches',
     },
   },
@@ -77,6 +95,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditBranchesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-branches',
     },
   },
@@ -86,6 +105,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateBranchesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-branches',
     },
   },
@@ -95,6 +115,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: PlacesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-places',
     },
   },
@@ -104,6 +125,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditPlacesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-places',
     },
   },
@@ -113,6 +135,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreatePlacesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-places',
     },
   },
@@ -122,6 +145,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: AccountsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-accounts',
     },
   },
@@ -131,6 +155,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditAccountsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-accounts',
     },
   },
@@ -140,6 +165,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateAccountsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-accounts',
     },
   },
@@ -149,6 +175,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CostCentersView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-cost-centers',
     },
   },
@@ -158,6 +185,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateCostCentersView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-cost-centers',
     },
   },
@@ -167,6 +195,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditCostCentersView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-cost-centers',
     },
   },
@@ -176,6 +205,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: MaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-material-possessions',
     },
   },
@@ -185,6 +215,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: EditMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-material-possessions',
     },
   },
@@ -194,6 +225,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: ShowMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'update-material-possessions',
     },
   },
@@ -203,6 +235,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-material-possessions',
     },
   },
@@ -212,6 +245,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: BulkCreateMaterialPossessionsView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'bulk-create-material-possessions',
     },
   },
@@ -221,6 +255,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: RolesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'list-roles',
     },
   },
@@ -230,6 +265,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateRolesView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-roles',
     },
   },
@@ -239,6 +275,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: UsersView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-roles',
     },
   },
@@ -248,6 +285,7 @@ const routes: readonly RouteRecordRaw[] = [
     component: CreateUsersView,
     meta: {
       requiresAuth: true,
+      needsAppBar: true,
       permission: 'create-users',
     },
   },
