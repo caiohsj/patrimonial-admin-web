@@ -1,20 +1,12 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useSessionStore } from '@/stores/session';
-import { useAsideNavStore } from '@/stores/AsideNav';
-import { useWindow } from '@/composables/window';
 import MapPinIcon from '@/components/icons/MapPinIcon.vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
-import HamburgerIcon from '@/components/icons/HamburgerIcon.vue';
 import SafeImage from '@/components/common/SafeImage.vue';
-
-const { bodyWidth } = useWindow();
-const isMobile = computed(() => bodyWidth.value < 768);
-
-const { toggleNavMobile } = useAsideNavStore();
 
 const router = useRouter();
 const { t } = useI18n();
@@ -56,22 +48,15 @@ watch(hasSession, (value) => {
 </script>
 
 <template>
-  <div v-if="hasSession" class="h-24 flex justify-between items-center px-2">
-    <div v-if="isMobile">
-      <button class="w-12 h-12" @click="toggleNavMobile">
-        <HamburgerIcon
-          class="w-full h-full text-gray-darken active:text-light"
-        />
-      </button>
-    </div>
-    <div>
+  <div v-if="hasSession" class="h-24 flex justify-between items-center px-8">
+    <div class="w-full md:w-fit">
       <div
         v-if="hasApplicationConfigurations"
         @click="changeApplicationConfigurations"
         class="flex bg-white py-2 rounded-md hover:opacity-60 cursor-pointer text-sm md:text-base shadow-lg"
       >
         <span
-          class="flex flex-col items-start px-8 justify-center border-gray-light border-r-2"
+          class="w-full flex flex-col items-start px-8 justify-center border-gray-light border-r-2"
         >
           <div class="flex items-center font-baloo2-bold">
             <span>{{ t('components.headers.appHeader.branch') }}</span>
@@ -81,7 +66,7 @@ watch(hasSession, (value) => {
             {{ currentBranch?.description }}
           </span>
         </span>
-        <span class="flex flex-col items-start px-8 justify-center">
+        <span class="w-full flex flex-col items-start px-8 justify-center">
           <div class="flex items-center font-baloo2-bold">
             <span>{{ t('components.headers.appHeader.place') }}</span>
             <HomeIcon class="h-4 w-4 ml-2 text-success" />
@@ -93,8 +78,7 @@ watch(hasSession, (value) => {
       </div>
     </div>
     <div
-      class="profile flex items-center gap-2 hover:cursor-pointer relative"
-      v-if="!isMobile"
+      class="profile hidden items-center gap-2 hover:cursor-pointer relative md:flex"
     >
       <a
         class="avatar-link bg-light p-1 hover:opacity-60"
