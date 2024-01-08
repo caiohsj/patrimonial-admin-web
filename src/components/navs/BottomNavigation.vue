@@ -26,14 +26,14 @@ type NavItem = {
 };
 const navItems: NavItem[] = [
   {
-    route: 'home',
-    activeRoutes: ['materialPossessions'],
-    icon: HomeIcon,
-  },
-  {
     route: 'settings',
     activeRoutes: ['settings'],
     icon: SettingsIcon,
+  },
+  {
+    route: 'home',
+    activeRoutes: ['materialPossessions'],
+    icon: HomeIcon,
   },
   {
     route: 'userProfile',
