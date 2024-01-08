@@ -363,6 +363,9 @@ export default {
           users: 'Usuários',
         },
       },
+      bottomNavigation: {
+        userAvatarAlt: 'Perfil do usuário',
+      },
     },
     tables: {
       baseTable: {

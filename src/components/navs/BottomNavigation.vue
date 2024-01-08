@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 import { computed, type Component } from 'vue';
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { storeToRefs } from 'pinia';
 import { usePermissions } from '@/composables/permissions';
 import { useSessionStore } from '@/stores/session';
 import HomeIcon from '@/components/icons/HomeIcon.vue';
 import SettingsIcon from '@/components/icons/SettingsIcon.vue';
 import SafeImage from '../common/SafeImage.vue';
-import { storeToRefs } from 'pinia';
 
 const route = useRoute();
+const { t } = useI18n();
 const { userHasPermission } = usePermissions();
 const { currentUser, hasSession, hasApplicationConfigurations } = storeToRefs(
   useSessionStore()
@@ -39,7 +41,7 @@ const navItems: NavItem[] = [
     icon: SafeImage,
     iconProps: {
       src: currentUser.value?.avatar,
-      alt: 'Perfil do usuário',
+      alt: t('components.bottomNavigation.userAvatarAlt'),
       placeholder: '/images/Avatar.jpg',
       class: 'rounded-full',
     },
