@@ -329,7 +329,7 @@ export default {
       contact: 'Entre em contato',
     },
     userProfileView: {
-      title: 'Meu perfil',
+      title: 'Meus dados',
       avatarAlt: 'Foto do perfil',
       form: {
         submit: 'Salvar',
@@ -362,6 +362,9 @@ export default {
           roles: 'Cargos',
           users: 'Usuários',
         },
+      },
+      bottomNavigation: {
+        userAvatarAlt: 'Perfil do usuário',
       },
     },
     tables: {

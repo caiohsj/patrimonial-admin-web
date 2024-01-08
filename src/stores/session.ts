@@ -38,6 +38,12 @@ export const useSessionStore = defineStore('session', {
       });
     },
 
+    async refresh() {
+      const { data } = await UserResource.refresh();
+
+      this.currentUser = data;
+    },
+
     signOut() {
       this.$patch({
         currentUser: null,

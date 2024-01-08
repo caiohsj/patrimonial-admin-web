@@ -130,10 +130,9 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       this.fetchMaterialPossessions();
     },
 
-    fetchMaterialPossession(id: number) {
-      MaterialPossessionResource.show(id).then(
-        ({ data }) => (this.materialPossession = data)
-      );
+    async fetchMaterialPossession(id: number) {
+      const { data } = await MaterialPossessionResource.show(id);
+      this.materialPossession = data;
     },
 
     fetchApprovedMaterialPossessions() {

@@ -117,7 +117,7 @@ watch(branch, (branch_id) => {
       </div>
 
       <div v-show="step == 2">
-        <div class="flex justify-between gap-6">
+        <div class="flex justify-between flex-wrap gap-6">
           <InputGroup
             type="number"
             :label="
@@ -125,12 +125,14 @@ watch(branch, (branch_id) => {
             "
             name="from"
             rules="required"
+            class="w-full xl:w-fit"
           />
           <InputGroup
             type="number"
             :label="t('views.bulkCreateMaterialPossessionsView.form.labels.to')"
             name="to"
             rules="required"
+            class="w-full xl:w-fit"
           />
           <InputGroup
             class="grow"

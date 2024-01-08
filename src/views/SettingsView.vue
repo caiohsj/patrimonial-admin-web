@@ -1,25 +1,16 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
-import { useSessionStore } from '@/stores/session';
-import { useAsideNavStore } from '@/stores/AsideNav';
 import { usePermissions } from '@/composables/permissions';
-import MenuItem from './MenuItem.vue';
-
-const navMobile = ref<HTMLDivElement>();
-
-const { toggleNavMobile, setNavMobileRef } = useAsideNavStore();
+import { useSessionStore } from '@/stores/session';
+import BackButton from '@/components/buttons/BackButton.vue';
+import MenuItem from '@/components/navs/MenuItem.vue';
+import ExitIcon from '@/components/icons/ExitIcon.vue';
 
 const { t } = useI18n();
-const route = useRoute();
 const router = useRouter();
-
-const sessionStore = useSessionStore();
-const { hasSession } = storeToRefs(sessionStore);
-
 const { userHasPermission } = usePermissions();
+const { signOut } = useSessionStore();
 
 const navItems = [
   {
@@ -65,42 +56,41 @@ const navItems = [
   },
 ];
 
-const itemActive = (activeRoutes: string[]) => {
-  return activeRoutes.includes(String(route.name));
+const logout = () => {
+  signOut();
+  router.push({ name: 'login' });
 };
-
-const navigate = (name: string): void => {
-  toggleNavMobile();
-
-  router.push({ name });
-};
-
-onMounted(() => {
-  setNavMobileRef(navMobile.value);
-});
 </script>
 
 <template>
-  <div class="bg-white pt-3 hidden md:block md:w-52 lg:w-80" v-if="hasSession">
-    <div class="flex justify-center mb-10">
+  <div class="settings-view">
+    <div class="flex relative justify-center">
+      <BackButton class="absolute left-0 w-fit h-fit" />
+
       <img
         src="@/assets/images/logo.png"
         :alt="t('altLogo')"
         class="w-36 h-30"
       />
+
+      <button
+        @click="logout"
+        class="absolute bg-danger text-light rounded-md p-1 right-0 w-fit h-fit"
+      >
+        <ExitIcon class="w-6 h-6" />
+      </button>
     </div>
-    <nav class="px-8">
-      <ul class="grid gap-4">
-        <MenuItem
-          v-for="item in navItems"
-          @navigate="navigate(item.route)"
-          :active="itemActive(item.activeRoutes)"
-          :show="userHasPermission(item.permission)"
-          :key="item.route"
-        >
-          {{ t(`components.navs.asideNav.items.${item.route}`) }}
-        </MenuItem>
-      </ul>
-    </nav>
+
+    <ul class="grid gap-4">
+      <MenuItem
+        v-for="item in navItems"
+        @navigate="router.push({ name: item.route })"
+        :active="false"
+        :show="userHasPermission(item.permission)"
+        :key="item.route"
+      >
+        {{ t(`components.navs.asideNav.items.${item.route}`) }}
+      </MenuItem>
+    </ul>
   </div>
 </template>

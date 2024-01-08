@@ -48,4 +48,7 @@ export default {
   disapprove(id: number) {
     return client.put(`/api/v1/users/${id}/disapprove`, null, true);
   },
+  refresh(): Promise<AxiosResponse<User>> {
+    return client.get('/api/v1/users/refresh');
+  },
 };
