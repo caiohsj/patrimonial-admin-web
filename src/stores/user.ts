@@ -4,6 +4,7 @@ import type { CreateUserFormData } from '@/@types/interfaces/CreateUserFormData'
 import type { UserFilters } from '@/@types/interfaces/api/UserFilters';
 import UserResource from '@/api/resources/user';
 import { useTransform } from '@/composables/transform';
+import { useSessionStore } from './session';
 
 type UserStoreState = {
   users: Array<User>;
@@ -68,11 +69,14 @@ export const useUserStore = defineStore('user', {
       const avatarBase64 =
         avatar instanceof File ? await fileToBase64(avatar) : avatar;
 
-      return UserResource.updateProfile(
+      await UserResource.updateProfile(
         name,
         email,
         avatarBase64.replace('data:image/jpeg;base64,', '')
       );
+
+      const { refresh } = useSessionStore();
+      refresh();
     },
 
     async deleteUser(id: number) {
