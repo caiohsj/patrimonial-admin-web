@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import TableRow from './TableRow.vue';
 import AddMultipleIcon from '@/components/icons/AddMultipleIcon.vue';

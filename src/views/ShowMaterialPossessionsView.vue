@@ -3,7 +3,7 @@ import { computed, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import { storeToRefs } from 'pinia';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useTransform } from '@/composables/transform';
 import DepreciationCard from '@/components/MaterialPossessions/DepreciationCard.vue';
 import ImageDialog from '@/components/dialogs/ImageDialog.vue';

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import type { CreateCostCenterFormData } from '@/@types/interfaces/CreateCostCenterFormData';
 import { useCostCenterStore } from '@/stores/CostCenter';
 import FormCard from '@/components/cards/FormCard.vue';

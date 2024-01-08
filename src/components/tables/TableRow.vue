@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useTransform } from '@/composables/transform';
 import ConfirmationScreen from '@/components/feedbacks/ConfirmationScreen.vue';
 import EyeIcon from '@/components/icons/EyeIcon.vue';

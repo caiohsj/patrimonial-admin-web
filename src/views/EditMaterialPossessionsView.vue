@@ -2,7 +2,7 @@
 import { ref, onBeforeMount, computed, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { storeToRefs } from 'pinia';
 import { useDebounceFn } from '@vueuse/core';
 import { useCostCenterStore } from '@/stores/CostCenter';

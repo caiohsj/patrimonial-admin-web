@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useSessionStore } from '@/stores/session';

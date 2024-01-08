@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, onMounted } from 'vue';
 import { useForm } from 'vee-validate';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { storeToRefs } from 'pinia';
 import { useSessionStore } from '@/stores/session';
 import { useUserStore } from '@/stores/user';

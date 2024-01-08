@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import type { BulkCreateMaterialPossessionFormData } from '@/@types/interfaces/BulkCreateMaterialPossessionFormData';
 import { useMaterialPossessionStore } from '@/stores/MaterialPossession';
 import { useBranchStore } from '@/stores/branch';

@@ -2,7 +2,7 @@
 import { onMounted, watch, ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useBranchStore } from '@/stores/branch';
 import { usePlaceStore } from '@/stores/place';
 import { useSessionStore } from '@/stores/session';

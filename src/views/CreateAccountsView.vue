@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import type { CreateAccountFormData } from '@/@types/interfaces/CreateAccountFormData';
 import { useAccountStore } from '@/stores/account';
 import FormCard from '@/components/cards/FormCard.vue';

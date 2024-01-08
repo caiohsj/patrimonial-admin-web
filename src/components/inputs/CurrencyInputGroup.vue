@@ -2,7 +2,7 @@
 import { required } from '@vee-validate/rules';
 import { useField } from 'vee-validate';
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 
 const { t } = useI18n();
 

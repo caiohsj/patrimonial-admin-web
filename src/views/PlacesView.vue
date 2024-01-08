@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { usePermissions } from '@/composables/permissions';

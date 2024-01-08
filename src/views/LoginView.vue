@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useForm } from 'vee-validate';
 import { storeToRefs } from 'pinia';
 import { onBeforeMount, watch } from 'vue';
