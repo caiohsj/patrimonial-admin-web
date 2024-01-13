@@ -1,4 +1,4 @@
-import ptBR from '@/locales/pt-BR';
+import ptBR from '@/locales/pt-BR.json';
 import { createI18n, type I18nOptions } from 'vue-i18n';
 
 const messages = {

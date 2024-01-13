@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { useSessionStore } from '@/stores/session';
 import MapPinIcon from '@/components/icons/MapPinIcon.vue';
 import HomeIcon from '@/components/icons/HomeIcon.vue';

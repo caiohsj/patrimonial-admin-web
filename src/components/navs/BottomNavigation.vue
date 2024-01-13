@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, type Component } from 'vue';
 import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { storeToRefs } from 'pinia';
 import { usePermissions } from '@/composables/permissions';
 import { useSessionStore } from '@/stores/session';
@@ -26,14 +26,14 @@ type NavItem = {
 };
 const navItems: NavItem[] = [
   {
-    route: 'home',
-    activeRoutes: ['materialPossessions'],
-    icon: HomeIcon,
-  },
-  {
     route: 'settings',
     activeRoutes: ['settings'],
     icon: SettingsIcon,
+  },
+  {
+    route: 'home',
+    activeRoutes: ['materialPossessions'],
+    icon: HomeIcon,
   },
   {
     route: 'userProfile',

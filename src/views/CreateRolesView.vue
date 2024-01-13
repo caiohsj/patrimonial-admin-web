@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { storeToRefs } from 'pinia';
 import type { CreateRoleFormData } from '@/@types/interfaces/CreateRoleFormData';
 import { useRoleStore } from '@/stores/role';

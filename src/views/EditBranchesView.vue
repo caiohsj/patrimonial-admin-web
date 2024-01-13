@@ -2,7 +2,7 @@
 import { computed, onBeforeMount, watch } from 'vue';
 import { useForm } from 'vee-validate';
 import { useRouter, useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { storeToRefs } from 'pinia';
 import type { CreateBranchFormData } from '@/@types/interfaces/CreateBranchFormData';
 import { useBranchStore } from '@/stores/branch';

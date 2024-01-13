@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/composables/i18n';
 import { usePermissions } from '@/composables/permissions';
 import { useSessionStore } from '@/stores/session';
 import BackButton from '@/components/buttons/BackButton.vue';
