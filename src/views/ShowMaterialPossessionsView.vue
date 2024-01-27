@@ -7,7 +7,9 @@ import { useI18n } from '@/composables/i18n';
 import { useTransform } from '@/composables/transform';
 import DepreciationCard from '@/components/MaterialPossessions/DepreciationCard.vue';
 import ImageDialog from '@/components/dialogs/ImageDialog.vue';
+import { usePermissions } from '@/composables/permissions';
 
+const { userHasPermission } = usePermissions();
 const openImageDialog = ref(false);
 const currentImageUrl = ref('');
 const { t } = useI18n();
@@ -28,6 +30,10 @@ const closeImage = () => {
   currentImageUrl.value = '';
   openImageDialog.value = false;
 };
+
+const showDepreciationDetails = computed(() =>
+  userHasPermission('show-material-possessions-depreciation')
+);
 
 onBeforeMount(() => {
   materialPossessionStore.fetchMaterialPossession(materialPossessionId.value);
@@ -130,103 +136,108 @@ onBeforeMount(() => {
           </span>
         </div>
 
-        <DepreciationCard
-          :title="
-            t(
-              'views.showMaterialPossessionsView.labels.economicDepreciation.title'
-            )
-          "
-          color="primary"
-          :complete="materialPossession?.economic_depreciation != null"
-          :items="[
-            [
+        <div v-if="showDepreciationDetails">
+          <DepreciationCard
+            :title="
               t(
-                'views.showMaterialPossessionsView.labels.economicDepreciation.residualValueOfDiscard'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.residual_value_of_discard
-              ),
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.economicDepreciation.depreciableValue'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.economic_depreciation?.depreciable_value
-              ),
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.economicDepreciation.lifespan'
-              ),
-              t('views.showMaterialPossessionsView.lifespan', {
-                value: materialPossession?.lifespan,
-              }),
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.monthlyDepreciationQuota'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.economic_depreciation
-                  ?.monthly_depreciation_quota
-              ),
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.accumulatedDepreciation'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.economic_depreciation
-                  ?.accumulated_depreciation
-              ),
-            ],
-            [
-              t('views.showMaterialPossessionsView.labels.bookValue'),
-              numberToCurrencyBRL(
-                materialPossession?.economic_depreciation?.book_value
-              ),
-            ],
-          ]"
-        />
+                'views.showMaterialPossessionsView.labels.economicDepreciation.title'
+              )
+            "
+            color="primary"
+            :complete="materialPossession?.economic_depreciation != null"
+            :items="[
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.economicDepreciation.residualValueOfDiscard'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.residual_value_of_discard
+                ),
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.economicDepreciation.depreciableValue'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.economic_depreciation?.depreciable_value
+                ),
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.economicDepreciation.lifespan'
+                ),
+                t('views.showMaterialPossessionsView.lifespan', {
+                  value: materialPossession?.lifespan,
+                }),
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.monthlyDepreciationQuota'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.economic_depreciation
+                    ?.monthly_depreciation_quota
+                ),
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.accumulatedDepreciation'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.economic_depreciation
+                    ?.accumulated_depreciation
+                ),
+              ],
+              [
+                t('views.showMaterialPossessionsView.labels.bookValue'),
+                numberToCurrencyBRL(
+                  materialPossession?.economic_depreciation?.book_value
+                ),
+              ],
+            ]"
+          />
 
-        <DepreciationCard
-          :title="
-            t('views.showMaterialPossessionsView.labels.taxDepreciation.title')
-          "
-          color="success"
-          :complete="materialPossession?.tax_depreciation != null"
-          :items="[
-            [
+          <DepreciationCard
+            :title="
               t(
-                'views.showMaterialPossessionsView.labels.taxDepreciation.taxRate'
-              ),
-              `${materialPossession?.tax_depreciation?.tax_rate} %`,
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.monthlyDepreciationQuota'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.tax_depreciation?.monthly_depreciation_quota
-              ),
-            ],
-            [
-              t(
-                'views.showMaterialPossessionsView.labels.accumulatedDepreciation'
-              ),
-              numberToCurrencyBRL(
-                materialPossession?.tax_depreciation?.accumulated_depreciation
-              ),
-            ],
-            [
-              t('views.showMaterialPossessionsView.labels.bookValue'),
-              numberToCurrencyBRL(
-                materialPossession?.tax_depreciation?.book_value
-              ),
-            ],
-          ]"
-        />
+                'views.showMaterialPossessionsView.labels.taxDepreciation.title'
+              )
+            "
+            color="success"
+            :complete="materialPossession?.tax_depreciation != null"
+            :items="[
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.taxDepreciation.taxRate'
+                ),
+                `${materialPossession?.tax_depreciation?.tax_rate} %`,
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.monthlyDepreciationQuota'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.tax_depreciation
+                    ?.monthly_depreciation_quota
+                ),
+              ],
+              [
+                t(
+                  'views.showMaterialPossessionsView.labels.accumulatedDepreciation'
+                ),
+                numberToCurrencyBRL(
+                  materialPossession?.tax_depreciation?.accumulated_depreciation
+                ),
+              ],
+              [
+                t('views.showMaterialPossessionsView.labels.bookValue'),
+                numberToCurrencyBRL(
+                  materialPossession?.tax_depreciation?.book_value
+                ),
+              ],
+            ]"
+          />
+        </div>
       </div>
     </div>
   </div>
