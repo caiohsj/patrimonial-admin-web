@@ -6,6 +6,11 @@ import AddMultipleIcon from '@/components/icons/AddMultipleIcon.vue';
 
 const { t } = useI18n();
 
+type Header = {
+  text: string;
+  cssClasses: Array<string>;
+};
+
 type TableProps = {
   title: string;
   canCreate?: boolean;
@@ -14,7 +19,8 @@ type TableProps = {
   canShow?: boolean;
   canDelete?: boolean;
   hasCustomActions?: boolean;
-  headers: Array<string>;
+  hasCustomContent?: boolean;
+  headers: Array<string | Header>;
   items: Array<any>;
   exceptItemsKeys?: Array<string>;
   total: number;
@@ -89,19 +95,25 @@ const showItem = (item: any) => {
     </div>
     <div class="overflow-x-auto">
       <table class="table text-left bg-light w-full">
-        <thead class="bg-gray-darken text-light">
+        <thead>
           <tr class="h-12 font-baloo2-bold">
             <th
               v-for="(item, index) in props.headers"
               :key="index"
-              class="px-4 whitespace-nowrap"
+              :class="[
+                'px-4 whitespace-nowrap',
+                typeof item === 'string'
+                  ? 'bg-gray-darken text-light'
+                  : item.cssClasses,
+              ]"
             >
-              {{ item }}
+              <span v-if="typeof item === 'string'">{{ item }}</span>
+              <span v-else>{{ item.text }}</span>
             </th>
             <th></th>
           </tr>
         </thead>
-        <tbody class="font-baloo2-regular">
+        <tbody class="font-baloo2-regular" v-if="!props.hasCustomContent">
           <TableRow
             v-for="(item, index) in props.items"
             :key="index"
@@ -109,17 +121,21 @@ const showItem = (item: any) => {
             :except-item-keys="props.exceptItemsKeys"
             :can-create="props.canCreate"
             :can-edit="props.canEdit"
-            :can-show="$props.canShow"
+            :can-show="props.canShow"
             :can-delete="props.canDelete"
             :has-custom-actions="props.hasCustomActions"
             @delete="deleteItem"
             @edit="editItem"
             @show="showItem"
           >
+            <h1>teste</h1>
             <template #customActions="customActionProps">
               <slot name="customActions" :item="customActionProps.item"></slot>
             </template>
           </TableRow>
+        </tbody>
+        <tbody class="font-baloo2-regular" v-else>
+          <slot></slot>
         </tbody>
       </table>
     </div>

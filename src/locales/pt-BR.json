@@ -1,5 +1,7 @@
 {
   "altLogo": "SMX Inventários",
+  "true": "Sim",
+  "false": "Não",
   "errors": {
     "unauthorized": "Não autorizado",
     "notFound": "Não encontrado",
@@ -162,7 +164,15 @@
           "dateOfAquisition": "Data de aquisição",
           "aquisitionValue": "Valor de aquisição",
           "costCenter": "Centro de custo",
-          "account": "Conta"
+          "account": "Conta",
+          "residualValueOfDiscard": "Valor residual de descarte",
+          "depreciableValue": "Valor depreciável",
+          "lifespan": "Vida útil (Em meses)",
+          "monthlyDepreciationQuota": "Quota de depreciação mensal",
+          "accumulatedDepreciation": "Depreciação acumulada",
+          "bookValue": "Valor contábil",
+          "taxRate": "Taxa fiscal",
+          "deprecated": "Totalmente Depreciado?"
         },
         "approve": "Aprovar"
       }

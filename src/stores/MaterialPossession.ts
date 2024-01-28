@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import type { MaterialPossession } from '@/@types/interfaces/models/MaterialPossession';
 import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
 import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
+import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
 
 type MaterialPossessionStoreState = {
-  materialPossessions: Array<MaterialPossession>;
+  materialPossessions: Array<Index>;
   materialPossession: Show | null;
   filters: MaterialPossessionFilters;
 };
@@ -125,8 +125,8 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       });
     },
 
-    async deleteMaterialPossession(materialPossession: MaterialPossession) {
-      await MaterialPossessionResource.delete(materialPossession);
+    async deleteMaterialPossession(id: number) {
+      await MaterialPossessionResource.delete(id);
       this.fetchMaterialPossessions();
     },
 
