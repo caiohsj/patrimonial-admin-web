@@ -19,6 +19,8 @@ export function useTransform() {
   };
 
   const numberToCurrencyBRL = (value?: number): string => {
+    if (value == undefined) return '';
+
     return `R$ ${value?.toString().replace('.', ',')}`;
   };
 
