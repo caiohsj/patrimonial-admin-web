@@ -1,14 +1,12 @@
 import client from '../client';
 import type { AxiosResponse } from 'axios';
-import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
+import type { IndexFilters } from '@/@types/interfaces/api/MaterialPossessions/IndexFilters';
 import type { UpdateMaterialPossessionFormData } from '@/@types/interfaces/UpdateMaterialPossessionFormData';
 import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
 
 export default {
-  index(
-    params: MaterialPossessionFilters
-  ): Promise<AxiosResponse<Array<Index>>> {
+  index(params: IndexFilters): Promise<AxiosResponse<Array<Index>>> {
     return client.get('/api/v1/material_possessions', params);
   },
   show(id: number): Promise<AxiosResponse<Show>> {

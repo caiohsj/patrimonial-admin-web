@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { MaterialPossessionFilters } from '@/@types/interfaces/api/MaterialPossessionFilters';
+import type { IndexFilters } from '@/@types/interfaces/api/MaterialPossessions/IndexFilters';
 import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
@@ -7,21 +7,23 @@ import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
 type MaterialPossessionStoreState = {
   materialPossessions: Array<Index>;
   materialPossession: Show | null;
-  filters: MaterialPossessionFilters;
+  indexFilters: IndexFilters;
 };
 
 export const useMaterialPossessionStore = defineStore('material_possession', {
   state: (): MaterialPossessionStoreState => ({
     materialPossession: null,
     materialPossessions: [],
-    filters: {
+    indexFilters: {
       approved: 1,
     },
   }),
 
   actions: {
     async fetchMaterialPossessions() {
-      const { data } = await MaterialPossessionResource.index(this.filters);
+      const { data } = await MaterialPossessionResource.index(
+        this.indexFilters
+      );
       this.materialPossessions = data;
     },
 
@@ -103,6 +105,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     updateMaterialPossession(
       materialPossessionId: number,
       description: string,
+      placeId: number,
       brandName: string,
       templateName: string,
       dateOfAquisition: string,
@@ -114,6 +117,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     ) {
       return MaterialPossessionResource.update(materialPossessionId, {
         description,
+        place_id: placeId,
         brand_name: brandName,
         template_name: templateName,
         date_of_aquisition: dateOfAquisition,
@@ -136,12 +140,12 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     },
 
     fetchApprovedMaterialPossessions() {
-      this.filters.approved = 1;
+      this.indexFilters.approved = 1;
       this.fetchMaterialPossessions();
     },
 
     fetchDisapprovedMaterialPossessions() {
-      this.filters.approved = 0;
+      this.indexFilters.approved = 0;
       this.fetchMaterialPossessions();
     },
 

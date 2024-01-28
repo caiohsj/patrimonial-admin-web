@@ -208,6 +208,7 @@
         "title": "Editar bem | Número: {number}",
         "labels": {
           "description": "Descrição",
+          "place": "Local",
           "brandName": "Marca",
           "templateName": "Modelo",
           "dateOfAquisition": "Data de aquisição",

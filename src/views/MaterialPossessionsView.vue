@@ -24,7 +24,9 @@ const openConfirmationDeleteScreen = ref(false);
 const materialIdToWillDelete = ref(0);
 
 const materialPossessionStore = useMaterialPossessionStore();
-const { materialPossessions, filters } = storeToRefs(materialPossessionStore);
+const { materialPossessions, indexFilters } = storeToRefs(
+  materialPossessionStore
+);
 
 const headers = computed(() => [
   t('views.materialPossessionsView.table.headers.number'),
@@ -134,14 +136,14 @@ const confirmDelete = () => {
           text: t('views.materialPossessionsView.tabs.approveds'),
           click: () =>
             materialPossessionStore.fetchApprovedMaterialPossessions(),
-          active: filters.approved === 1,
+          active: indexFilters.approved === 1,
           show: true,
         },
         {
           text: t('views.materialPossessionsView.tabs.disapproveds'),
           click: () =>
             materialPossessionStore.fetchDisapprovedMaterialPossessions(),
-          active: filters.approved === 0,
+          active: indexFilters.approved === 0,
           show: userHasPermission('approve-material-possessions'),
         },
       ]"

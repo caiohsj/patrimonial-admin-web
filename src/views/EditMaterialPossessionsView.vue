@@ -7,6 +7,7 @@ import { storeToRefs } from 'pinia';
 import { useDebounceFn } from '@vueuse/core';
 import { useCostCenterStore } from '@/stores/CostCenter';
 import { useAccountStore } from '@/stores/account';
+import { usePlaceStore } from '@/stores/place';
 import { useBrandStore } from '@/stores/brand';
 import { useTemplateStore } from '@/stores/template';
 import { useTransform } from '@/composables/transform';
@@ -45,6 +46,9 @@ const { brands } = storeToRefs(brandStore);
 const templateStore = useTemplateStore();
 const { templates } = storeToRefs(templateStore);
 
+const placeStore = usePlaceStore();
+const { placesOptions } = storeToRefs(placeStore);
+
 const nextStep = async () => {
   const result = await validate();
 
@@ -56,6 +60,7 @@ const onSubmit = handleSubmit((values) => {
     .updateMaterialPossession(
       materialPossessionId.value,
       values.description,
+      values.place_id,
       values.brand_name,
       values.template_name,
       values.date_of_aquisition,
@@ -91,6 +96,9 @@ onBeforeMount(async () => {
   await materialPossessionStore.fetchMaterialPossession(
     materialPossessionId.value
   );
+  await placeStore.fetchPlaces({
+    branch_id: materialPossession.value?.branch_id,
+  });
 
   setValues({
     description: materialPossession.value?.description,
@@ -100,6 +108,9 @@ onBeforeMount(async () => {
     ),
     brand_name: materialPossession.value?.brand_name,
     template_name: materialPossession.value?.template_name,
+    place_id: materialPossession.value?.place_id
+      ? materialPossession.value?.place_id
+      : undefined,
     cost_center_id: materialPossession.value?.cost_center_id
       ? materialPossession.value?.cost_center_id
       : undefined,
@@ -132,6 +143,11 @@ onBeforeMount(async () => {
           "
           name="description"
           rules="required"
+        />
+        <SelectGroup
+          :options="placesOptions"
+          name="place_id"
+          :label="t('views.editMaterialPossessionsView.form.labels.place')"
         />
         <InputWithSelect
           :label="

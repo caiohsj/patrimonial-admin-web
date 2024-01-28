@@ -22,4 +22,6 @@ export interface Show {
   tax_depreciation: TaxDepreciation | null;
   cost_center_id: number;
   account_id: number;
+  place_id: number;
+  branch_id: number;
 }
