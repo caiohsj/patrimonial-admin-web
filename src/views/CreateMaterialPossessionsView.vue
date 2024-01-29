@@ -81,7 +81,7 @@ const onSubmit = handleSubmit((values) => {
       values.lifespan
     )
     .then(() => {
-      materialPossessionStore.filters.approved = 0;
+      materialPossessionStore.indexFilters.approved = 0;
       router.push({ name: 'materialPossessions' });
     });
 });
