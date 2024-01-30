@@ -59,7 +59,10 @@ const itemActive = (activeRoutes: string[]) => {
 };
 
 const showBottomNavigation = computed(
-  () => hasSession && hasApplicationConfigurations
+  () =>
+    hasSession ||
+    (userHasPermission('application-configurations') &&
+      hasApplicationConfigurations)
 );
 </script>
 
@@ -91,7 +94,11 @@ const showBottomNavigation = computed(
         :to="{ name: route }"
         class="flex items-center"
       >
-        <component :is="icon" class="w-10 h-10 p-1" v-bind="{ ...iconProps }" />
+        <component
+          :is="icon"
+          class="w-10 h-10 p-1 object-cover"
+          v-bind="{ ...iconProps }"
+        />
       </router-link>
     </li>
   </ul>

@@ -127,6 +127,7 @@ watch(hasSession, (value) => {
 
     .safe-image {
       clip-path: circle();
+      object-fit: cover;
     }
   }
 }
