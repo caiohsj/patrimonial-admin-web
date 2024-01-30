@@ -114,6 +114,7 @@ onMounted(() => {
     width: 180px;
     height: 180px;
     clip-path: circle();
+    object-fit: cover;
   }
 }
 </style>
