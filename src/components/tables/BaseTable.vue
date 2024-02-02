@@ -110,7 +110,7 @@ const showItem = (item: any) => {
               <span v-if="typeof item === 'string'">{{ item }}</span>
               <span v-else>{{ item.text }}</span>
             </th>
-            <th></th>
+            <th class="bg-gray-darken"></th>
           </tr>
         </thead>
         <tbody class="font-baloo2-regular" v-if="!props.hasCustomContent">
