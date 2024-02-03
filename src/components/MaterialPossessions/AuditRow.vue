@@ -5,6 +5,7 @@ import { useTransform } from '@/composables/transform';
 import { useI18n } from '@/composables/i18n';
 import { useDate } from '@/composables/date';
 import type { Log } from '@/@types/interfaces/api/MaterialPossessions/log';
+import ClockIcon from '@/components/icons/ClockIcon.vue';
 
 const props = defineProps<{ log: Log }>();
 
@@ -50,28 +51,31 @@ const newValues = computed(() => objectToArray(JSON.parse(props.log.new_data)));
     class="flex flex-col text-lg border-2 rounded-md p-2 cursor-pointer hover:border-success"
   >
     <div class="flex items-center justify-between gap-4">
-      <span class="bg-sky-400 text-light rounded-sm px-2">
+      <div class="bg-sky-400 text-light rounded-sm px-2">
         {{
           t(
             `components.materialPossessions.auditRow.log_type.${props.log.log_type}`
           )
         }}
-      </span>
-      <span>
+      </div>
+      <div>
         {{
           t('components.materialPossessions.auditRow.loggable_id', {
             id: props.log.loggable_id,
           })
         }}
-      </span>
-      <span>
+      </div>
+      <div>
         {{
           t('components.materialPossessions.auditRow.user_name', {
             user_name: props.log.user_name,
           })
         }}
-      </span>
-      <span>{{ fromNowUnixSeconds($props.log.log_date) }}</span>
+      </div>
+      <div class="flex items-center w-fit">
+        <ClockIcon class="h-5 w-5 mr-2" />
+        <span>{{ fromNowUnixSeconds($props.log.log_date) }}</span>
+      </div>
       <!-- <span class="w-4 h-4 bg-dark justify-self-end" style="clip-path: polygon(0% 20%, 50% 80%, 100% 20%);"></span> -->
     </div>
 
