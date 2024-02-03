@@ -26,5 +26,9 @@ export function useDate() {
     return moment(date).fromNow();
   }
 
-  return { fromNow };
+  function fromNowUnixSeconds(timestamp: number) {
+    return moment.unix(timestamp).fromNow();
+  }
+
+  return { fromNow, fromNowUnixSeconds };
 }

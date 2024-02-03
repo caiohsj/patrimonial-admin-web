@@ -9,7 +9,7 @@ import type { Log } from '@/@types/interfaces/api/MaterialPossessions/log';
 const props = defineProps<{ log: Log }>();
 
 const { t } = useI18n();
-const { fromNow } = useDate();
+const { fromNowUnixSeconds } = useDate();
 const { objectToArray, numberToCurrencyBRL } = useTransform();
 const div = ref<HTMLDivElement>();
 const changesElement = ref<HTMLDivElement>();
@@ -71,7 +71,7 @@ const newValues = computed(() => objectToArray(JSON.parse(props.log.new_data)));
           })
         }}
       </span>
-      <span>{{ fromNow(props.log.log_date) }}</span>
+      <span>{{ fromNowUnixSeconds($props.log.log_date) }}</span>
       <!-- <span class="w-4 h-4 bg-dark justify-self-end" style="clip-path: polygon(0% 20%, 50% 80%, 100% 20%);"></span> -->
     </div>
 
