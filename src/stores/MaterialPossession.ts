@@ -3,11 +3,13 @@ import type { IndexFilters } from '@/@types/interfaces/api/MaterialPossessions/I
 import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import MaterialPossessionResource from '@/api/resources/MaterialPossession';
 import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
+import type { Log } from '@/@types/interfaces/api/MaterialPossessions/log';
 
 type MaterialPossessionStoreState = {
   materialPossessions: Array<Index>;
   materialPossession: Show | null;
   indexFilters: IndexFilters;
+  logs: Array<Log>;
 };
 
 export const useMaterialPossessionStore = defineStore('material_possession', {
@@ -17,6 +19,7 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     indexFilters: {
       approved: 1,
     },
+    logs: [],
   }),
 
   actions: {
@@ -152,6 +155,13 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
     async approveMaterialPossession(id: number) {
       await MaterialPossessionResource.approve(id);
       this.fetchMaterialPossessions();
+    },
+
+    fetchMaterialPossessionsLogs() {
+      this.$patch({ logs: [] });
+      MaterialPossessionResource.logs().then((response) =>
+        this.$patch({ logs: response.data })
+      );
     },
   },
 });

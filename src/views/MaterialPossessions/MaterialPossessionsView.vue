@@ -146,6 +146,12 @@ const confirmDelete = () => {
           active: indexFilters.approved === 0,
           show: userHasPermission('approve-material-possessions'),
         },
+        {
+          text: 'Auditoria dos bens',
+          click: () => router.push({ name: 'auditOfMaterialPossessions' }),
+          active: false,
+          show: userHasPermission('logs-material-possessions'),
+        },
       ]"
       :show="true"
     />

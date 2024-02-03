@@ -12,6 +12,27 @@
       "currency": "Deve ser um valor monetário do tipo {currency}"
     }
   },
+  "formats": {
+    "materialPossessions": {
+      "lifespan": "{number} meses"
+    }
+  },
+  "keys": {
+    "materialPossessions": {
+      "lifespan": "Vida útil (Em meses)",
+      "description": "Descrição",
+      "residual_value_of_discard": "Valor residual de descarte",
+      "place_id": "ID do Local",
+      "cost_center_id": "ID do Centro de Custo",
+      "account_id": "ID da Conta",
+      "brand_id": "ID da Marca",
+      "template_id": "ID do Modelo",
+      "approved": "Aprovado",
+      "aquisition_value": "Valor de aquisição",
+      "date_of_aquisition": "Data de aquisição",
+      "updated_at": "Atualizado em"
+    }
+  },
   "views": {
     "loginView": {
       "title": "Autenticação",
@@ -264,6 +285,9 @@
         }
       }
     },
+    "auditOfMaterialPossessionsView": {
+      "title": "Auditoria dos bens"
+    },
     "rolesView": {
       "table": {
         "title": "Cargos",
@@ -402,6 +426,15 @@
       "depreciationCard": {
         "incompleteData":
           "Dados incompletos, não foi possível gerar as informações de depreciação"
+      },
+      "auditRow": {
+        "log_type": {
+          "create": "Cadastro",
+          "update": "Atualização",
+          "delete": "Exclusão"
+        },
+        "loggable_id": "ID do Bem: {id}",
+        "user_name": "Usuário: {user_name}"
       }
     }
   }
