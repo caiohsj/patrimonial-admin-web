@@ -29,6 +29,7 @@ const { materialPossessions, indexFilters } = storeToRefs(
 );
 
 const headers = computed(() => [
+  t('views.materialPossessionsView.table.headers.id'),
   t('views.materialPossessionsView.table.headers.number'),
   t('views.materialPossessionsView.table.headers.description'),
   t('views.materialPossessionsView.table.headers.placeDescription'),
@@ -169,6 +170,9 @@ const confirmDelete = () => {
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
     >
       <tr v-for="material in materialPossessions" :key="material.id">
+        <td class="px-4 whitespace-nowrap">
+          {{ material.id }}
+        </td>
         <td class="px-4 whitespace-nowrap">
           {{ material.number }}
         </td>
