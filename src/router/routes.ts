@@ -27,6 +27,8 @@ import CreateUsersView from '@/views/CreateUsersView.vue';
 import CreatePasswordView from '@/views/CreatePasswordView.vue';
 import UserProfileView from '@/views/UserProfileView.vue';
 import SettingsView from '@/views/SettingsView.vue';
+import IndexBrandsView from '@/views/Brands/IndexBrandsView.vue';
+import IndexTemplatesView from '@/views/Templates/IndexTemplatesView.vue';
 
 const routes: readonly RouteRecordRaw[] = [
   {
@@ -304,6 +306,26 @@ const routes: readonly RouteRecordRaw[] = [
     path: '/nova_senha',
     name: 'createPassword',
     component: CreatePasswordView,
+  },
+  {
+    path: '/marcas',
+    name: 'brands',
+    component: IndexBrandsView,
+    meta: {
+      requiresAuth: true,
+      needsAppBar: true,
+      permission: 'list-brands',
+    },
+  },
+  {
+    path: '/modelos',
+    name: 'templates',
+    component: IndexTemplatesView,
+    meta: {
+      requiresAuth: true,
+      needsAppBar: true,
+      permission: 'list-templates',
+    },
   },
 ];
 

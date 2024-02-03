@@ -31,6 +31,7 @@ const navItems = [
       'bulkCreateMaterialPossessions',
       'editMaterialPossessions',
       'showMaterialPossessions',
+      'auditOfMaterialPossessions',
     ],
   },
   {
@@ -57,6 +58,16 @@ const navItems = [
     route: 'users',
     permission: 'list-users',
     activeRoutes: ['users', 'createUsers'],
+  },
+  {
+    route: 'brands',
+    permission: 'list-brands',
+    activeRoutes: ['brands'],
+  },
+  {
+    route: 'templates',
+    permission: 'list-templates',
+    activeRoutes: ['templates'],
   },
   {
     route: 'costCenters',

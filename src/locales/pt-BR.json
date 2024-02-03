@@ -293,7 +293,8 @@
         "title": "Cargos",
         "headers": {
           "id": "ID",
-          "name": "Nome"
+          "name": "Nome",
+          "admin": "Tem permissão admin?"
         }
       }
     },
@@ -374,6 +375,25 @@
           "email": "Email"
         }
       }
+    },
+    "brandsView": {
+      "table": {
+        "title": "Marcas",
+        "headers": {
+          "id": "ID",
+          "name": "Nome"
+        }
+      }
+    },
+    "templatesView": {
+      "table": {
+        "title": "Modelos",
+        "headers": {
+          "id": "ID",
+          "name": "Nome",
+          "brand_name": "Marca"
+        }
+      }
     }
   },
   "components": {
@@ -395,7 +415,9 @@
           "costCenters": "Centros de Custos",
           "materialPossessions": "Bens",
           "roles": "Cargos",
-          "users": "Usuários"
+          "users": "Usuários",
+          "brands": "Marcas",
+          "templates": "Modelos"
         }
       },
       "bottomNavigation": {
