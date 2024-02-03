@@ -17,6 +17,7 @@ const { roles } = storeToRefs(roleStore);
 const headers = computed(() => [
   t('views.rolesView.table.headers.id'),
   t('views.rolesView.table.headers.name'),
+  t('views.rolesView.table.headers.admin'),
 ]);
 
 onMounted(() => roleStore.fetchRoles());
@@ -27,13 +28,24 @@ onMounted(() => roleStore.fetchRoles());
     class="list-roles"
     :title="t('views.rolesView.table.title')"
     :can-create="userHasPermission('create-roles')"
-    :can-edit="false"
-    :can-delete="false"
     :headers="headers"
     :items="roles"
     :total="roles.length"
+    :has-custom-content="true"
     @create="router.push({ name: 'createRoles' })"
-  />
+  >
+    <tr v-for="role in roles" :key="role.id">
+      <td class="px-4 whitespace-nowrap">
+        {{ role.id }}
+      </td>
+      <td class="px-4 whitespace-nowrap">
+        {{ role.name }}
+      </td>
+      <td class="px-4 whitespace-nowrap">
+        {{ t(`${role.admin}`) }}
+      </td>
+    </tr>
+  </BaseTable>
 </template>
 
 <style lang="scss">

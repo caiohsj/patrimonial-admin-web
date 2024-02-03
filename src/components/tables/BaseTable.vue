@@ -93,7 +93,7 @@ const showItem = (item: any) => {
         {{ t('components.tables.baseTable.results', { count: props.total }) }}
       </span>
     </div>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto pb-4">
       <table class="table text-left bg-light w-full">
         <thead>
           <tr class="h-12 font-baloo2-bold">
@@ -110,7 +110,7 @@ const showItem = (item: any) => {
               <span v-if="typeof item === 'string'">{{ item }}</span>
               <span v-else>{{ item.text }}</span>
             </th>
-            <th></th>
+            <th class="bg-gray-darken"></th>
           </tr>
         </thead>
         <tbody class="font-baloo2-regular" v-if="!props.hasCustomContent">

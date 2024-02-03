@@ -4,6 +4,7 @@ import type { IndexFilters } from '@/@types/interfaces/api/MaterialPossessions/I
 import type { UpdateMaterialPossessionFormData } from '@/@types/interfaces/UpdateMaterialPossessionFormData';
 import type { Show } from '@/@types/interfaces/api/MaterialPossessions/Show';
 import type { Index } from '@/@types/interfaces/api/MaterialPossessions/Index';
+import type { Log } from '@/@types/interfaces/api/MaterialPossessions/log';
 
 export default {
   index(params: IndexFilters): Promise<AxiosResponse<Array<Index>>> {
@@ -30,5 +31,8 @@ export default {
   },
   approve(id: number) {
     return client.put(`/api/v1/material_possessions/${id}/approve`, null, true);
+  },
+  logs(): Promise<AxiosResponse<Array<Log>>> {
+    return client.get('/api/v1/logs/material_possessions');
   },
 };
