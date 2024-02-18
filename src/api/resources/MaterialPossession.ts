@@ -35,4 +35,7 @@ export default {
   logs(): Promise<AxiosResponse<Array<Log>>> {
     return client.get('/api/v1/logs/material_possessions');
   },
+  export(): Promise<AxiosResponse<Blob>> {
+    return client.blob('/api/v1/material_possessions_export');
+  },
 };
