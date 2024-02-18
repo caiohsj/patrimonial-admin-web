@@ -3,6 +3,7 @@ import { useI18n } from '@/composables/i18n';
 import BaseButton from '@/components/buttons/BaseButton.vue';
 import TableRow from './TableRow.vue';
 import AddMultipleIcon from '@/components/icons/AddMultipleIcon.vue';
+import ShareIcon from '@/components/icons/ShareIcon.vue';
 
 const { t } = useI18n();
 
@@ -18,6 +19,7 @@ type TableProps = {
   canEdit?: boolean;
   canShow?: boolean;
   canDelete?: boolean;
+  canExport?: boolean;
   hasCustomActions?: boolean;
   hasCustomContent?: boolean;
   headers: Array<string | Header>;
@@ -32,6 +34,7 @@ type BaseTableEmits = {
   (event: 'edit', value: any): void;
   (event: 'delete', value: any): void;
   (event: 'show', value: any): void;
+  (event: 'export'): void;
 };
 
 const props = defineProps<TableProps>();
@@ -74,6 +77,14 @@ const showItem = (item: any) => {
           @click="emit('bulkCreate')"
         >
           <AddMultipleIcon />
+        </button>
+        <button
+          type="button"
+          class="w-10 h-10 flex items-center justify-center bg-light text-primary hover:text-primary-darken active:opacity-30"
+          v-if="props.canExport"
+          @click="emit('export')"
+        >
+          <ShareIcon />
         </button>
       </div>
       <!-- TODO: search bar -->

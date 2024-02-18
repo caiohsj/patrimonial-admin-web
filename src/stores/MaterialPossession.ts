@@ -163,5 +163,13 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
         this.$patch({ logs: response.data })
       );
     },
+
+    async exportMaterialPossessions() {
+      const response = await MaterialPossessionResource.export();
+      const blobURL = URL.createObjectURL(
+        new File([response.data], 'bens_exportados.xlsx')
+      );
+      window.location.assign(blobURL);
+    },
   },
 });

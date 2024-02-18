@@ -39,6 +39,21 @@ const client = {
     });
   },
 
+  blob(endpoint: string, params?: any) {
+    const loadingStore = useLoadingStore();
+
+    return new Promise<AxiosResponse<any, any>>((resolve, reject) => {
+      instance
+        .get(endpoint, { params, responseType: 'blob' })
+        .then((response) => resolve(response))
+        .catch((error: AxiosError<any, any>) => {
+          checkIfUnathorized(error.response?.status);
+          reject(error);
+        })
+        .finally(() => loadingStore.stopLoading());
+    });
+  },
+
   post(endpoint: string, data: any, showFeedback = false) {
     const loadingStore = useLoadingStore();
 

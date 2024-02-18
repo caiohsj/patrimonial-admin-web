@@ -161,6 +161,7 @@ const confirmDelete = () => {
       :title="t('views.materialPossessionsView.table.title')"
       :can-create="userHasPermission('create-material-possessions')"
       :can-bulk-create="userHasPermission('bulk-create-material-possessions')"
+      :can-export="userHasPermission('export-material-possessions')"
       :has-custom-actions="false"
       :has-custom-content="true"
       :headers="headers"
@@ -168,6 +169,7 @@ const confirmDelete = () => {
       :total="materialPossessions.length"
       @create="router.push({ name: 'createMaterialPossessions' })"
       @bulk-create="router.push({ name: 'bulkCreateMaterialPossessions' })"
+      @export="materialPossessionStore.exportMaterialPossessions()"
     >
       <tr v-for="material in materialPossessions" :key="material.id">
         <td class="px-4 whitespace-nowrap">
