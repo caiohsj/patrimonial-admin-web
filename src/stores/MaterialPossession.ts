@@ -169,7 +169,11 @@ export const useMaterialPossessionStore = defineStore('material_possession', {
       const blobURL = URL.createObjectURL(
         new File([response.data], 'bens_exportados.xlsx')
       );
-      window.location.assign(blobURL);
+      const link = document.createElement('a');
+      link.href = blobURL;
+      link.setAttribute('download', 'bens_exportados.xlsx');
+      document.body.appendChild(link);
+      link.click();
     },
   },
 });
