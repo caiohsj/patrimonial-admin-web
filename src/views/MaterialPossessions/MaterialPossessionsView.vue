@@ -194,7 +194,11 @@ const confirmDelete = () => {
           {{ material.template_name }}
         </td>
         <td class="px-4 whitespace-nowrap">
-          {{ useDateFormat(material.date_of_aquisition, 'DD/MM/YYYY').value }}
+          {{
+            material.date_of_aquisition
+              ? useDateFormat(material.date_of_aquisition, 'DD/MM/YYYY').value
+              : ''
+          }}
         </td>
         <td class="px-4 whitespace-nowrap">
           {{ numberToCurrencyBRL(material.aquisition_value) }}
