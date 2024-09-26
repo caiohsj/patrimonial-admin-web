@@ -1,0 +1,13 @@
+name: teste
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  build-and-deploy:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo ${{ env.staging.secrets.TESTE }}
